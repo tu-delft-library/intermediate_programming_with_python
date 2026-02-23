@@ -1,9 +1,9 @@
 --- 
 layout: default 
-title: Readiness Quiz - Intermediate Programming with Python 
+title: Readiness Quiz - Intermediate Programming
 --- 
  
-# Readiness Quiz - Intermediate Programming with Python
+# Readiness Quiz - Intermediate Programming
 
 - This is a self assessment quiz
 
