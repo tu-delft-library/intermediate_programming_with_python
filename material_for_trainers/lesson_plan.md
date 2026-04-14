@@ -2,11 +2,12 @@
 
 ## 9:00 - Installation check - 20' - CATA 
 
-- 🖥 Did everyone:
-    - install Python
-    - install VS code
-    - install GitHub SSH key
-    - install `carpentries` environment
+- 🖥 Early start for people that had trouble with installation
+- Tools that should be installed:
+    - Python
+    - VScode
+    - GitHub SSH key
+    - `carpentries` environment [todo]
 
 ## 9:20 - Land - 10' - CATA 
 ☕ Coffee/tea 🫖
@@ -18,67 +19,105 @@
 ## 9:35 - A short icebreaker - 5' - CATA 
 [TODO]
 
-## 9:40 - Setting the scene - 10' - CATA 
-- 🎦 introduction with [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
-    - Course overview (section 1, 2, 3)
-    - Tools that will be used in this course
-    - Patient Inflammation Study Project
+## 9:40 - Introduction - 15' - CATA 
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/10-section1-intro.html) 
 
-## 9:50 - Notebooks vs scripts - 10' - CATA 
-- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6)
-    - When Jupyter notebooks are the right tool
-    - When to graduate to a `.py` script
-    - How this course fits into a researcher's workflow
-    - Why project structure matters from day one
+🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
 
-## 10:00 - Downloading Our Software project - 10' - CATA 
+- Course overview
+- Tools we will use
+- When Jupyter notebooks are the right tool
+- When to graduate to a `.py` script
+- How this course fits into a researcher's workflow
+- Why project structure matters from day one
+- Setting the scene
 
+
+## 10:00 - Fork the repository - 10' - CATA 
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/11-software-project.html) 
+
+- Go to `README` file in the `edu.nl` link
+- Click on `python-intermediate-inflammation` repository link 
+- Make sure you are signed into your GitHub account
+- Click the `Fork` to create a fork under your GitHub account
+- Leave default name `python-intermediate-inflammation`
+    - [TODO] only main branches for us!
+    - uncheck the `Copy the main branch` only option
+- Click on the `<> Code` button
+- Click on the `SSH` tab to copy the address of the repository for the next exercise
+
+## 10:10 - 1 💪 Obtain the software project locally - 10' - CATA  
+see `exercises.md`
+
+Solution
 ```bash
-Fork python-intermediate-inflammation
+cd ~/Desktop/
+git clone git@github.com:<YOUR_GITHUB_USERNAME>/python-intermediate-inflammation.git
+cd python-intermediate-inflammation/
+git remote -v               # if starts with HTTPS, change to SSH
+git remote set-url origin git@github.com:<YOUR_GITHUB_USERNAME>/python-intermediate-inflammation.git
+git remote -v
 ```
-
-## 10:10 - 💪 Downloading Our Software project - 10' - CATA  
-- Exercise: Obtain the Software Project Locally
 
 ## 10:20 - Our project structure - 10' - CATA 
-
-- Three folders: inflammation, data, tests
- -- inflammation-analysis.py -> main entry point
- -- data > csv files
- -- tests > a few tests
-- Why folder structure matters
-
-Work on terminal
+- Root folder:
+    - `inflammation-analysis.py` main entry point
+    - `README`
+    - `LICENSE`
+    - `pyproject.toml` configuration file for dependencies (more on this later)
+- Three subfolder:
+    - data -> csv files
+    - tests -> a few tests (more on this later)
+    - inflammation -> has more `.py` scripts
 ```bash
-TODO
+ls -lF      # detailed list of the contents
+ls tests
+ls inflammation/
 ```
-## 10:30 - 💪 Our project structure - 5' - CATA 
-TODO better exercise here?
-- Exercise: Have a Peek at the Data
+
+## 10:30 - 2 💪 Have a peek at the data - 5' - CATA
+see `exercises.md`
+
+Solution
+```bash
+wc -l data/inflammation-01.csv
+wc -l data/small-01.csv
+```
 
 ## 10:35 - Break - 15'
 
 ## 10:50 - Virtual Environments For Software Development - 15' - RAUL 
-- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
-- Introduction: dependencies and package managers
-- Virtual environments: isolated directories with their own Python interpreter and packages
-- Managing Virtual environments with venv
-- Managing external packages with pip
-- Reproducibility: sharing an environment so others get the same results
+🎦 Introduce Virtual environments with the kitchen analogy using [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
 
-## 11:05 - Creating Virtual Environments Using venv - 20' - RAUL 
+```bash
+cat inflammation/views.py           # numpy and matplotlib external packages
+```
+- These packages are not installed in the basic version of python. We use a package manager to install `extra` packages.
+
+- If you work on multiple projects, you may need specific versions of each library. For this we use `virtual environments` which create an isolated bubble of the libraries so they don't conflict with each other. A virtual environment is *simply* an isolated directory with their own Python interpreter and packages.
+
+- To clarify the difference between a package and virtual environment manager, continue with the kitchen analogy:
+    - **🍳 Package manager:** "What equipment do I need?" (pots, knives, blenders — i.e. numpy, matplotlib)
+    - **🏠 Virtual environment:** "Which kitchen am I cooking in?" (so you don't mix up one chef's equipment with another's)
+    - **🥕 Your data:** the actual ingredients you bring to that kitchen
+
+
+- In this course we use `pip` as package manager and `venv` as virtual environment manager
+
+## 11:05 - Creating Virtual Environments Using `venv` - 20' - RAUL 
+**CATA continue here**
 ```bash
 ``` 
-- Creating a Virtual environment with venv
-- Naming conventions
-- Activate and check: which python3
-- Deactivate
-- Installing external packages with pip
-- Installing our local Project as a package
-- Exporting environment: pip freeze > requirements.txt
-- Running Python scripts from the command line
+    - Creating a Virtual environment with `venv`
+    - Naming conventions
+    - Activate and check: which python3
+    - Deactivate
+    - Installing external packages with pip
+    - Installing our local Project as a package
+    - Exporting environment: pip freeze > requirements.txt
+    - Running Python scripts from the command line
 
-## 11:25 - 💪 Creating Virtual Environments Using venv - 15' - RAUL 
+## 11:25 - 💪 Creating Virtual Environments Using `venv` - 15' - RAUL 
 - Create a new environment
 - Activate it
 - Install a package
