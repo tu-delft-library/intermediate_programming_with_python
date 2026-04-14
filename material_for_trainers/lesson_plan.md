@@ -1,438 +1,333 @@
+# 🌞 DAY 1 🌞
 
-## 9:00 - Land - 10' - CATA
+## 9:00 - Installation check - 20' - CATA 
+
+- 🖥 Did everyone:
+    - install Python
+    - install VS code
+    - install GitHub SSH key
+    - install `carpentries` environment
+
+## 9:20 - Land - 10' - CATA 
 ☕ Coffee/tea 🫖
 
-## 9:10 - Housekeeping - 10' CATA
+## 9:30 - Welcome - 5' - CATA 
 - ✅ Roll call + 🤝 Code of Conduct
-- 🖥 Did everyone:
-    - install git
-    - create a GitHub account
-    - set up SSH key
 - 🙋 Getting help (🆘 red  ✅ green stickers)
 
-## 9:20 - Icebreaker - 5' - CATA
-🎥 Icebreaker instructions on slides
+## 9:35 - A short icebreaker - 5' - CATA 
+[TODO]
 
-## 9:25 - Introduction to branches - 15' - CATA 
-🎥 Use slides
+## 9:40 - Setting the scene - 10' - CATA 
+- 🎦 introduction with [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
+    - Course overview (section 1, 2, 3)
+    - Tools that will be used in this course
+    - Patient Inflammation Study Project
 
-## 9:40 - Make local repo with history - 10' - CATA 
-Use this opportunity to **recap git commands**
+## 9:50 - Notebooks vs scripts - 10' - CATA 
+- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6)
+    - When Jupyter notebooks are the right tool
+    - When to graduate to a `.py` script
+    - How this course fits into a researcher's workflow
+    - Why project structure matters from day one
 
-Let's configure our `git` default editor:
-```bash
-git config --global core.editor "nano -w"
-```
-```bash
-cd Desktop/
-mkdir sandbox
-cd sandbox/
-git init
-git status
-echo 'first line'                       # echo prints text to terminal screen
-echo 'first line' > lines.txt           # > redirects string into a file, overwrites content
-echo 'second line' >> lines.txt         # >> similar to > but it appends instead of overwrite
-git add lines.txt 
-git commit -m 'Add first two lines' lines.txt 
-git log --oneline
-echo 'third line' >> lines.txt 
-git add lines.txt 
-git commit -m 'Add third line' lines.txt
-git log --oneline
-```
-## 9:50 - New commands for branching - 15' - CATA 
+## 10:00 - Downloading Our Software project - 10' - CATA 
 
 ```bash
-git branch              # check branches (explain the * pointing to main) 
-git branch b1           # add argument to create new branch
-git branch              # verify branch was created (output: b1, *main)
+Fork python-intermediate-inflammation
 ```
-`b1` is a name. It can be any name. Recommendations: use lowercase and underscores/dashes
+
+## 10:10 - 💪 Downloading Our Software project - 10' - CATA  
+- Exercise: Obtain the Software Project Locally
+
+## 10:20 - Our project structure - 10' - CATA 
+
+- Three folders: inflammation, data, tests
+ -- inflammation-analysis.py -> main entry point
+ -- data > csv files
+ -- tests > a few tests
+- Why folder structure matters
+
+Work on terminal
 ```bash
-git status              # on branch main / nothing to commit
-cat lines.txt           # three lines
-git log --oneline       # explain (HEAD -> main, b1)
-git branch -m b1 b2     # rename branch (-m for move)
-git log --oneline       # branch b1 was renamed to b2 (HEAD -> main, b2)
-git branch -d b2        # delete branch
-git log --oneline       # verify main is the only branch
-git branch -d main      # fails - can't delete current branch
-git branch b1           # create again branch b1
-git log --oneline       # verify
-git switch              # fails - no branch name
-git switch b1          # stand on branch b1
-git log --oneline       # verify
-git branch b1           # branch alreay exists 
-git switch -c b2        # create and switch to b2
-git log --oneline       # notice HEAD -> b2
-git switch main         # switch to main
-git log --oneline       # notice HEAD -> main
+TODO
 ```
+## 10:30 - 💪 Our project structure - 5' - CATA 
+TODO better exercise here?
+- Exercise: Have a Peek at the Data
 
-## 10:05 - 1 💪 Get familiar with branches - 10' - CATA 
-See `exercises.md`. There is an optional challenge under each numbered exercise.. There is an optional challenge under each numbered exercise.
+## 10:35 - Break - 15'
 
-Solution:
+## 10:50 - Virtual Environments For Software Development - 15' - RAUL 
+- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
+- Introduction: dependencies and package managers
+- Virtual environments: isolated directories with their own Python interpreter and packages
+- Managing Virtual environments with venv
+- Managing external packages with pip
+- Reproducibility: sharing an environment so others get the same results
+
+## 11:05 - Creating Virtual Environments Using venv - 20' - RAUL 
 ```bash
-git branch pa
-git branch pe
-git branch pi
-git branch -m pa po
-git switch po
-git log --oneline
-git switch pe
-git log --oneline
-git switch main         # stand on main to delete other branches
-git branch -d pe pi po
-git log --oneline
-```
+``` 
+- Creating a Virtual environment with venv
+- Naming conventions
+- Activate and check: which python3
+- Deactivate
+- Installing external packages with pip
+- Installing our local Project as a package
+- Exporting environment: pip freeze > requirements.txt
+- Running Python scripts from the command line
 
-## 10:15 - Develop on different branches - 10' - CATA 
+## 11:25 - 💪 Creating Virtual Environments Using venv - 15' - RAUL 
+- Create a new environment
+- Activate it
+- Install a package
+- Export requirements.txt
+- Deactivate and go back to system Python
 
+## 11:40 - Break - 15'
 
+## 11:55 - VSCode orientation - 15' - CATA 
+Live demo 
+- What is an IDE and Why use one
+- Opening the Project in VSCode
+- Adding the Python interpreter
+- Syntax highlighting, code completion, code search
+- Running code from the IDE
+- We will use VSCode throughout the rest of the Course
+
+## 12:10 - 💪 Requirements file - 10' - CATA 
+Exercise: Update requirements file after adding a new dependency
+## 12:20 - Version control with VSCode - 10' - CATA 
 ```bash
-git status
-echo 'forth line' >> lines.txt              # add more lines
-git diff
-git add lines.txt 
-git commit -m 'Add forth line' lines.txt    # commit changes on main
-git status
-git switch b1
-git log --oneline
-echo 'forth line' >> lines.txt 
-git diff
-git add lines.txt
-git commit -m 'Add forth line on branch b1' lines.txt # commit changes on b1
-git status
-git switch main
-git log --oneline --all                    # show all branches
-git log --oneline --all --graph            # show graph with all branches
-```
-Notice the HEAD pointing to the main branch. The commits are different even if the changes are similar.
+``` 
+"[Use VSCode for all git operations from here]
+- Checking in changes to our project
+- Adding venv to .gitignore
+- Update and commit requirements.txt
+- Sync with remote: pull and push
 
-## 10:25 - 2 💪 Commit in a secondary branch - 5' - CATA
-See `exercises.md`. There is an optional challenge under each numbered exercise. 
+## 12:30 - Lunch - 60'
+## 13:30 - Why testing matters - 10' - RAUL 
+- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
+- Why write tests?
+  -- Ensure correctness
+  -- Catch regressions: new code should not break existing code
+- Unit tests, regression tests, integration tests
+- How to read a failing test and a stack trace
 
-Solution:
+## 13:40 - Unit testing with Pytest - 20' - RAUL 
 ```bash
-git switch b2
-cat lines.txt
-echo 'forth line' >> lines.txt 
-echo 'fifth line' >> lines.txt
-git diff
-git add lines.txt
-git commit -m "Add two more lines on b2"
-git status
-```
+``` 
+- Inflammation data analysis
+- tests using NumPy testing library
+- tests using pytest
+- install pytest
+- Run tests/test_models.py
+- How pytest finds tests: functions named test_
 
-## 10:30 - Break - 10' 
+## 14:00 - 💪 Unit testing with Pytest - 15' - RAUL 
+- Write Some Unit Tests
+- git commit
 
-## 10:40 - Explore differences across branches - 15' - HALFORD 
+## 14:15 - Debugging in the IDE - 15' - RAUL 
+Live demo 
+- How to read an error message and a stack trace
+- Configure Python tests in VSCode
+- Run tests
+- Running the debugger
+- Breakpoints
+- Inspecting variables
+- Reading the call stack
 
-Let's keep adding to our history:
+## 14:30 - Break - 15'
+
+## 14:45 - Python Coding Style Guide - 15' - CATA 
+- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
+- PEP8
+- Quick mention of formatting guidelines and show autopep8 in VScode: (Indentation, Maximum Line Length, Line Break, Blank Lines, Whitespace, String Quotes)
+- Spend more time on Naming Conventions: Function, Variable, Class, Module, Package Naming in Python
+- Good practices when writting Comments
+- Type hints (not in SWC) but super important
+
+## 15:00 - 💪 Python Coding Style Guide - 20' - CATA 
+- Set up autopep8 in VSCode
+- Improve Code Style of Our Project
+- git commit
+
+## 15:20 - Python Coding Style Guide - 5' - CATA 
+- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
+- Documentation Strings aka Docstrings
+## 15:25 - Python Coding Style Guide - 20' - CATA 
+- Fix the Docstrings
+- Add type hints
+- git commit
+
+## 15:45 - Break - 15'
+
+## 16:00 - 💪 LAB: Testing the inflammation project - 40' - RAUL 
+
+- Write unit tests for daily_min(), daily_mean(), daily_max()
+- Introduce an intentional bug and confirm a test catches it
+- Fix the bug and re-run the test suite
+- git commit
+
+## 16:40 - Review LAB with the group - 10' - RAUL 
+Discussion (face-2-face) 
+- Discuss solutions and common issues
+- Q&a
+
+## 16:50 - Summarize key points - 10' - RAUL 
+- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
+- Recap: project setup, virtual environments, VSCode, git, testing, debugging, style
+- Preview of Day 2: code quality, project structure, refactoring
+- Questions
+
+
+# 🌞 DAY 2 🌞
+
+
+## 9:10 - Welcome - 5' - RAUL 
+- ✅ Roll call + 🤝 Code of Conduct
+- 🙋 Getting help (🆘 red  ✅ green stickers)
+
+## 9:15 - Recap from day one - 10' - RAUL 
+- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
+- Key concepts from Day 1: setup, virtual environments, testing, debugging, style
+- Questions from participants
+
+## 9:25 - Data validation - 10' - RAUL 
 ```bash
-git switch main
-cat lines.txt
-echo 'forth line (duplicate)' >> lines.txt      # add mistake on main
-git diff
-git add lines.txt 
-git commit -m 'Add fifth line on main (with mistake)' lines.txt 
-cat lines.txt 
-git switch b1
-cat lines.txt
-echo 'fifth line' >> lines.txt 
-git diff
-git add lines.txt 
-git commit -m 'Add fifth line on b1' lines.txt 
-git log --oneline --all --graph                 # so many little changes
-```
-Maybe we are confused about what was done on which branch. Let's see how to investigate the changes.
+``` 
+- What About Testing for Errors?
+- raises()
+- Testing for invalid input data -> data validation
+- Update requirements file
 
+## 9:35 - 💪 Data validation - 10' - RAUL 
+- Write data validation test for daily_mean() and daily_max()
+- git commit
+
+## 9:45 - Test parametrization - 10' - RAUL 
 ```bash
-git switch main                     
-git diff HEAD HEAD~1 lines.txt      # REMEMBER: changes between latest and one before latest commit
-git diff main b1 lines.txt # changes between  main and b1
-git diff main b1~1 lines.txt # changes between main and parent of the latest commit on branch B1
-git diff main~1 b1~1 lines.txt # changes between parent of the latest commit on the main branch and the parent of the latest commit on branch B1
-# No difference on this one. Both files have 4 lines
-```
-Let's correct the mistake on `main` branch
+``` 
+- Parameterising Our Unit Tests
+- Edge cases 
 
+## 9:55 - 💪 Test parametrization - 15' - RAUL 
+Write Parameterised Unit Tests (remember to add edge cases)
+- git commit
+
+## 10:10 - Break - 15'
+
+## 10:25 - Defensive programming - 10' - CATA 
 ```bash
-git status              # verify
-nano lines.txt          # change "forth line (duplicate)" with "fifth line"
-cat lines.txt           # verify
-git status              # verify
-git add lines.txt       # routine
-git commit -m 'Correct fifth line on main' lines.txt # routine 
-git log --oneline --graph
-```
+``` 
+- Check data at input
+- Raise errors and fail
+- Fix (assumptions) and raise a warning
 
-## 10:55 - 3 💪  Explore differences across branches - 10' - HALFORD
-See `exercises.md`. There is an optional challenge under each numbered exercise.
+## 10:35 - 💪 Defensive programming - 15' - CATA 
+- Exercise: Add a Precondition to Check the Correct Type and Shape of Data
+- git commit
 
-Solution:
+## 10:50 - Abstractions and Decoupling - 15' - CATA 
+- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
+- What is an abstraction?
+- Decoupling: why it matters
+- Practical tips:
+  -- Long chains of ""and"" in a function -> extract an abstraction
+  -- Copy/paste code -> extract an abstraction
+  
+  ## 11:05 - 💪 Abstractions and Decoupling - 15' - CATA 
+- Exercise: Decouple Data Loading from Data Analysis
+- git commit
+
+## 11:20 - Break - 15'
+
+## 11:35 - Organising code into modules - 15' - RAUL 
+- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
+- What is a Python module?
+- When to split Code into separate files
+- Imports and namespaces
+- Keeping modules focused: one responsibility per module
+
+## 11:50 - 💪 Organising code into modules - 30' - RAUL 
+- Split the inflammation project into separate modules (data loading, analysis, reporting)
+- Update imports
+- git commit
+
+## 12:20 - Open Q&A and catch-up - 10' - RAUL 
+- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
+- Participants Raise questions from the morning
+- Catch up on any unfinished exercises
+
+## 12:30 - Lunch - 60'
+## 13:30 - Refactoring - 10' - CATA 
+- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
+- Change structure not behaviour.
+  -- abstractions, decoupling, renaming, reorganising, reduce duplication DO NOT fix bugs
+- Writing Tests Before Refactoring
+
+## 13:40 - 💪 Refactoring - 20' - CATA 
+- Write regression tests before refactoring
+- git commit
+
+## 14:00 - Separating Pure and Impure Code - 10' - CATA 
+- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
+- Pure functions: same input always gives same output, no side effects
+- Benefits of Pure functions for testing and reasoning about code
+
+## 14:10 - 💪 Separating Pure and Impure Code - 20' - CATA 
+- Refactor to use a pure function
+- git commit
+
+## 14:30 - Break - 15'
+
+## 14:45 - Testing pure functions - 10' - RAUL 
+- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
+- Testing Pure Functions
+- Functional programming
+
+## 14:55 - 💪 Testing pure functions - 15' - RAUL 
+Testing a Pure Function
+
+
+## 15:10 - the __main__ function - 10' - RAUL 
 ```bash
-git switch b2
-git diff HEAD
-git diff HEAD~1
-git diff HEAD~2
-git diff HEAD~3         # fails
-git diff b2 b1 lines.txt
-git diff main b2~1 lines.txt
-```
+``` 
+- __name__  ""__main__"
 
-## 11:05 - Merging branches and conflict resolution - 15' - HALFORD 
+- Why it matters for scripts vs imports
 
-Let's develop further on branch `b1`:
+## 15:20 - Command line arguments - 10' - RAUL 
 ```bash
-git switch b1                                             # on branch b1
-echo 'sixth line' >> lines.txt                          # routine
-echo 'seventh line' >> lines.txt                          # routine
-git diff                                                  # routine
-git add lines.txt                                         # routine
-git commit -m 'Add 6th and 7th lines on b1' lines.txt   # routine
-git log --oneline --all --graph                           # routine
-```
-We are done with developing on `b1` and want to merge to `main`. 
-For this we first *stand* on main branch (with `switch`) and then apply the merge.
-```bash
-git switch main                     # on branch main
-git diff main b1 lines.txt          # verify
-git merge -m 'Merge b1' lines.txt   # wrong syntax - merge expects branch not file
-git merge -m 'Merge b1' b1          # right syntax: fails because of conflict
-git status                          # see which files are in conflict
-git diff lines.txt                  # verify differences
-```
-To resolve the merge conflict:
-1. edit manually the conflicting sections: keep current branch (aka `ours`), incoming branch (aka `theirs`), combine or make entirely different changes.
-1. remove the conflict markers
+``` 
+- argparser
+- run from terminal
+- positional and optional argument order
 
-> **Reading the markers:**
-> - `<<<<<<< HEAD` → your current branch's version
-> - `=======` → dividing line
-> - `>>>>>>>` → the incoming branch's version
+## 15:30 - 💪 Command line arguments - 15' - RAUL 
+- Exercise: Add optional parameter:
+  -- a filename for a figure. If paremeter exists, save figure to file insted of plot.show()
+- git commit
 
-```bash
-nano lines.txt           # edit the file within the conflict markers
-                         # manually combine both sets
-                         # demo ^k to delete whole line
-```
-`lines.txt` should look like this:
-```bash
-first line
-second line
-third line
-forth line
-fifth line
-sixth line
-seventh line
-```
->
-In this example, the conflict has been resolved by mixing both sets of changes. Parts of the changes from both branches are now present in the file. If you are done you can use `git add` to stage the resolved changes:
+## 15:45 - Break - 15'
 
-```bash
-git status
-git diff                                                  # diff shows nothing!
-```
-During a merge, conflicting files go to a different state while the conflict is resolved and a commit is done.
-The easiest way to see the state of the file is to see show the content using `cat`.
-```bash
-cat lines.txt
-git add lines.txt                                         # mark resolution
-git status                                                # verify
-git commit -m 'Merge changes from b1 into main'          # conclude merge right syntax
-git status                                                # verify
-git log --oneline --all --graph                           # see merge visually
-git log --oneline --all --graph --parents                 # see merge with hashes 
-```
+## 16:00 - 💪 LAB refactoring using inflammation_analysis.py - 40' - CATA 
+- Add warnings for suspicious data values
+- Add optional input parameters
+- Ensure all tests still pass
+- git commit
+- git push
 
-> **ADVANCED** If you really want to see the differences during a merge use: `git diff :1:lines.txt :2:lines.txt`
-
-## 11:20 - 4 💪 A first type for merge - 10' - HALFORD 
-See `exercises.md`. There is an optional challenge under each numbered exercise.
-
-Solution:
-```bash
-git diff main b2 lines.tx       # show differences for lines.txt
-git diff main b2                # show differences all files - same in this case
-git switch main                 # stand on main
-git merge b2                    # merge b2 into main
-nano lines.txt                  # fix conflicts
-git add lines.txt
-git commit -m 'Merge b2 into main'
-git log --oneline --all --graph # verify
-```
-
-> **Before break:** Turn to a neighbour and compare the output of `git log --oneline --all --graph`. Does it look the same? Different commit hashes? Same shape?
-
-## 11:30 - Break  - 10' 
-
-## 11:40 -  💻 LAB - Understanding merge conflicts - 40' - CATA
-see `LAB_merge_conflicts.md`
-
-## 12:20 -  Review LAB with group - 10' - CATA
-Do not solve the LAB live. Just ask questions, share experiences or highlight concepts that you noticed were still a bit confusing.
-
-## 12:30 - 	Lunch - 60'		
-
-## 13:30 - 5 💪 Interactive Git - 15' - HALFORD 
-See `exercises.md`. There is an optional challenge under each numbered exercise.
-
-## 13:45 - Create a remote repository on GitHub - 5' - HALFORD 
-
-Our `sandbox` has grown into something we want to keep. Time turn it into a remote repository.
-
-Because our local history is a little messy, we prefer to have a fresh clean repo and copy the current state of the files there.
-
-1. Go to [github.com](https://github.com) and sign in
-2. Click the **+** icon in the top-right corner and choose **New repository**
-3. Name it `logbook`
-4. Leave it **Public**
-5. Leave all clone_colleague options as they are. Do **not** add a `README` or `.gitignore`
-6. Click **Create repository**
-
-GitHub will show you your new empty repository and its URL. 
-Click on the `SSH` tab. It will look like:
-```
-git@github.com:YOUR-USERNAME/logbook.git
-```
-Copy this URL
-
-## 13:50 - Cloning and pushing - 10' - HALFORD 
-
-Clone the repository locally:
-```bash
-cd ~/Desktop
-git clone git@github.com:YOUR-USERNAME/logbook.git  # empty repo warning is ok!
-cd logbook
-```
-
-```bash
-git status                                        # nothing to commit
-git branch                                        # observe that is empty
-git log                                           # observe - fatal error -> no branch
-```
-
-```bash
-git remote -v               # shows short name (origin) and full URL
-```
-
-Explain remote operations:
-- **Fetching**: downloading new data (commits, branches, or tags) from a remote repository into your local repository — without modifying your working files.
-- **Pushing**: uploading your local commits to the remote repository.
-- **Pulling**: `git pull` is `git fetch` + `git merge` in one step.
-
-Copy the local `sandbox` file into this repo and push:
-```bash
-cp ~/Desktop/sandbox/lines.txt .
-git add lines.txt
-git commit -m 'Add lines.txt from local work'
-git push origin main        # push to remote
-```
-Note the message from git showing the commits were pushed to Github.
-
-Visit GitHub and refresh — students should see `lines.txt` appear online.
-
-## 14:00 - Pulling from a remote repository - 10' - HALFORD
-Let's pretend someone else edited the file.
-We'll simulate this by using GitHub web editor:
-1. Open `lines.txt` on GitHub
-1. Click on the pencil icon on the upper right corner to edit
-1. Add a new line at the bottom: `eighth line`
-1. Commit with message `Add eighth line via GitHub`
-
-Now pull it locally:
-```bash
-git log --oneline           # notice the remote change is not here yet
-git pull origin main        # fetch + merge in one step
-git log --oneline           # now the commit from GitHub is visible
-cat lines.txt               # eighth line is there
-```
-
-> **Key message:** always pull before you start working to avoid unnecessary conflicts.
-
-## 14:10 - Solve a conflict when pushing - 15' - HALFORD
-
-Make a small edit directly on GitHub (via the web editor):
-1. Open `lines.txt` on GitHub
-2. Add a new line at the bottom: `ninth line - GitHub`
-3. Commit with message `Add ninth line via GitHub`
-
-Now, back in the terminal, make a **different** local change without pulling:
-```bash
-echo 'ninth line - local' >> lines.txt
-git add lines.txt
-git commit -m 'Add ninth line locally'
-git push origin main        # fails! rejected - remote contains work you do not have
-```
-
-Explain **divergent branches**: both the local and remote `main` have moved forward independently. Git can try to reconcile the branches. The two most common options are: `merge` and `rebase`.
-
-Let's ask Git to use `merge` by default
-```bash
-git config pull.rebase false      # merge
-```
-
-Resolve it:
-```bash
-git pull origin main        # fetch + attempt merge → conflict in lines.txt
-git status                  # lines.txt listed as "both modified"
-nano lines.txt              # resolve conflict markers — keep one or combine both lines
-git add lines.txt
-git commit -m 'Merge remote and local ninth line'
-git push origin main        # now succeeds
-```
-
-Visit GitHub and confirm the resolved file is there.
-
-> **Key message:** the conflict resolution steps are identical whether the divergence comes from a colleague or from your own edit on GitHub. **Pull before you push.**
-
-## 14:25 - 6 💪 Undo a Bad Merge - 10' - HALFORD
-See `exercises.md`. There is an optional challenge under each numbered exercise.
-
-Solution:
-```bash
-git switch main
-git branch bad-merge
-git switch bad-merge
-echo 'tenth line - branch version' >> lines.txt
-git add lines.txt
-git commit -m 'Add tenth line on bad-merge'
-git switch main
-echo 'tenth line - main version' >> lines.txt
-git add lines.txt
-git commit -m 'Add tenth line on main'
-git merge bad-merge         # conflict! both branches changed the last line
-git status                  # lines.txt listed as "both modified"
-cat lines.txt               # conflict markers are visible
-git merge --abort
-git status                  # clean — back to where you were before the merge
-cat lines.txt               # conflict markers are gone, file is as it was on main
-git log --oneline --graph   # no merge commit was created
-git branch -D bad-merge     # force-delete (it was never cleanly merged)
-git log --oneline --graph   # back to a clean main
-```
-
-`git merge --abort` is only available **while a merge is in progress** 
-
-## 14:35 - Break - 10' 
-
-## 14:45 - 💻 LAB - Conflicts with Remote Repositories - 40' - CATA 
-see `LAB_remote_conflicts_github.md`
-
-## 15:25 - Review LAB with the group - 10' - CATA
-Do not solve the LAB live. Just ask questions, share experiences or highlight concepts that you noticed were still a bit confusing.
-
-## 15:35 - Break - 10'
-## 15:45 - Summarize key points - 10' - HALFORD 
-- **Branches**: create isolated lines of development with `git branch` and `git switch`.
-- **Merging**: bring changes together with `git merge`.
-Git creates a merge commit
-- **Conflicts**: happen when the same lines were changed in both branches. Always: edit → remove markers → `git add` → `git commit`
-- **Remote workflows**: `clone`, `push`, `pull`. Pull before you push. Conflicts can happen on remotes too, and are resolved the same way
-- **Escape hatches**: if a conflict surprises you and you need time to think `git merge --abort` is a safe exit
+## 16:40 - Summarize key points - 10' - CATA 
+- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
+- Recap: project structure, defensive Programming, Abstractions, refactoring, Pure functions
+- Where to go next: packaging, documentation tools (Sphinx), continuous integration
+- questions and feedback
 
 
-## 15:55 - Give feedback about the course - 5' 
-Go to the link in `README.md`
+## 16:50 - Give feedback about the course - 5'                                        
+                                                
+                                            
