@@ -16,7 +16,7 @@
 <summary>🔍 Click here for hints! </summary>
 
 - To navigate to a desired path use  `cd desired_path` 
-- To clone a repository locally use  `git clone git@github.com:<YOUR_GITHUB_USERNAME>/python-intermediate-inflammation.git`
+- To clone a repository localzly use  `git clone git@github.com:<YOUR_GITHUB_USERNAME>/python-intermediate-inflammation.git`
 </details>
 
 ## 2 💪 Have a peek at the data
@@ -25,11 +25,37 @@
 - How many rows does `small-01.csv` have?
 
 <details>
-<summary>🔍 Click here for hints! </summary>
+<summary>🔍 Click here for hints! </summary>history
 
 - Use `wc -l filename` to count the number of rows in a file
 </details>
 
+## 3 💪 Create a `venv`
+- Deactivate your current `venv` to go back to system Python
+- Navigate to your `Desktop`
+- Make a new directory called `sandbox`
+- Navigate inside the `sandbox` directory
+- Create a new environment using `venv`
+- Verify that the new environment is saved in the current directory
+- Activate it
+- Install the following packages: `numpy`, `requests`
+- Verify the packages were installed
+- Export the environment into a `requirements.txt`
+- View the contents of `requirements.txt`
+- Deactivate the `venv` to go back to system Python
+- Navigate back to `python-intermediate-inflammation`
+
+
+<details>
+<summary>🔍 Click here for hints! </summary>
+
+- Use `deactivate` to go back to system python
+- Use `python3 -m venv name_of_environment` to create a new environment
+- Use `source name_of_environment/bin/activate` activate the environment file
+- Use `python3 -m pip install package` to install a package
+- Use `python3 -m pip list` to see list of currently installed packages
+- Use `python3 -m pip freeze > requirements.txt` to save the environment
+</details>
 
 ## XX 💪 
 
