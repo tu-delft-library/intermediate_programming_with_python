@@ -7,7 +7,6 @@
     - Python
     - VScode
     - GitHub SSH key
-    - `carpentries` environment [todo]
 
 ## 9:20 - Land - 10' - CATA 
 ☕ Coffee/tea 🫖
@@ -98,35 +97,86 @@ cat inflammation/views.py           # numpy and matplotlib external packages
 
 - To clarify the difference between a package and virtual environment manager, continue with the kitchen analogy:
     - **🍳 Package manager:** "What equipment do I need?" (pots, knives, blenders — i.e. numpy, matplotlib)
-    - **🏠 Virtual environment:** "Which kitchen am I cooking in?" (so you don't mix up one chef's equipment with another's)
-    - **🥕 Your data:** the actual ingredients you bring to that kitchen
+    - **🏠 Virtual environment:** "Which kitchen am I cooking in?" (so you don't mix up one recipe's equipment with another's)
+    - **🥕 Your data:** the ingredients you bring to that kitchen
+    - **Your code:** the recipe
 
-
-- In this course we use `pip` as package manager and `venv` as virtual environment manager
+- There many options for package managers and venv managers. Some of them (like `conda`) do both roles together. In this course we use `pip` as package manager and `venv` as virtual environment manager
 
 ## 11:05 - Creating Virtual Environments Using `venv` - 20' - RAUL 
-**CATA continue here**
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/12-virtual-environments.html)
+
+How to create virtual environments
 ```bash
-``` 
-    - Creating a Virtual environment with `venv`
-    - Naming conventions
-    - Activate and check: which python3
-    - Deactivate
-    - Installing external packages with pip
-    - Installing our local Project as a package
-    - Exporting environment: pip freeze > requirements.txt
-    - Running Python scripts from the command line
+pwd                         # ensure standing in python-intermediate-inflammation/
+python3 -m venv venv        # path convention to use venv or .venv (hidden)
+ls -l                       # new  folder venv
+ls -l venv                  # bin for python interpreter(Scripts for Windows)
+ls venv/lib/pythonX.X/site-packages/    # independent python packages
+ls venv\Lib\site-packages               # on windows
+source venv/bin/activate                # activate (enter kitchen) 
+                                        # note name (venv) before $
+source venv/Scripts/activate            # for windows
+which python3                           # notice full path inside venv
+deactivate                              # exit environment (exit kitchen)
+```
+How to install packages
+```bash
+source venv/bin/activate                # reactivate to continue working
+python3 -m pip install numpy            # pip install
+python3 -m pip install matplotlib
+python3 -m pip install numpy>=1.2       # set minimum version of package 
+python3 -m pip show numpy               # display info of package
+python3 -m pip list                     # list all packages in venv
+python3 -m pip uninstall matplotlib     # just demo. Answer n
+```
+How to install our local project as a package. Allows to call the Python code we are writing from another location.
+```bash
+python3 -m pip install --editable .     # --editable change dynamically as we develop, . current dir
+python3 -m pip install --upgrade pip    # if above fails -> update pip          
+python3 -m pip list                     # note our package on the list
+```
+How to replicate an environment. For your colleagues (and future self) to be able to reproduce your environment with all its dependencies. 
+```bash
+python3 -m pip freeze --exclude-editable > requirements.txt    # produce list of packages, exclude our package, save into a txt file
+cat requirements.txt                # see the list of packages with versions!
+```
+The `requirements.txt` file can be committed to version control and used later to recreate the environment like this:
+```bash
+python3 -m pip install -r requirements.txt --editable .
+```
+How to run Python scripts from the command line
+```bash
+pwd                         # ensure standing in python-intermediate-inflammation/ 
+python3 inflammation-analysis.py    # use python3 to run script in current directory  
+python3 inflammation-analysis.py data/inflammation-01.csv # add input file
+```
 
 ## 11:25 - 💪 Creating Virtual Environments Using `venv` - 15' - RAUL 
-- Create a new environment
-- Activate it
-- Install a package
-- Export requirements.txt
-- Deactivate and go back to system Python
+see `exercises.md`
+
+solution
+```bash
+cd ~/Desktop/
+mkdir sandbox
+cd sandbox/
+python3 -m venv venv
+ls -al
+source venv/bin/activate
+python3 -m pip install numpy
+python3 -m pip install requests
+python3 -m pip list
+python3 -m pip freeze > requirements.txt
+cat requirements.txt 
+deactivate
+cd ~/Desktop/python-intermediate-inflammation/
+```
 
 ## 11:40 - Break - 15'
 
 ## 11:55 - VSCode orientation - 15' - CATA 
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/13-ides.html)
+
 Live demo 
 - What is an IDE and Why use one
 - Opening the Project in VSCode
@@ -137,17 +187,21 @@ Live demo
 
 ## 12:10 - 💪 Requirements file - 10' - CATA 
 Exercise: Update requirements file after adding a new dependency
+
 ## 12:20 - Version control with VSCode - 10' - CATA 
 ```bash
 ``` 
-"[Use VSCode for all git operations from here]
+[Use VSCode for all git operations from here]
 - Checking in changes to our project
 - Adding venv to .gitignore
 - Update and commit requirements.txt
 - Sync with remote: pull and push
 
 ## 12:30 - Lunch - 60'
+
 ## 13:30 - Why testing matters - 10' - RAUL 
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/21-automatically-testing-software.html#what-is-software-testing)
+
 - 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
 - Why write tests?
   -- Ensure correctness
@@ -156,6 +210,7 @@ Exercise: Update requirements file after adding a new dependency
 - How to read a failing test and a stack trace
 
 ## 13:40 - Unit testing with Pytest - 20' - RAUL 
+
 ```bash
 ``` 
 - Inflammation data analysis
@@ -170,6 +225,8 @@ Exercise: Update requirements file after adding a new dependency
 - git commit
 
 ## 14:15 - Debugging in the IDE - 15' - RAUL 
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/24-diagnosing-issues-improving-robustness.html#debugging-in-an-ide)
+
 Live demo 
 - How to read an error message and a stack trace
 - Configure Python tests in VSCode
@@ -182,6 +239,8 @@ Live demo
 ## 14:30 - Break - 15'
 
 ## 14:45 - Python Coding Style Guide - 15' - CATA 
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/15-coding-conventions.html)
+
 - 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
 - PEP8
 - Quick mention of formatting guidelines and show autopep8 in VScode: (Indentation, Maximum Line Length, Line Break, Blank Lines, Whitespace, String Quotes)
@@ -197,6 +256,7 @@ Live demo
 ## 15:20 - Python Coding Style Guide - 5' - CATA 
 - 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
 - Documentation Strings aka Docstrings
+
 ## 15:25 - Python Coding Style Guide - 20' - CATA 
 - Fix the Docstrings
 - Add type hints
@@ -369,4 +429,7 @@ Testing a Pure Function
 
 ## 16:50 - Give feedback about the course - 5'                                        
                                                 
-                                            
+# [? for raul] 
+- .venv vs venv vs intuitive name
+- test windows commands
+                                           
