@@ -32,7 +32,7 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 - Setting the scene
 
 
-## 10:00 - Fork the repository - 10' - CATA 
+## 9:55 - Fork the repository - 10' - CATA 
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/11-software-project.html) 
 
 - Go to `README` file in the `edu.nl` link
@@ -45,7 +45,7 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 - Click on the `<> Code` button
 - Click on the `SSH` tab to copy the address of the repository for the next exercise
 
-## 10:10 - 1 💪 Obtain the software project locally - 10' - CATA  
+## 10:05 - 1 💪 Obtain the software project locally - 10' - CATA  
 see `exercises.md`
 
 Solution
@@ -58,7 +58,7 @@ git remote set-url origin git@github.com:<YOUR_GITHUB_USERNAME>/python-intermedi
 git remote -v
 ```
 
-## 10:20 - Our project structure - 10' - CATA 
+## 10:15 - Our project structure - 10' - CATA 
 - Root folder:
     - `inflammation-analysis.py` main entry point
     - `README`
@@ -74,7 +74,7 @@ ls tests
 ls inflammation/
 ```
 
-## 10:30 - 2 💪 Have a peek at the data - 5' - CATA
+## 10:25 - 2 💪 Have a peek at the data - 5' - CATA
 see `exercises.md`
 
 Solution
@@ -83,9 +83,9 @@ wc -l data/inflammation-01.csv
 wc -l data/small-01.csv
 ```
 
-## 10:35 - Break - 15'
+## 10:30 - Break - 15'
 
-## 10:50 - Virtual Environments For Software Development - 15' - RAUL 
+## 10:45 - Virtual Environments For Software Development - 15' - RAUL 
 🎦 Introduce Virtual environments with the kitchen analogy using [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
 
 ```bash
@@ -103,15 +103,15 @@ cat inflammation/views.py           # numpy and matplotlib external packages
 
 - There many options for package managers and venv managers. Some of them (like `conda`) do both roles together. In this course we use `pip` as package manager and `venv` as virtual environment manager
 
-## 11:05 - Creating Virtual Environments Using `venv` - 20' - RAUL 
+## 11:00 - Creating Virtual Environments Using `venv` - 20' - RAUL 
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/12-virtual-environments.html)
 
 How to create virtual environments
 ```bash
 pwd                         # ensure standing in python-intermediate-inflammation/
-python3 -m venv venv        # path convention to use venv or .venv (hidden)
+python3 -m venv venv       # path convention venv (hidden)
 ls -l                       # new  folder venv
-ls -l venv                  # bin for python interpreter(Scripts for Windows)
+ls -l venv                  # bin for python interpreter (Scripts for Windows)
 ls venv/lib/pythonX.X/site-packages/    # independent python packages
 ls venv\Lib\site-packages               # on windows
 source venv/bin/activate                # activate (enter kitchen) 
@@ -152,7 +152,7 @@ python3 inflammation-analysis.py    # use python3 to run script in current direc
 python3 inflammation-analysis.py data/inflammation-01.csv # add input file
 ```
 
-## 11:25 - 💪 Creating Virtual Environments Using `venv` - 15' - RAUL 
+## 11:20 - 💪 Creating Virtual Environments Using `venv` - 10' - RAUL 
 see `exercises.md`
 
 solution
@@ -172,34 +172,66 @@ deactivate
 cd ~/Desktop/python-intermediate-inflammation/
 ```
 
-## 11:40 - Break - 15'
+## 11:30 - Break - 15'
 
-## 11:55 - VSCode orientation - 15' - CATA 
+## 11:45 - VSCode orientation - 15' - CATA 
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/13-ides.html)
 
-Live demo 
-- What is an IDE and Why use one
-- Opening the Project in VSCode
-- Adding the Python interpreter
-- Syntax highlighting, code completion, code search
-- Running code from the IDE
-- We will use VSCode throughout the rest of the Course
+#### Starting with a software project
+An Integrated Development Environments (IDEs) is an application with tools to help software development. We will use VS Code.
+- Open folder -> navigate to `~/Desktop/python-intermediate-inflammation/`
+- Icons on the left bar access key views of VS Code.  
+- In the `Explorer` tab we see the project structure (browse through the folders).
+  
+#### Installing extensions
+VSCode is light and general. Which means you need to install what you need.
+  - Go to the `Extensions` tab 
+  - install `Python` by Microsoft
+  - install `autoDocstring` by Nils Werner
+  - search for `GitHub Copilot` -> `Disable (Workspace)`
 
-## 12:10 - 💪 Requirements file - 10' - CATA 
-Exercise: Update requirements file after adding a new dependency
+#### Adding a Python interpreter
+First we need to tell the IDE which version of Python we want to use. We do that in the terminal
+- Open `Terminal` > `New Terminal` and type `source /venv/bin/activate`
+- Next step should not be necessary, but it's good to check
+  - Go to `View > Command Palette`, or shortcut `CTRL-SHIFT-P` (Windows, Linux) or `CMD-SHIFT-P` (macOS)
+  - Search for `Python: Select Interpreter` 
+  - Select the one in `Workspace` -> the `venv` we set up earlier today
+- Open `inflammation-analysis.py` in code editor
+  - We can check that the *correct* python interpreter is installed in the lower right corner. 
+- Notice the Python syntax highlighting: comments, special language words (`import`, `from`, `if`), modules, function names, strings.
 
-## 12:20 - Version control with VSCode - 10' - CATA 
+#### Adding external dependency
+To add an external dependency (an extra package) we use the integrated terminal
+- Go back to the terminal
+- Type `python3 -m pip install pytest`
+
+## 12:05 - 💪 Requirements file - 10' - CATA 
+see `exercises.md`
+
+solution
 ```bash
-``` 
-[Use VSCode for all git operations from here]
-- Checking in changes to our project
-- Adding venv to .gitignore
-- Update and commit requirements.txt
-- Sync with remote: pull and push
+python3 -m pip list       # see list of packages
+cat requirements.txt      # see contents of requirements.txt -> pytest is missing
+python3 -m pip freeze > requirements.txt  # regenerate requirements.txt
+python3 -m pip freeze --exclude-editable > requirements.txt # remember the --exclude-editable flag for your current project
+```
 
-## 12:30 - Lunch - 60'
+## 12:15 - Version control using IDE - 10' - CATA 
+In the `Version control` view we see a little blue notification. It means `git` has found a change
+  - Let's verify that files inside `venv` are not tracked by `git`
+  - `venv` automatically adds a `.gitignore` file
+  > **explicitly ask** if `venv` is not ignored. If so ask helpers add `venv/*` to `.gitignore`
+  - `requirements.txt` is untracked (`U`)
+  - click on `+` to stage changes (add new file)
+  - Write commit message and click on `Commit`
+  - Notice update on log history in the `GRAPH` below
+  - Finally, we can `Sync Changes` which means `Pull + Push`.
 
-## 13:30 - Why testing matters - 10' - RAUL 
+
+## 12:20 - Lunch - 60'
+
+## 13:20 - Why testing matters - 10' - RAUL 
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/21-automatically-testing-software.html#what-is-software-testing)
 
 - 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
@@ -209,7 +241,7 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 - Unit tests, regression tests, integration tests
 - How to read a failing test and a stack trace
 
-## 13:40 - Unit testing with Pytest - 20' - RAUL 
+## 13:30 - Unit testing with Pytest - 20' - RAUL 
 
 ```bash
 ``` 
@@ -220,11 +252,11 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 - Run tests/test_models.py
 - How pytest finds tests: functions named test_
 
-## 14:00 - 💪 Unit testing with Pytest - 15' - RAUL 
+## 13:50 - 💪 Unit testing with Pytest - 15' - RAUL 
 - Write Some Unit Tests
 - git commit
 
-## 14:15 - Debugging in the IDE - 15' - RAUL 
+## 14:05 - Debugging in the IDE - 15' - RAUL 
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/24-diagnosing-issues-improving-robustness.html#debugging-in-an-ide)
 
 Live demo 
@@ -236,9 +268,9 @@ Live demo
 - Inspecting variables
 - Reading the call stack
 
-## 14:30 - Break - 15'
+## 14:20 - Break - 15'
 
-## 14:45 - Python Coding Style Guide - 15' - CATA 
+## 14:35 - Python Coding Style Guide - 15' - CATA 
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/15-coding-conventions.html)
 
 - 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
@@ -248,35 +280,35 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 - Good practices when writting Comments
 - Type hints (not in SWC) but super important
 
-## 15:00 - 💪 Python Coding Style Guide - 20' - CATA 
+## 14:50 - 💪 Python Coding Style Guide - 20' - CATA 
 - Set up autopep8 in VSCode
 - Improve Code Style of Our Project
 - git commit
 
-## 15:20 - Python Coding Style Guide - 5' - CATA 
+## 15:10 - Python Coding Style Guide - 5' - CATA 
 - 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
 - Documentation Strings aka Docstrings
 
-## 15:25 - Python Coding Style Guide - 20' - CATA 
+## 15:15 - Python Coding Style Guide - 20' - CATA 
 - Fix the Docstrings
 - Add type hints
 - git commit
 
-## 15:45 - Break - 15'
+## 15:35 - Break - 15'
 
-## 16:00 - 💪 LAB: Testing the inflammation project - 40' - RAUL 
+## 15:50 - 💪 LAB: Testing the inflammation project - 40' - RAUL 
 
 - Write unit tests for daily_min(), daily_mean(), daily_max()
 - Introduce an intentional bug and confirm a test catches it
 - Fix the bug and re-run the test suite
 - git commit
 
-## 16:40 - Review LAB with the group - 10' - RAUL 
+## 16:30 - Review LAB with the group - 10' - RAUL 
 Discussion (face-2-face) 
 - Discuss solutions and common issues
 - Q&a
 
-## 16:50 - Summarize key points - 10' - RAUL 
+## 16:40 - Summarize key points - 10' - RAUL 
 - 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
 - Recap: project setup, virtual environments, VSCode, git, testing, debugging, style
 - Preview of Day 2: code quality, project structure, refactoring
