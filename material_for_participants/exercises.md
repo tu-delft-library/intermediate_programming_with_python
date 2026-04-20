@@ -57,6 +57,23 @@
 - Use `python3 -m pip freeze > requirements.txt` to save the environment
 </details>
 
+## 4 💪 Requirements file
+
+- Verify that `pytest` is appearing in your virtual environment
+- Compare this list to the list of packages inside `requirements.txt`
+- Regenerate the `requirements.txt` file
+- Confirm that `pytest` is included in `requirements.txt` file 
+
+
+<details>
+<summary>🔍 Click here for hints! </summary>
+
+- Use `python3 -m pip list` to see the list of packages in the current virtual environment
+- Use `cat a_file.txt` to see the contents of the `a_file.txt`
+- Use `python3 -m pip freeze --exclude-editable > requirements.txt` to generate a new `requirements.txt` file
+</details>
+
+
 ## XX 💪 
 
 
