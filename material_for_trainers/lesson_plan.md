@@ -1,24 +1,23 @@
 # 🌞 DAY 1 🌞
 
-## 9:00 - Installation check - 20' - CATA 
+##	9:00	-	Installation check	-	20'	-	RAUL
 
 - 🖥 Early start for people that had trouble with installation
 - Tools that should be installed:
     - Python
     - VScode
     - GitHub SSH key
+    - Forked and cloned `python-intermediate-inflammation`
+    
+##	9:20	-	Welcome	-	5'	-	RAUL
 
-## 9:20 - Land - 10' - CATA 
-☕ Coffee/tea 🫖
-
-## 9:30 - Welcome - 5' - CATA 
 - ✅ Roll call + 🤝 Code of Conduct
 - 🙋 Getting help (🆘 red  ✅ green stickers)
 
-## 9:35 - A short icebreaker - 5' - CATA 
+##	9:25	-	A short icebreaker	-	5'	-	RAUL
 [TODO]
 
-## 9:40 - Introduction - 15' - CATA 
+##	9:30	-	Introduction	-	15'	-	RAUL
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/10-section1-intro.html) 
 
 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
@@ -31,34 +30,7 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 - Why project structure matters from day one
 - Setting the scene
 
-
-## 9:55 - Fork the repository - 10' - CATA 
-source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/11-software-project.html) 
-
-- Go to `README` file in the `edu.nl` link
-- Click on `python-intermediate-inflammation` repository link 
-- Make sure you are signed into your GitHub account
-- Click the `Fork` to create a fork under your GitHub account
-- Leave default name `python-intermediate-inflammation`
-    - [TODO] only main branches for us!
-    - uncheck the `Copy the main branch` only option
-- Click on the `<> Code` button
-- Click on the `SSH` tab to copy the address of the repository for the next exercise
-
-## 10:05 - 1 💪 Obtain the software project locally - 10' - CATA  
-see `exercises.md`
-
-Solution
-```bash
-cd ~/Desktop/
-git clone git@github.com:<YOUR_GITHUB_USERNAME>/python-intermediate-inflammation.git
-cd python-intermediate-inflammation/
-git remote -v               # if starts with HTTPS, change to SSH
-git remote set-url origin git@github.com:<YOUR_GITHUB_USERNAME>/python-intermediate-inflammation.git
-git remote -v
-```
-
-## 10:15 - Our project structure - 10' - CATA 
+##	9:45	-	Our project structure	-	5'	-	RAUL
 - Root folder:
     - `inflammation-analysis.py` main entry point
     - `README`
@@ -74,7 +46,7 @@ ls tests
 ls inflammation/
 ```
 
-## 10:25 - 2 💪 Have a peek at the data - 5' - CATA
+##	9:50	-	2 💪 Have a peek at the data - 5' - RAUL
 see `exercises.md`
 
 Solution
@@ -83,9 +55,7 @@ wc -l data/inflammation-01.csv
 wc -l data/small-01.csv
 ```
 
-## 10:30 - Break - 15'
-
-## 10:45 - Virtual Environments For Software Development - 15' - RAUL 
+##	9:55	-	Virtual Environments For Software Development	-	10'	-	RAUL
 🎦 Introduce Virtual environments with the kitchen analogy using [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
 
 ```bash
@@ -96,14 +66,15 @@ cat inflammation/views.py           # numpy and matplotlib external packages
 - If you work on multiple projects, you may need specific versions of each library. For this we use `virtual environments` which create an isolated bubble of the libraries so they don't conflict with each other. A virtual environment is *simply* an isolated directory with their own Python interpreter and packages.
 
 - To clarify the difference between a package and virtual environment manager, continue with the kitchen analogy:
-    - **🍳 Package manager:** "What equipment do I need?" (pots, knives, blenders — i.e. numpy, matplotlib)
-    - **🏠 Virtual environment:** "Which kitchen am I cooking in?" (so you don't mix up one recipe's equipment with another's)
+    - **🍳 Package manager:** What equipment do I need? (pots, knives, blenders — i.e. numpy, matplotlib)
+    - **🏠 Virtual environment:** Which kitchen am I cooking in? (so you don't mix up one recipe's equipment with another's)
     - **🥕 Your data:** the ingredients you bring to that kitchen
     - **Your code:** the recipe
 
 - There many options for package managers and venv managers. Some of them (like `conda`) do both roles together. In this course we use `pip` as package manager and `venv` as virtual environment manager
 
-## 11:00 - Creating Virtual Environments Using `venv` - 20' - RAUL 
+##	10:05	-	Creating Virtual Environments Using `venv`	-	15'	-	RAUL
+
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/12-virtual-environments.html)
 
 How to create virtual environments
@@ -152,7 +123,7 @@ python3 inflammation-analysis.py    # use python3 to run script in current direc
 python3 inflammation-analysis.py data/inflammation-01.csv # add input file
 ```
 
-## 11:20 - 💪 Creating Virtual Environments Using `venv` - 10' - RAUL 
+##	10:20	-	💪 Creating Virtual Environments Using `venv` - 10' - RAUL 
 see `exercises.md`
 
 solution
@@ -172,9 +143,9 @@ deactivate
 cd ~/Desktop/python-intermediate-inflammation/
 ```
 
-## 11:30 - Break - 15'
+##	10:30	-	Break	-	15'	
 
-## 11:45 - VSCode orientation - 15' - CATA 
+##	10:45	-	VSCode orientation	-	15'	-	CATA
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/13-ides.html)
 
 #### Starting with a software project
@@ -206,7 +177,7 @@ To add an external dependency (an extra package) we use the integrated terminal
 - Go back to the terminal
 - Type `python3 -m pip install pytest`
 
-## 12:05 - 💪 Requirements file - 10' - CATA 
+##	11:00	-	💪 Requirements file - 10' - CATA 
 see `exercises.md`
 
 solution
@@ -217,7 +188,7 @@ python3 -m pip freeze > requirements.txt  # regenerate requirements.txt
 python3 -m pip freeze --exclude-editable > requirements.txt # remember the --exclude-editable flag for your current project
 ```
 
-## 12:15 - Version control using IDE - 10' - CATA 
+##	11:10	-	Version control using IDE - 10' - CATA 
 In the `Version control` view we see a little blue notification. It means `git` has found a change
   - Let's verify that files inside `venv` are not tracked by `git`
   - `venv` automatically adds a `.gitignore` file
@@ -227,24 +198,21 @@ In the `Version control` view we see a little blue notification. It means `git` 
   - Write commit message and click on `Commit`
   - Notice update on log history in the `GRAPH` below
   - Finally, we can `Sync Changes` which means `Pull + Push`.
+  
+  ##	11:20	-	Why testing matters	-	10'	-	CATA
 
-
-## 12:20 - Lunch - 60'
-
-## 13:20 - Why testing matters - 10' - RAUL 
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/21-automatically-testing-software.html#what-is-software-testing)
 
 - 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
 - Why write tests?
-  -- Ensure correctness
+  -- Ensure correctness: expected errors in our code
+  -- Testing both valid and invalid input (data validation)
   -- Catch regressions: new code should not break existing code
-- Unit tests, regression tests, integration tests
+- The three main types of automated: Unit tests, regression tests, integration tests
 - How to read a failing test and a stack trace
 
-## 13:30 - Unit testing with Pytest - 20' - RAUL 
+##	11:30	-	Unit testing with Pytest	-	15'	-	CATA
 
-```bash
-``` 
 - Inflammation data analysis
 - tests using NumPy testing library
 - tests using pytest
@@ -252,14 +220,26 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 - Run tests/test_models.py
 - How pytest finds tests: functions named test_
 
-## 13:50 - 💪 Unit testing with Pytest - 15' - RAUL 
-- Write Some Unit Tests
+```bash
+``` 
+- Run tests/test_models.py
+- How pytest finds tests: functions named test_
+```bash
+python3 -m pytest tests/test_models.py  # run one file
+python3 -m pytest                       # run all tests
+```
+
+##	11:45	-	Break	-	15'
+
+##	12:00	-	💪 Unit testing with Pytest	-	15'	-	RAUL
+
+Exercise:
+- Write unit tests for daily_min(), daily_mean(), daily_max()
 - git commit
 
-## 14:05 - Debugging in the IDE - 15' - RAUL 
+##	12:15	-	Debugging in the IDE	-	15'	-	RAUL
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/24-diagnosing-issues-improving-robustness.html#debugging-in-an-ide)
 
-Live demo 
 - How to read an error message and a stack trace
 - Configure Python tests in VSCode
 - Run tests
@@ -268,200 +248,246 @@ Live demo
 - Inspecting variables
 - Reading the call stack
 
-## 14:20 - Break - 15'
+##	12:30	-	Lunch	-	60'	
 
-## 14:35 - Python Coding Style Guide - 15' - CATA 
-source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/15-coding-conventions.html)
+##	13:30	-	Data validation	-	10'	-	CATA
 
-- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
-- PEP8
-- Quick mention of formatting guidelines and show autopep8 in VScode: (Indentation, Maximum Line Length, Line Break, Blank Lines, Whitespace, String Quotes)
-- Spend more time on Naming Conventions: Function, Variable, Class, Module, Package Naming in Python
-- Good practices when writting Comments
-- Type hints (not in SWC) but super important
-
-## 14:50 - 💪 Python Coding Style Guide - 20' - CATA 
-- Set up autopep8 in VSCode
-- Improve Code Style of Our Project
-- git commit
-
-## 15:10 - Python Coding Style Guide - 5' - CATA 
-- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
-- Documentation Strings aka Docstrings
-
-## 15:15 - Python Coding Style Guide - 20' - CATA 
-- Fix the Docstrings
-- Add type hints
-- git commit
-
-## 15:35 - Break - 15'
-
-## 15:50 - 💪 LAB: Testing the inflammation project - 40' - RAUL 
-
-- Write unit tests for daily_min(), daily_mean(), daily_max()
-- Introduce an intentional bug and confirm a test catches it
-- Fix the bug and re-run the test suite
-- git commit
-
-## 16:30 - Review LAB with the group - 10' - RAUL 
-Discussion (face-2-face) 
-- Discuss solutions and common issues
-- Q&a
-
-## 16:40 - Summarize key points - 10' - RAUL 
-- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
-- Recap: project setup, virtual environments, VSCode, git, testing, debugging, style
-- Preview of Day 2: code quality, project structure, refactoring
-- Questions
-
-
-# 🌞 DAY 2 🌞
-
-
-## 9:10 - Welcome - 5' - RAUL 
-- ✅ Roll call + 🤝 Code of Conduct
-- 🙋 Getting help (🆘 red  ✅ green stickers)
-
-## 9:15 - Recap from day one - 10' - RAUL 
-- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
-- Key concepts from Day 1: setup, virtual environments, testing, debugging, style
-- Questions from participants
-
-## 9:25 - Data validation - 10' - RAUL 
-```bash
-``` 
 - What About Testing for Errors?
 - raises()
 - Testing for invalid input data -> data validation
 - Update requirements file
 
-## 9:35 - 💪 Data validation - 10' - RAUL 
+##	13:40	-	 💪 Data validation	-	10'	-	CATA
+
+Exercise: 
 - Write data validation test for daily_mean() and daily_max()
 - git commit
 
-## 9:45 - Test parametrization - 10' - RAUL 
-```bash
-``` 
+##	13:50	-	Test parametrization	-	10'	-	CATA
+
 - Parameterising Our Unit Tests
 - Edge cases 
 
-## 9:55 - 💪 Test parametrization - 15' - RAUL 
-Write Parameterised Unit Tests (remember to add edge cases)
+##	14:00	-	 💪 Test parametrization	-	15'	-	CATA
+
+Exercise: Write Parameterised Unit Tests (remember to add edge cases)
 - git commit
 
-## 10:10 - Break - 15'
+##	14:15	-	Break	-	15'			
 
-## 10:25 - Defensive programming - 10' - CATA 
-```bash
-``` 
-- Check data at input
-- Raise errors and fail
-- Fix (assumptions) and raise a warning
+##	14:30	-	Python Coding Style Guide	-	15'	-	RAUL
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/15-coding-conventions.html)
 
-## 10:35 - 💪 Defensive programming - 15' - CATA 
-- Exercise: Add a Precondition to Check the Correct Type and Shape of Data
-- git commit
-
-## 10:50 - Abstractions and Decoupling - 15' - CATA 
 - 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
+- PEP8
+- Formatting guidelines and show autopep8 in VScode: (Indentation, Maximum Line Length, Line Break, Blank Lines, Whitespace, String Quotes)
+- Naming Conventions: Function, Variable, Class, Module, Package Naming in Python
+- Good practices when writting Comments
+
+##	14:45	-	 💪 Python Coding Style Guide	-	20'	-	RAUL
+
+Exercise: 
+- Set up autopep8 in VSCode
+- Improve Code Style of Our Project
+- git commit
+
+##	15:05	-	Python Coding Style Guide	-	5'	-	RAUL
+
+- Documentation Strings aka Docstrings
+
+##	15:10	-	💪 Python Coding Style Guide	-	20'	-	RAUL
+
+Exercise: 
+- Fix the Docstrings
+- Add type hints
+- git commit
+
+##	15:30	-	Break	-	15'			
+
+##	15:45	-	 💪 LAB: Testing the inflammation project	-	40'	-	CATA
+
+Consolidation lab:
+- Introduce an intentional bug and confirm a test catches it
+- Use the debugger to locate the bug
+- Fix the bug and re-run the test suite
+- git commit
+
+##	16:25	-	Review LAB with the group	-	10'	-	CATA
+
+- Discuss solutions and common issues
+- Q&a
+
+##	16:35	-	Summarize key points	-	10'	-	CATA
+
+- Recap: virtual environments, testing, debugging, style
+- Preview of Day 2:  abstractions, refactoring
+- Questions
+
+##	16:45	-	Good bye			
+
+# 🌞 DAY 2 🌞				
+
+##	9:15	-	Coffee, tea	-	5'	-	CATA
+
+##	9:20	-	Welcome	-	5'	-	CATA
+
+- ✅ Roll call + 🤝 Code of Conduct
+- 🙋 Getting help (🆘 red  ✅ green stickers)
+
+##	9:25	-	Recap from day one	-	5'	-	CATA
+
+- Key concepts from Day 1: environments, testing, debugging, style
+- Questions from participants
+
+##	9:30	-	Abstractions and Decoupling	-	15'	-	CATA
+
 - What is an abstraction?
 - Decoupling: why it matters
 - Practical tips:
-  -- Long chains of ""and"" in a function -> extract an abstraction
+  -- Long chains of and in a function -> extract an abstraction
   -- Copy/paste code -> extract an abstraction
-  
-  ## 11:05 - 💪 Abstractions and Decoupling - 15' - CATA 
+
+##	9:45	-	 💪 Abstractions and Decoupling	-	15'	-	CATA
+
 - Exercise: Decouple Data Loading from Data Analysis
 - git commit
 
-## 11:20 - Break - 15'
+##	10:00	-	Encapsulations and Classes	-	15'	-	CATA
 
-## 11:35 - Organising code into modules - 15' - RAUL 
-- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
+- Classes
+- naming -> CapitalisedWords
+- instances 
+- __init__
+- self
+
+##	10:15	-	 💪 Encapsulations and Classes	-	15'	-	CATA
+
+- Exercise: Use Classes to Abstract out Data Loading
+- git commit
+
+##	10:30	-	Break	-	15'
+
+##	10:45	-	Organising code into modules	-	10'	-	RAUL
+
 - What is a Python module?
 - When to split Code into separate files
 - Imports and namespaces
 - Keeping modules focused: one responsibility per module
 
-## 11:50 - 💪 Organising code into modules - 30' - RAUL 
+##	10:55	-	 💪 Organising code into modules	-	20'	-	RAUL
+
+Exercise:
 - Split the inflammation project into separate modules (data loading, analysis, reporting)
 - Update imports
 - git commit
 
-## 12:20 - Open Q&A and catch-up - 10' - RAUL 
-- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
-- Participants Raise questions from the morning
-- Catch up on any unfinished exercises
+##	11:15	-	Separating Pure and Impure Code	-	15'	-	RAUL
 
-## 12:30 - Lunch - 60'
-## 13:30 - Refactoring - 10' - CATA 
-- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
-- Change structure not behaviour.
-  -- abstractions, decoupling, renaming, reorganising, reduce duplication DO NOT fix bugs
-- Writing Tests Before Refactoring
-
-## 13:40 - 💪 Refactoring - 20' - CATA 
-- Write regression tests before refactoring
-- git commit
-
-## 14:00 - Separating Pure and Impure Code - 10' - CATA 
-- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
 - Pure functions: same input always gives same output, no side effects
 - Benefits of Pure functions for testing and reasoning about code
 
-## 14:10 - 💪 Separating Pure and Impure Code - 20' - CATA 
-- Refactor to use a pure function
+##	11:30	-	 💪 Separating Pure and Impure Code	-	15'	-	RAUL
+
+Exercise: Refactor to use a pure function
 - git commit
 
-## 14:30 - Break - 15'
+##	11:45	-	Break	-	15'	
 
-## 14:45 - Testing pure functions - 10' - RAUL 
-- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
-- Testing Pure Functions
-- Functional programming
+##	12:00	-	The __main__ function and command line arguments	-	15'	-	CATA
 
-## 14:55 - 💪 Testing pure functions - 15' - RAUL 
-Testing a Pure Function
+- __name__  __main__
+- argparse basics
+- Positional and optional arguments
+- Run from terminal
 
+##	12:15	-	 💪 The __main__ function and command line arguments	-	15'	-	CATA
 
-## 15:10 - the __main__ function - 10' - RAUL 
-```bash
-``` 
-- __name__  ""__main__"
-
-- Why it matters for scripts vs imports
-
-## 15:20 - Command line arguments - 10' - RAUL 
-```bash
-``` 
-- argparser
-- run from terminal
-- positional and optional argument order
-
-## 15:30 - 💪 Command line arguments - 15' - RAUL 
 - Exercise: Add optional parameter:
   -- a filename for a figure. If paremeter exists, save figure to file insted of plot.show()
 - git commit
 
-## 15:45 - Break - 15'
+##	12:30	-	Lunch	-	60'
 
-## 16:00 - 💪 LAB refactoring using inflammation_analysis.py - 40' - CATA 
+##	13:30	-	Refactoring	-	10'	-	RAUL
+
+- Change structure not behaviour.
+  -- abstractions, decoupling, renaming, reorganising, reduce duplication DO NOT fix bugs
+- Writing Tests Before Refactoring
+
+##	13:40	-	 💪 Refactoring exercise	-	20'	-	RAUL
+
+Exercise: Write regression tests before refactoring
+- git commit
+
+##	14:00	-	Review	-	5'	-	RAUL
+
+- Instructor-led debrief
+
+##	14:05	-	 💪 Refactoring exercise	-	20'	-	RAUL
+
+Exercise: Rename variables and functions for clarity
+- Identify misleading or ambiguous names
+- Rename throughout and confirm tests still pass
+- git commit
+
+##	14:25	-	Review	-	5'	-	RAUL
+
+- Instructor-led debrief
+- common Naming patterns in research code
+
+##	14:30	-	Break	-	15'		
+
+##	14:45	-	 💪 Refactoring exercise	-	25'	-	CATA
+
+Exercise: Find repeated logic in the codebase
+- Extract shared logic into reusable functions
+- Confirm tests still pass
+- git commit
+
+##	15:10	-	Review	-	5'	-	CATA
+
+- Instructor-led debrief
+
+##	15:15	-	 💪 Refactoring exercise	-	25'	-	CATA
+
+Exercise: Revisit the module structure from the morning
+- Move functions to the most logical module
+- Ensure imports are clean and consistent
+- Confirm tests still pass
+- git commit
+
+##	15:40	-	Review	-	5'	-	CATA
+
+- Instructor-led debrief
+
+##	15:45	-	Break	-	15'
+
+##	16:00	-	 💪 Optional stretch: defensive programming	-	25'	-	RAUL
+
+Optional exercise (for participants who have finished):
+- Add preconditions to check correct type and shape of input data
+- Raise errors and fail early
 - Add warnings for suspicious data values
-- Add optional input parameters
-- Ensure all tests still pass
+- Confirm tests still pass
 - git commit
 - git push
 
-## 16:40 - Summarize key points - 10' - CATA 
-- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
-- Recap: project structure, defensive Programming, Abstractions, refactoring, Pure functions
-- Where to go next: packaging, documentation tools (Sphinx), continuous integration
+##	16:25	-	Final  review	-	10'	-	RAUL
+
+- Discuss the refactoring across all  exercises
+- What changed? What stayed the same?
+- common pitfalls
+
+##	16:35	-	Summarize key points	-	10'	-	RAUL
+
+- Recap: Project structure, abstractions, modules, Pure functions, refactoring
+- Where to go next: packaging, documentation Tools (Sphinx), continuous integration
 - questions and feedback
 
+##	16:45	-	Give feedback about the course	-	5'	-	RAUL		
 
-## 16:50 - Give feedback about the course - 5'                                        
-                                                
+##	16:50 - Good bye 
+                                        
 # [? for raul] 
 - .venv vs venv vs intuitive name
 - test windows commands
-                                           
