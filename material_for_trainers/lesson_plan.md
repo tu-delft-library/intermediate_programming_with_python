@@ -143,9 +143,9 @@ deactivate
 cd ~/Desktop/python-intermediate-inflammation/
 ```
 
-##	10:30	-	Break	-	15'	
+##	10:30	-	Break	-	10'	
 
-##	10:45	-	VSCode orientation	-	15'	-	CATA
+##	10:40	-	VSCode orientation	-	15'	-	CATA
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/13-ides.html)
 
 #### Starting with a software project
@@ -177,7 +177,7 @@ To add an external dependency (an extra package) we use the integrated terminal
 - Go back to the terminal
 - Type `python3 -m pip install pytest`
 
-##	11:00	-	💪 Requirements file - 10' - CATA 
+##	10:55	-	💪 Requirements file - 5' - CATA 
 see `exercises.md`
 
 solution
@@ -188,7 +188,9 @@ python3 -m pip freeze > requirements.txt  # regenerate requirements.txt
 python3 -m pip freeze --exclude-editable > requirements.txt # remember the --exclude-editable flag for your current project
 ```
 
-##	11:10	-	Version control using IDE - 10' - CATA 
+##	11:00	-	Version control using IDE - 10' - CATA 
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/13-ides.html#version-control)
+
 In the `Version control` view we see a little blue notification. It means `git` has found a change
   - Let's verify that files inside `venv` are not tracked by `git`
   - `venv` automatically adds a `.gitignore` file
@@ -199,45 +201,131 @@ In the `Version control` view we see a little blue notification. It means `git` 
   - Notice update on log history in the `GRAPH` below
   - Finally, we can `Sync Changes` which means `Pull + Push`.
   
-  ##	11:20	-	Why testing matters	-	10'	-	CATA
+  ##	11:10	-	Why testing matters	-	5'	-	CATA
 
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/21-automatically-testing-software.html#what-is-software-testing)
 
-- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
+[slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
+
 - Why write tests?
-  -- Ensure correctness: expected errors in our code
-  -- Testing both valid and invalid input (data validation)
-  -- Catch regressions: new code should not break existing code
-- The three main types of automated: Unit tests, regression tests, integration tests
-- How to read a failing test and a stack trace
+  - Ensure correctness: expected errors in our code
+  - Testing both valid and invalid input (data validation)
+  - Catch regressions: new code should not break existing code
+- The three main types of automated: 
+  - unit tests: small and specific functionality (e.g. a function returns an expected output)
+  - integration tests: higher level. Test interaction between functions
+  - regression tests: whole pipelines. Ensures output has not changed. Normally requires input data.
 
-##	11:30	-	Unit testing with Pytest	-	15'	-	CATA
 
-- Inflammation data analysis
-- tests using NumPy testing library
-- tests using pytest
-- install pytest
-- Run tests/test_models.py
-- How pytest finds tests: functions named test_
+##	11:15	-	Unit testing with Pytest	-	10'	-	CATA
+
+Let's open the file `inflammation/models.py`. Note function `daily_mean()` which calculates mean *vertically* across the data.
+
+We can test this function as shown in `tests/test_models.py`. In here we have two `test cases`. Each test has an input, an execution and an expected output. A test case is simple and easy to understand. 
+
+The name of the test is important
+`test_` -> starts with `test_` so that `pytest` can find it
+`daily_mean` -> the funciton its testing
+`_zeros`-> specific input
+
+Let's run the tests using `pytest`
 
 ```bash
-``` 
-- Run tests/test_models.py
-- How pytest finds tests: functions named test_
-```bash
-python3 -m pytest tests/test_models.py  # run one file
-python3 -m pytest                       # run all tests
+pytest tests/test_models.py  # run one file (same as python3 -m pytest tests/test_models.py)
 ```
 
-##	11:45	-	Break	-	15'
 
-##	12:00	-	💪 Unit testing with Pytest	-	15'	-	RAUL
+##	11:25	-	💪 Unit testing with Pytest	-	10'	-	CATA
+see `exercises.md`
 
-Exercise:
-- Write unit tests for daily_min(), daily_mean(), daily_max()
+> **While participants work** unplug screen and copy paste these functions in your local copy of `tests/test_models.py`
+
+solution:
+```bash
+
+from inflammation.models import daily_max, daily_mean, daily_min
+def test_daily_max():
+    """Test that max function works for an array of positive integers."""
+
+    test_input = np.array([[4, 2, 5],
+                           [1, 6, 2],
+                           [4, 1, 9]])
+    test_result = np.array([4, 6, 9])
+
+    npt.assert_array_equal(daily_max(test_input), test_result)
+
+
+def test_daily_min():
+    """Test that min function works for an array of positive and negative integers."""
+
+    test_input = np.array([[ 4, -2, 5],
+                           [ 1, -6, 2],
+                           [-4, -1, 9]])
+    test_result = np.array([-4, -6, 2])
+
+    npt.assert_array_equal(daily_min(test_input), test_result)
+```
+
+##	11:35	-	Break	-	10'
+
+
+##	11:45	-	Data validation	-	10'	-	CATA
+
+- What About Testing for Errors?
+- raises()
+- Testing for invalid input data -> data validation
+- Update requirements file
+
+##	11:55	-	 💪 Data validation	-	10'	-	CATA
+
+Exercise: 
+- Write data validation test for daily_mean() and daily_max()
 - git commit
 
-##	12:15	-	Debugging in the IDE	-	15'	-	RAUL
+##	12:05	-	Test parametrization	-	10'	-	CATA
+
+- Parameterising Our Unit Tests
+- Edge cases 
+
+##	12:15	-	 💪 Test parametrization	-	15'	-	CATA
+
+Exercise: Write Parameterised Unit Tests (remember to add edge cases)
+- git commit
+
+
+##	12:30	-	Lunch	-	60'	
+
+
+##	13:30	-	Python Coding Style Guide	-	15'	-	RAUL
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/15-coding-conventions.html)
+
+- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
+- PEP8
+- Formatting guidelines and show autopep8 in VScode: (Indentation, Maximum Line Length, Line Break, Blank Lines, Whitespace, String Quotes)
+- Naming Conventions: Function, Variable, Class, Module, Package Naming in Python
+- Good practices when writting Comments
+
+##	13:45	-	 💪 Python Coding Style Guide	-	20'	-	RAUL
+
+Exercise: 
+- Set up autopep8 in VSCode
+- Improve Code Style of Our Project
+- git commit
+
+##	14:05	-	Python Coding Style Guide	-	5'	-	RAUL
+
+- Documentation Strings aka Docstrings
+
+##	14:10	-	💪 Python Coding Style Guide	-	20'	-	RAUL
+
+Exercise: 
+- Fix the Docstrings
+- Add type hints
+- git commit
+
+##	14:30	-	Break	-	10'			
+
+##	14:40	-	Debugging in the IDE	-	15'	-	RAUL
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/24-diagnosing-issues-improving-robustness.html#debugging-in-an-ide)
 
 - How to read an error message and a stack trace
@@ -248,63 +336,7 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 - Inspecting variables
 - Reading the call stack
 
-##	12:30	-	Lunch	-	60'	
-
-##	13:30	-	Data validation	-	10'	-	CATA
-
-- What About Testing for Errors?
-- raises()
-- Testing for invalid input data -> data validation
-- Update requirements file
-
-##	13:40	-	 💪 Data validation	-	10'	-	CATA
-
-Exercise: 
-- Write data validation test for daily_mean() and daily_max()
-- git commit
-
-##	13:50	-	Test parametrization	-	10'	-	CATA
-
-- Parameterising Our Unit Tests
-- Edge cases 
-
-##	14:00	-	 💪 Test parametrization	-	15'	-	CATA
-
-Exercise: Write Parameterised Unit Tests (remember to add edge cases)
-- git commit
-
-##	14:15	-	Break	-	15'			
-
-##	14:30	-	Python Coding Style Guide	-	15'	-	RAUL
-source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/15-coding-conventions.html)
-
-- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
-- PEP8
-- Formatting guidelines and show autopep8 in VScode: (Indentation, Maximum Line Length, Line Break, Blank Lines, Whitespace, String Quotes)
-- Naming Conventions: Function, Variable, Class, Module, Package Naming in Python
-- Good practices when writting Comments
-
-##	14:45	-	 💪 Python Coding Style Guide	-	20'	-	RAUL
-
-Exercise: 
-- Set up autopep8 in VSCode
-- Improve Code Style of Our Project
-- git commit
-
-##	15:05	-	Python Coding Style Guide	-	5'	-	RAUL
-
-- Documentation Strings aka Docstrings
-
-##	15:10	-	💪 Python Coding Style Guide	-	20'	-	RAUL
-
-Exercise: 
-- Fix the Docstrings
-- Add type hints
-- git commit
-
-##	15:30	-	Break	-	15'			
-
-##	15:45	-	 💪 LAB: Testing the inflammation project	-	40'	-	CATA
+##	14:55	-	 💪 LAB: Testing the inflammation project	-	45'	-	CATA
 
 Consolidation lab:
 - Introduce an intentional bug and confirm a test catches it
@@ -312,18 +344,18 @@ Consolidation lab:
 - Fix the bug and re-run the test suite
 - git commit
 
-##	16:25	-	Review LAB with the group	-	10'	-	CATA
+##	15:40	-	Review LAB with the group	-	10'	-	CATA
 
 - Discuss solutions and common issues
 - Q&a
 
-##	16:35	-	Summarize key points	-	10'	-	CATA
+##	15:50	-	Summarize key points	-	10'	-	CATA
 
 - Recap: virtual environments, testing, debugging, style
 - Preview of Day 2:  abstractions, refactoring
 - Questions
 
-##	16:45	-	Good bye			
+##	16:00	-	Good bye			
 
 # 🌞 DAY 2 🌞				
 
@@ -491,3 +523,7 @@ Optional exercise (for participants who have finished):
 # [? for raul] 
 - .venv vs venv vs intuitive name
 - test windows commands
+
+# pending topics
+
+- How to read a failing test and a stack trace
