@@ -269,25 +269,25 @@ def test_daily_min():
 ##	11:35	-	Break	-	10'
 
 
-##	11:45	-	Data validation	-	10'	-	CATA
+##	11:45	-	Data validation	-	10'	-	RAUL
 
 - What About Testing for Errors?
 - raises()
 - Testing for invalid input data -> data validation
 - Update requirements file
 
-##	11:55	-	 💪 Data validation	-	10'	-	CATA
+##	11:55	-	 💪 Data validation	-	10'	-	RAUL
 
 Exercise: 
 - Write data validation test for daily_mean() and daily_max()
 - git commit
 
-##	12:05	-	Test parametrization	-	10'	-	CATA
+##	12:05	-	Test parametrization	-	10'	-	RAUL
 
 - Parameterising Our Unit Tests
 - Edge cases 
 
-##	12:15	-	 💪 Test parametrization	-	15'	-	CATA
+##	12:15	-	 💪 Test parametrization	-	15'	-	RAUL
 
 Exercise: Write Parameterised Unit Tests (remember to add edge cases)
 - git commit
@@ -296,7 +296,7 @@ Exercise: Write Parameterised Unit Tests (remember to add edge cases)
 ##	12:30	-	Lunch	-	60'	
 
 
-##	13:30	-	Python Coding Style Guide	-	15'	-	RAUL
+##	13:30	-	Python Coding Style Guide	-	15'	-	CATA
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/15-coding-conventions.html)
 
 - 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
@@ -305,18 +305,18 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 - Naming Conventions: Function, Variable, Class, Module, Package Naming in Python
 - Good practices when writting Comments
 
-##	13:45	-	 💪 Python Coding Style Guide	-	20'	-	RAUL
+##	13:45	-	 💪 Python Coding Style Guide	-	20'	-	CATA
 
 Exercise: 
 - Set up autopep8 in VSCode
 - Improve Code Style of Our Project
 - git commit
 
-##	14:05	-	Python Coding Style Guide	-	5'	-	RAUL
+##	14:05	-	Python Coding Style Guide	-	5'	-	CATA
 
 - Documentation Strings aka Docstrings
 
-##	14:10	-	💪 Python Coding Style Guide	-	20'	-	RAUL
+##	14:10	-	💪 Python Coding Style Guide	-	20'	-	CATA
 
 Exercise: 
 - Fix the Docstrings
@@ -336,7 +336,7 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 - Inspecting variables
 - Reading the call stack
 
-##	14:55	-	 💪 LAB: Testing the inflammation project	-	45'	-	CATA
+##	14:55	-	 💪 LAB: Testing the inflammation project	-	45'	-	RAUL
 
 Consolidation lab:
 - Introduce an intentional bug and confirm a test catches it
@@ -344,12 +344,12 @@ Consolidation lab:
 - Fix the bug and re-run the test suite
 - git commit
 
-##	15:40	-	Review LAB with the group	-	10'	-	CATA
+##	15:40	-	Review LAB with the group	-	10'	-	RAUL
 
 - Discuss solutions and common issues
 - Q&a
 
-##	15:50	-	Summarize key points	-	10'	-	CATA
+##	15:50	-	Summarize key points	-	10'	-	RAUL
 
 - Recap: virtual environments, testing, debugging, style
 - Preview of Day 2:  abstractions, refactoring
