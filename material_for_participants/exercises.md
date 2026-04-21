@@ -1,25 +1,6 @@
 # Exercises
 
-
-## 1 💪 Obtain the software project locally
-
-- Open `VSCode`
-- Open `Terminal` inside `VSCode`
-- Navigate to `~/Desktop`
-- Use `SSH` to clone the `python-intermediate-inflammation` repository you just copied into your GitHub account
-- Navigate inside the `python-intermediate-inflammation` folder
-- Use `git remote -v` to see the address of the remote repository
-    - If the remote address starts with `https` use this command to change it to `ssh`
-    - `git remote set-url origin git clone git@github.com:<YOUR_GITHUB_USERNAME>/python-intermediate-inflammation.git`
-
-<details>
-<summary>🔍 Click here for hints! </summary>
-
-- To navigate to a desired path use  `cd desired_path` 
-- To clone a repository localzly use  `git clone git@github.com:<YOUR_GITHUB_USERNAME>/python-intermediate-inflammation.git`
-</details>
-
-## 2 💪 Have a peek at the data
+## 1 💪 Have a peek at the data
 
 - How many rows does `inflammation-01.csv` have?
 - How many rows does `small-01.csv` have?
@@ -30,7 +11,7 @@
 - Use `wc -l filename` to count the number of rows in a file
 </details>
 
-## 3 💪 Create a `venv`
+## 2 💪 Create a `venv`
 - Deactivate your current `venv` to go back to system Python
 - Navigate to your `Desktop`
 - Make a new directory called `sandbox`
@@ -57,7 +38,7 @@
 - Use `python3 -m pip freeze > requirements.txt` to save the environment
 </details>
 
-## 4 💪 Requirements file
+## 3 💪 Requirements file
 
 - Verify that `pytest` is appearing in your virtual environment
 - Compare this list to the list of packages inside `requirements.txt`
@@ -72,6 +53,18 @@
 - Use `cat a_file.txt` to see the contents of the `a_file.txt`
 - Use `python3 -m pip freeze --exclude-editable > requirements.txt` to generate a new `requirements.txt` file
 </details>
+
+## 4 💪 Write some unit tests 
+[TODO]
+- Write unit tests for daily_min(), daily_max()
+- git commit
+
+<details>
+<summary>🔍 Click here for hints! </summary>
+
+- tip
+</details>
+
 
 
 ## XX 💪 
