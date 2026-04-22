@@ -671,7 +671,7 @@ logging module
   - this affects for lessons in episode 3 (DAY 2). carpentries requires to switch branch. So that a [compute_data.py](https://github.com/carpentries-incubator/python-intermediate-inflammation/blob/full-data-analysis/inflammation/compute_data.py) is added. How can we deal with this? I don't want work with branches in this course. 
   - we can also make a modified version of the materials that includes this file. Have participants fork that one instead.
 
-- Other topics to add:
+- Other topics to add vs giving each topic of day 2 more time and more exercises.
  - Configuration management - YAML configs
  - Logging vs. printing (logging module)
  - Data handling > can we do it without introducing pandas?
