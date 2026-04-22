@@ -2,8 +2,7 @@
 
 ##	9:00	-	Installation check	-	20'	-	RAUL
 
-- 🖥 Early start for people that had trouble with installation
-- Tools that should be installed:
+- 🖥 Tools that should be installed:
     - Python
     - VScode
     - GitHub SSH key
@@ -205,7 +204,7 @@ In the `Version control` view we see a little blue notification. It means `git` 
 
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/21-automatically-testing-software.html#what-is-software-testing)
 
-[slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
+🎦 Use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
 
 - Why write tests?
   - Ensure correctness: expected errors in our code
@@ -218,15 +217,16 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 
 
 ##	11:15	-	Unit testing with Pytest	-	10'	-	CATA
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/21-automatically-testing-software.html#using-a-testing-framework)
 
 Let's open the file `inflammation/models.py`. Note function `daily_mean()` which calculates mean *vertically* across the data.
 
-We can test this function as shown in `tests/test_models.py`. In here we have two `test cases`. Each test has an input, an execution and an expected output. A test case is simple and easy to understand. 
+Open `tests/test_models.py`. In here we have two `test cases`. Each test has an input, an execution and an expected output. A test case is simple and easy to understand. 
 
-The name of the test is important
-`test_` -> starts with `test_` so that `pytest` can find it
-`daily_mean` -> the funciton its testing
-`_zeros`-> specific input
+The name of the test is important:
+- `test_` -> starts with `test_` so that `pytest` can find it
+- `daily_mean` -> the funciton its testing
+- `_zeros`-> specific input
 
 Let's run the tests using `pytest`
 
@@ -234,64 +234,181 @@ Let's run the tests using `pytest`
 pytest tests/test_models.py  # run one file (same as python3 -m pytest tests/test_models.py)
 ```
 
+Now, what happens when the test we wrote is not working properly? Let's deliberately break this test
+```bash
+def test_daily_mean_integers():
+    """Test that mean function works for an array of positive integers."""
+
+    test_input = np.array([[1, 2],
+                           [3, 4],
+                           [5, 6]])
+    # delete test_result
+    npt.assert_array_equal(daily_mean(test_input), test_result)         # test_result is not defined
+```
+When we run the tests again, we see an error trace
+```bash
+__________________________ test_daily_mean_integers_broken ________________________
+
+    def test_daily_mean_integers():
+        """Test that mean function works for an array of positive integers."""
+    
+        test_input = np.array([[1, 2],
+                               [3, 4],
+                               [5, 6]])
+>       npt.assert_array_equal(daily_mean(test_input), test_result)
+                                                       ^^^^^^^^^^^
+E       NameError: name 'test_result' is not defined
+
+tests/test_models.py:29: NameError
+```
+Read it top to bottom:
+
+- `test_daily_mean_integers_broken` — tells you which test failed
+- `> arrow` — marks the exact line that failed
+- `E lines` — the error message, what `pytest` expected vs. got
+- `File path + line number — tests/test_models.py:39` — where to go fix it
+
+Fix the test before continuing:
+
+```bash
+test_result = np.array([3, 4])
+```
+> **OPTIONAL** Use git to reverse broken test (using discard changes)
 
 ##	11:25	-	💪 Unit testing with Pytest	-	10'	-	CATA
 see `exercises.md`
 
-> **While participants work** unplug screen and copy paste these functions in your local copy of `tests/test_models.py`
 
 solution:
+- first import `daily_min`
+- copy/paste `test_daily_mean_integers()` and adapt for `daily_min`
+
+
 ```bash
 
-from inflammation.models import daily_max, daily_mean, daily_min
-def test_daily_max():
-    """Test that max function works for an array of positive integers."""
+from inflammation.models import daily_mean, daily_min
 
-    test_input = np.array([[4, 2, 5],
-                           [1, 6, 2],
-                           [4, 1, 9]])
-    test_result = np.array([4, 6, 9])
+def test_daily_min_integers():
+    """Test that the min function works for an array of positive intergers.
+    """
 
-    npt.assert_array_equal(daily_max(test_input), test_result)
-
-
-def test_daily_min():
-    """Test that min function works for an array of positive and negative integers."""
+    test_input = np.array([[1, 2],
+                           [3, 4],
+                           [5, 6]])
+    test_result = np.array([1, 2])
+    npt.assert_array_equal(daily_min(test_input), test_result)
+```
+modify `test_input` and `test_result` to include negative values
+```bash
 
     test_input = np.array([[ 4, -2, 5],
                            [ 1, -6, 2],
                            [-4, -1, 9]])
     test_result = np.array([-4, -6, 2])
 
-    npt.assert_array_equal(daily_min(test_input), test_result)
 ```
+> **Remember** Git commit!
 
 ##	11:35	-	Break	-	10'
 
 
 ##	11:45	-	Data validation	-	10'	-	RAUL
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/21-automatically-testing-software.html#what-about-testing-for-errors)
 
-- What About Testing for Errors?
-- raises()
-- Testing for invalid input data -> data validation
-- Update requirements file
+Testing the behaviour of inputs, both valid and invalid, is a really good idea and is known as *data validation*.
+
+Python allows to test for invalid data and `raise` an error. 
+The most common errors we can use for data validation:
+
+- `TypeError` — wrong type of input (e.g. passing `None` or a string instead of an array)
+- `IndexError` — accessing an index that doesn't exist (e.g. requesting `axis 0` on an empty array)
+- `ValueError` — right type, wrong value or shape (e.g. an array with incompatible dimensions) 
+
+```bash
+import pytest                                          # import `pytest` to use `raises()` 
+
+def test_daily_min_string():
+    """Test for TypeError when passing strings"""      # Write summary before code clarifies purpose
+
+    with pytest.raises(TypeError):                     # string instead of array give TypeError
+        error_expected = daily_min(['hi', 'there'])    # simple input      
+```
+- Git commit
 
 ##	11:55	-	 💪 Data validation	-	10'	-	RAUL
+see `exercises.md`
 
-Exercise: 
-- Write data validation test for daily_mean() and daily_max()
-- git commit
+
+solution:
+- copy`test_daily_min_string()`
+- Paste it right below other  `daily_mean` tests (so that tests are clustered by function)
+- adapt to use `daily_mean`
+```bash
+def test_daily_mean_string():
+    """Test that the mean function fails for an array of strings
+    """
+    with pytest.raises(TypeError):
+        error_expected = daily_mean(['hi','there'])
+```
+
+> **Remember** Git commit!
 
 ##	12:05	-	Test parametrization	-	10'	-	RAUL
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/22-scaling-up-unit-testing.html#parameterising-our-unit-tests)
 
-- Parameterising Our Unit Tests
-- Edge cases 
+Let's take a look at our tests so far. They seem to have a lot of the same lines of code. The main difference is the input/result arrays.
+
+We can make this code more efficient by *parametrizing* the tests with multiple test inputs. We add a *python decorator* right above the test function we want to use.
+```bash
+@pytest.mark.parametrize(                       # python decorator
+        "test_input, test_result",                # name of arguments
+        [
+            ([ [0, 0], [0, 0], [0, 0] ], [0, 0]),   # values of arguments
+            ([ [1, 2], [3, 4], [5, 6] ], [3, 4]),
+        ])
+
+def test_daily_mean(test_input, test_result):
+    """Test that mean function works for an array of zeros and positive integers."""
+    npt.assert_array_equal(daily_mean(test_input), test_result)
+```
+After this is working we can use this test to investigate *edge cases*: unexpected circumstances or extreme input values. 
+
+For example:
+
+- All zeros — handles zero matrix correctly
+- Single row — return that row unchanged
+```bash
+@pytest.mark.parametrize(
+        "test_input, test_result",
+        [
+            ([ [0, 0], [0, 0], [0, 0] ], [0, 0]),
+            ([ [1, 2], [3, 4], [5, 6] ], [3, 4]),
+            (np.zeros((3, 5)), np.zeros(5)),
+            ([[1, 2, 3]], [1, 2, 3]),
+        ])
+```
+
+Once the tests are passing, we can **commit!**
+
 
 ##	12:15	-	 💪 Test parametrization	-	15'	-	RAUL
 
-Exercise: Write Parameterised Unit Tests (remember to add edge cases)
-- git commit
+see `exercises.md`
 
+solution:
+```bash
+@pytest.mark.parametrize(
+        "test_input, test_result",
+        [
+            ([ [0, 0, 0], [0, 0, 0], [0, 0, 0] ], [0, 0, 0]),
+            ([ [1, 2, -1],[3, -2, 4],[5, -9, 6]], [1,-9,-1]),
+        ])
+
+def test_daily_min(test_input, test_result):
+    """Test that min function works for an array of positive and negative integers."""
+    npt.assert_array_equal(daily_min(test_input), test_result)
+```
+> **Remember** Git commit!
 
 ##	12:30	-	Lunch	-	60'	
 
@@ -299,36 +416,86 @@ Exercise: Write Parameterised Unit Tests (remember to add edge cases)
 ##	13:30	-	Python Coding Style Guide	-	15'	-	CATA
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/15-coding-conventions.html)
 
-- 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
-- PEP8
-- Formatting guidelines and show autopep8 in VScode: (Indentation, Maximum Line Length, Line Break, Blank Lines, Whitespace, String Quotes)
-- Naming Conventions: Function, Variable, Class, Module, Package Naming in Python
-- Good practices when writting Comments
+🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
+
+- [TODO expand] 
+  - PEP8
+  - Formatting guidelines and show autopep8 in VScode: (Indentation, Maximum Line Length, Line Break, Blank Lines, Whitespace, String Quotes)
+  - Naming Conventions: Function, Variable, Class, Module, Package Naming in Python
+  - Good practices when writting Comments
+  - Set up autopep8 in VSCode
 
 ##	13:45	-	 💪 Python Coding Style Guide	-	20'	-	CATA
+see `exercises.md`
 
-Exercise: 
-- Set up autopep8 in VSCode
-- Improve Code Style of Our Project
-- git commit
+solution:
+There are a few things to fix in `inflammation-analysis.py`:
+
+- Line 30 in `inflammation-analysis.py` is too long. A better style would be to use multiple lines and hanging indent
+
+```bash
+# Using hanging indent with the, closing '}' aligned with the start of the multiline contruct
+view_data = {
+    'average': models.daily_mean(inflammation_data),
+    'max': models.daily_max(inflammation_data),
+    'min': models.daily_min(inflammation_data)
+}
+```
+- Variable `InFiles` in `inflammation-analysis.py` uses `CapitalisedWords` naming convention which is recommended for class names but not variable names. By convention, variable names should be in lowercase with optional underscores so you should rename the variable `InFiles` to, e.g., `infiles` or `in_files`.
+
+- There are two blank lines starting from line 19 in `inflammation-analysis.py`. Normally, you should not use blank lines in the middle of the code unless you want to separate logical units - in which case only one blank line is used. Note how VSCode is warning us by underlining the whole line below.
+
+- Only one blank line after the end of definition of function main and the rest of the code below line 27 in inflammation-analysis.py - should be two blank lines (PEP 8 recommends surrounding top-level function (and class) definitions with two blank lines). Note how VSCode is warning us by underlining the whole line below.
+
+> **Remember** Git commit!
 
 ##	14:05	-	Python Coding Style Guide	-	5'	-	CATA
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/15-coding-conventions.html#documentation-strings-aka-docstrings)
 
+[TODO expand]
 - Documentation Strings aka Docstrings
+- typehints
 
-##	14:10	-	💪 Python Coding Style Guide	-	20'	-	CATA
+##	14:10	-	💪 Fix the Docstrings	-	20'	-	CATA
 
-Exercise: 
-- Fix the Docstrings
-- Add type hints
-- git commit
+see `exercises.md`
 
+solution:
+The improved docstrings for the above functions would contain explanations for parameters and return values.
+
+```bash
+def daily_mean(data):
+   """Calculate the daily mean of a 2D inflammation data array for each day.
+
+   :param data: A 2D data array with inflammation data (each row contains measurements for a single patient across all days).
+   :returns: An array of mean values of measurements for each day.
+   """
+   return np.mean(data, axis=0)
+```
+```bash
+def daily_max(data):
+   """Calculate the daily maximum of a 2D inflammation data array for each day.
+
+   :param data: A 2D data array with inflammation data (each row contains measurements for a single patient across all days).
+   :returns: An array of max values of measurements for each day.
+   """
+   return np.max(data, axis=0)
+```
+```bash
+def daily_min(data):
+   """Calculate the daily minimum of a 2D inflammation data array for each day.
+
+   :param data: A 2D data array with inflammation data (each row contains measurements for a single patient across all days).
+   :returns: An array of minimum values of measurements for each day.
+   """
+   return np.min(data, axis=0)
+```
 ##	14:30	-	Break	-	10'			
 
 ##	14:40	-	Debugging in the IDE	-	15'	-	RAUL
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/24-diagnosing-issues-improving-robustness.html#debugging-in-an-ide)
 
-- How to read an error message and a stack trace
+[TODO expandß]
 - Configure Python tests in VSCode
 - Run tests
 - Running the debugger
@@ -336,15 +503,15 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 - Inspecting variables
 - Reading the call stack
 
-##	14:55	-	 💪 LAB: Testing the inflammation project	-	45'	-	RAUL
-
-Consolidation lab:
+##	14:55	-	 💪 PRACTICAL: Testing the inflammation project	-	45'	-	RAUL
+[TODO]
+Consolidation PRACTICAL:
 - Introduce an intentional bug and confirm a test catches it
 - Use the debugger to locate the bug
 - Fix the bug and re-run the test suite
 - git commit
 
-##	15:40	-	Review LAB with the group	-	10'	-	RAUL
+##	15:40	-	Review PRACTICAL with the group	-	10'	-	RAUL
 
 - Discuss solutions and common issues
 - Q&a
@@ -371,28 +538,34 @@ Consolidation lab:
 - Key concepts from Day 1: environments, testing, debugging, style
 - Questions from participants
 
-##	9:30	-	Abstractions and Decoupling	-	15'	-	CATA
 
+##	9:30	-	Abstractions and Decoupling	-	15'	-	CATA
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/33-code-decoupling-abstractions.html#introduction)
+
+[TODO expand]
 - What is an abstraction?
 - Decoupling: why it matters
 - Practical tips:
   -- Long chains of and in a function -> extract an abstraction
   -- Copy/paste code -> extract an abstraction
 
-##	9:45	-	 💪 Abstractions and Decoupling	-	15'	-	CATA
+##	9:45	-	 💪 Decouple Data Loading from Data Analysis	-	15'	-	CATA
 
 - Exercise: Decouple Data Loading from Data Analysis
 - git commit
 
 ##	10:00	-	Encapsulations and Classes	-	15'	-	CATA
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/33-code-decoupling-abstractions.html#encapsulation-classes
+)
 
+[TODO expand]
 - Classes
 - naming -> CapitalisedWords
 - instances 
 - __init__
 - self
 
-##	10:15	-	 💪 Encapsulations and Classes	-	15'	-	CATA
+##	10:15	-	 💪 Use Classes to Abstract out Data Loading	-	15'	-	CATA
 
 - Exercise: Use Classes to Abstract out Data Loading
 - git commit
@@ -523,7 +696,11 @@ Optional exercise (for participants who have finished):
 # [? for raul] 
 - .venv vs venv vs intuitive name
 - test windows commands
+- we are not using branches because we didn't want to exclude people that have not done the interim git course
+  - this affects for lessons in episode 3 (DAY 2). carpentries requires to switch branch. So that a [compute_data.py](https://github.com/carpentries-incubator/python-intermediate-inflammation/blob/full-data-analysis/inflammation/compute_data.py) is added. How can we deal with this? I don't want work with branches in this course. 
+  - we can also make a modified version of the materials that includes this file. Have participants fork that one instead.
 
-# pending topics
-
-- How to read a failing test and a stack trace
+- Other topics to add:
+ - Configuration management - YAML configs
+ - Logging vs. printing (logging module)
+ - Data handling > can we do it without introducing pandas?
