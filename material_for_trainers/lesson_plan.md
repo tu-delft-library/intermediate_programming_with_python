@@ -431,7 +431,7 @@ see `exercises.md`
 solution:
 There are a few things to fix in `inflammation-analysis.py`:
 
-- Line 30 in `inflammation-analysis.py` is too long. A better style would be to use multiple lines and hanging indent
+- Line 24 in `inflammation-analysis.py` is too long. A better style would be to use multiple lines and hanging indent
 
 ```bash
 # Using hanging indent with the, closing '}' aligned with the start of the multiline contruct
@@ -445,7 +445,7 @@ view_data = {
 
 - There are two blank lines starting from line 19 in `inflammation-analysis.py`. Normally, you should not use blank lines in the middle of the code unless you want to separate logical units - in which case only one blank line is used. Note how VSCode is warning us by underlining the whole line below.
 
-- Only one blank line after the end of definition of function main and the rest of the code below line 27 in inflammation-analysis.py - should be two blank lines (PEP 8 recommends surrounding top-level function (and class) definitions with two blank lines). Note how VSCode is warning us by underlining the whole line below.
+- Only one blank line after the end of definition of function `main` and the rest of the code below line 27 in `inflammation-analysis.py` - should be two blank lines (PEP 8 recommends surrounding top-level function (and class) definitions with two blank lines). Note how VSCode is warning us by underlining the whole line below.
 
 > **Remember** Git commit!
 
@@ -495,7 +495,7 @@ def daily_min(data):
 ##	14:40	-	Debugging in the IDE	-	15'	-	RAUL
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/24-diagnosing-issues-improving-robustness.html#debugging-in-an-ide)
 
-[TODO expandß]
+[TODO expand]
 - Configure Python tests in VSCode
 - Run tests
 - Running the debugger
@@ -525,62 +525,55 @@ Consolidation PRACTICAL:
 ##	16:00	-	Good bye			
 
 # 🌞 DAY 2 🌞				
+##	9:00	-	Coffee, tea	-	10'	-	RAUL
 
-##	9:00	-	Coffee, tea	-	10'	-	CATA
-
-##	9:10	-	Welcome	-	5'	-	CATA
+##	9:10	-	Welcome	-	5'	-	RAUL
 
 - ✅ Roll call + 🤝 Code of Conduct
 - 🙋 Getting help (🆘 red  ✅ green stickers)
 
-##	9:15	-	Recap from day one	-	10'	-	CATA
+##	9:15	-	Recap from day one	-	10'	-	RAUL	
 
 - Key concepts from Day 1: environments, testing, debugging, style
 - Questions from participants
 
-##	9:25	-	Refactoring	-	10'	-	CATA
+##	9:25	-	 💪 Simulate a contribution from a colleague	-	5'	-	RAUL	
+see `exercises.md`
 
-- Change structure not behaviour.
-  -- abstractions, decoupling, renaming, reorganising, reduce duplication DO NOT fix bugs
-- Writing Tests Before Refactoring
+solution:
+- Open `exercises.md` 
+- Go to `💪 Simulate a contribution from a colleague`
+- Follow instructions to generate module with code
 
-##	9:35	-	 💪 Refactoring exercise	-	20'	-	CATA
 
-Exercise: Write regression tests before refactoring
-- git commit
 
-##	9:55	-	Organising code into modules	-	10'	-	CATA
+##	9:30	-	Abstractions and Decoupling	-	10'	-	RAUL	
 
-- What is a Python module?
-- When to split Code into separate files
-- Imports and namespaces
-- Keeping modules focused: one responsibility per module
-
-##	10:05	-	 💪 Organising code into modules	-	20'	-	CATA
-
-Exercise:
-- Split the inflammation project into separate modules (data loading, analysis, reporting)
-- Update imports
-- git commit
-
-##	10:25	-	Break	-	15'
-
-##	10:40	-	Abstractions and Decoupling	-	10'	-	RAUL
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/33-code-decoupling-abstractions.html#introduction)
 
-[TODO expand]
-- What is an abstraction?
-- Decoupling: why it matters
-- Practical tips:
-  -- Long chains of and in a function -> extract an abstraction
-  -- Copy/paste code -> extract an abstraction
+- What is decoupling? breaking up the software into smaller components. Two components of code can be considered decoupled if a change in one does not necessitate a change in the other. 
+- What is an abstraction? hiding the details of *how* something works leaving us to deal only with *what* it does. 
+- Why is it important:
+  - easier to read as you only need to understand the details of the (smaller) component you are looking at and not the whole monolithic codebase.
+  - easier to test, as one of the components can be replaced by a test or a mock version of it.
+  - easier to maintain, as changes can be isolated from other parts of the code.
 
-##	10:50	-	 💪 Decouple Data Loading from Data Analysis	-	20'	-	RAUL
+- When to implement them in practice?
+  - when you find your self copy/pasting code, this is a sign that you can turn that bit of code into an abstraction (i.e. an independent function that you can call multiple times)
+  - when you name your function and use lots of and (e.g. `load_and_compute_and_save()`) this also signals you should split this function into smaller functions
+  
 
-- Exercise: Decouple Data Loading from Data Analysis
-- git commit
+  
+##	9:40	-	 💪 Decouple Data Loading from Data Analysis	-	15'	-	RAUL	
 
-##	11:10	-	Encapsulations and Classes	-	10'	-	RAUL
+see `exercise.md`
+
+
+##	9:55	-	Review exercise	-	5'	-	RAUL	
+
+Review exercise
+
+##	10:00	-	Encapsulations and Classes	-	10'	-	RAUL	
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/33-code-decoupling-abstractions.html#encapsulation-classes
 )
 
@@ -590,88 +583,132 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 - instances 
 - __init__
 - self
+> **Key concept** Encapsulation provides information hiding. Abstraction provides implementation hiding.
 
-##	11:20	-	 💪 Use Classes to Abstract out Data Loading	-	20'	-	RAUL
 
-- Exercise: Use Classes to Abstract out Data Loading
+##	10:10	-	 💪 Use Classes to Abstract out Data Loading	-	20'	-	RAUL
+
+see `exercise.md`
+
+##	10:25	-	Review exercise	-	5'	-	RAUL	
+
+Review exercise
+
+##	10:30	-	Break	-	15'
+
+##	10:45	-	💪  Add an Additional DataSource	-	20'	-	CATA	
+
+see `exercise.md`
+
+
+##	11:05	-	Review exercise	-	5'	-	CATA	
+
+Review exercise
+
+##	11:10	-	Refactoring	-	10'	-	CATA	
+
+- Change structure not behaviour.
+  -- abstractions, decoupling, renaming, reorganising, reduce duplication DO NOT fix bugs
+- Writing Tests Before Refactoring
+
+##	11:20	-	Refactoring exercise	-	20'	-	CATA	
+
+see `exercise.md`
+
+ Write regression tests before refactoring
 - git commit
 
-##	11:40	-	Break	-	15'	
+##	11:40	-	Review exercise	-	5'	-	CATA	
 
+Review exercise
 
-##	11:55	-	Separating Pure and Impure Code	-	15'	-	CATA
+##	11:45	-	Break	-	15'
+
+##	12:00	-	Separating Pure and Impure Code	-	15'	-	RAUL	
 
 - Pure functions: same input always gives same output, no side effects
 - Benefits of Pure functions for testing and reasoning about code
 
-##	12:10	-	 💪 Separating Pure and Impure Code	-	20'	-	CATA
+##	12:15	-	💪 Separating Pure and Impure Code	-	15'	-	RAUL	
 
-Exercise: Refactor to use a pure function
+see `exercise.md`
+
+ Refactor to use a pure function
 - git commit
 
-##	12:30	-	Lunch	-	60'
+##	12:30	-	Review exercise	-	5'	-	RAUL	
 
-##	13:30	-	The __main__ function and command line arguments	-	15'	-	RAUL
+Review exercise
+
+##	12:35	-	Lunch	-	60'
+
+##	13:35	-	The __main__ function and command line arguments	-	15'	-	CATA	
 
 - __name__  __main__
 - argparse basics
 - Positional and optional arguments
 - Run from terminal
 
-##	13:45	-	 💪 Add optional input parameter	-	15'	-	RAUL
+##	13:50	-	 💪 Refactor: add optional input parameter	-	15'	-	CATA	
 
-- Exercise: Add optional parameter:
+see `exercise.md`
+
+Add optional parameter:
   -- a filename for a figure. If paremeter exists, save figure to file insted of plot.show()
 - git commit
 
+##	14:05	-	Review exercise	-	5'	-	CATA	
 
-##	14:00	- ?? configuration management - 15' - RAUL
-YAML
+Review exercise
 
-##	14:15	-	 💪 exercise	-	15'	-	RAUL
+##	14:10	-	Organising code into modules	-	10'	-	CATA	
 
-##	14:30	-	Break	-	15'	
+- What is a Python module?
+- When to split Code into separate files
+- Imports and namespaces
+- Keeping modules focused: one responsibility per module
 
-##	14:45	- ?? logging vs printing - 15' - CATA
-logging module
+##	14:20	-	Refactoring: Organising code into modules	-	15'	-	CATA	
 
-##	15:00	-	 💪 exercise	-	20'	-	CATA
+see `exercise.md`
+[TODO] rethink this part. Code is already modular. Do we just rename the modules? or is there more separation we can do?
 
+##	14:35	-	Review exercise	-	5'	-	CATA	
 
+Review exercise
 
-##	15:20	-	 💪 PRACTICAL defensive programming	-	30'	-	RAUL
+##	14:40	-	Break	-	15'	-	0	
 
+Break
+
+##	14:55	-	💪 PRACTICAL -	40'	-	RAUL	
+
+options: defensive programming or more refactoring
 - Add preconditions to check correct type and shape of input data
 - Raise errors and fail early
 - Add warnings for suspicious data values
 - Confirm tests still pass
-- git commit
-- git push
 
-##	15:50 -	Final  review	-	10'	-	RAUL
+##	15:35	-	Final  review	-	10'	-	RAUL	
 
-- Discuss the refactoring across all  exercises
-- What changed? What stayed the same?
-- common pitfalls
+- Discuss solutions and common issues
+- Q&a
 
-##	16:00	-	Summarize key points	-	10'	-	RAUL
+##	15:45	-	Summarize key points	-	10'	-	RAUL	
 
 - Recap: Project structure, abstractions, modules, Pure functions, refactoring
 - Where to go next: packaging, documentation Tools (Sphinx), continuous integration
 - questions and feedback
 
-##	16:10 -	Give feedback about the course	-	5'	-	RAUL		
+##	15:55	-	Give feedback about the course	-	5'	-	RAUL	
 
-##	16:15 - Good bye 
-                                        
-# [? for raul] 
-- .venv vs venv vs intuitive name
-- test windows commands
-- we are not using branches because we didn't want to exclude people that have not done the interim git course
-  - this affects for lessons in episode 3 (DAY 2). carpentries requires to switch branch. So that a [compute_data.py](https://github.com/carpentries-incubator/python-intermediate-inflammation/blob/full-data-analysis/inflammation/compute_data.py) is added. How can we deal with this? I don't want work with branches in this course. 
-  - we can also make a modified version of the materials that includes this file. Have participants fork that one instead.
+##	16:00	-	Good bye
 
-- Other topics to add vs giving each topic of day 2 more time and more exercises.
- - Configuration management - YAML configs
- - Logging vs. printing (logging module)
- - Data handling > can we do it without introducing pandas?
+# [? for raul]
+- test windows commands -> will do on his computer
+- add `compute_data.py` to exercise.md. And give instructions on how to copy the file.
+
+ - instead of more content -> spread time per topic
+ - make the practicals
+- add to email -> this course is not for you if you use pytorch
+
