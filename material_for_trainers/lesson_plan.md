@@ -551,8 +551,8 @@ solution:
 
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/33-code-decoupling-abstractions.html#introduction)
 
-- What is decoupling? breaking up the software into smaller components. Two components of code can be considered decoupled if a change in one does not necessitate a change in the other. 
-- What is an abstraction? hiding the details of *how* something works leaving us to deal only with *what* it does. 
+- What is decoupling? breaking up the software into smaller components. Two components of code can be considered decoupled if a change in one does not need a change in the other. 
+- What is an abstraction? hiding the details of *how* something works leaving us only with *what* it does. 
 - Why is it important:
   - easier to read as you only need to understand the details of the (smaller) component you are looking at and not the whole monolithic codebase.
   - easier to test, as one of the components can be replaced by a test or a mock version of it.
@@ -560,9 +560,8 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 
 - When to implement them in practice?
   - when you find your self copy/pasting code, this is a sign that you can turn that bit of code into an abstraction (i.e. an independent function that you can call multiple times)
-  - when you name your function and use lots of and (e.g. `load_and_compute_and_save()`) this also signals you should split this function into smaller functions
+  - when you name your function and use lots of `and's` (e.g. `load_and_compute_and_save()`) this suggests that you should split this function into smaller functions
   
-
   
 ##	9:40	-	 💪 Decouple Data Loading from Data Analysis	-	15'	-	RAUL	
 
@@ -571,117 +570,359 @@ see `exercise.md`
 
 ##	9:55	-	Review exercise	-	5'	-	RAUL	
 
-Review exercise
+The new function `load_inflammation_data()` that reads all the inflammation data into the format needed for the analysis could look something like: .
 
-##	10:00	-	Encapsulations and Classes	-	10'	-	RAUL	
+```bash
+def load_inflammation_data(dir_path):
+    data_file_paths = glob.glob(os.path.join(dir_path, 'inflammation*.csv'))
+    if len(data_file_paths) == 0:
+        raise ValueError(f"No inflammation CSV files found in path {dir_path}")
+    data = map(models.load_csv, data_file_paths) # Load inflammation data from each CSV file
+    return list(data) # Return the list of 2D NumPy arrays with inflammation data
+```
+The new function `analyse_data()` could then look like:
+
+```bash
+def analyse_data(data_dir):
+    data = load_inflammation_data(data_dir)
+
+    means_by_day = map(models.daily_mean, data)
+    means_by_day_matrix = np.stack(list(means_by_day))
+
+    daily_standard_deviation = np.std(means_by_day_matrix, axis=0)
+
+    graph_data = {
+        'standard deviation by day': daily_standard_deviation,
+    }
+    views.visualize(graph_data)
+```
+The code is now easier to follow since we do not need to understand the data loading part to understand the statistical analysis part, and vice versa. In most cases, functions work best when they are short!
+
+##	10:00	-	Encapsulations and Classes	-	15'	-	RAUL	
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/33-code-decoupling-abstractions.html#encapsulation-classes
 )
 
-[TODO expand]
-- Classes
-- naming -> CapitalisedWords
-- instances 
-- __init__
-- self
+However, even with the change done in the previous exercise the data loading is still coupled with the data analysis to a large extent. For example, if we have to support loading data from different sources (e.g. `JSON` files or an `SQL` database), we would have to pass some kind of a flag into `analyse_data()` indicating the type of data we want to read from. Instead, we would like to decouple the consideration of data source from the `analyse_data()` function entirely. 
+
+One way we can do this is by using *encapsulation*. Encapsulation can be used to group together data with methods that manipulate that data. 
+
+For example a `class` is a very common encapsulation.
+
+> **Analogy** A `class` is a cookie cutter template, and `instances` as the cookies themselves. That is, one class can have many instances.
+
+Make a new file inside `inflammation` called `sandbox.py`. Open this file to test the following code
+
+```bash
+class Circle:           # how to declare a class 
+  pass                 # notice the name convention > CapitalisedWords
+```
+
+You can construct an instance of a class elsewhere in the code by doing the following:
+```bash
+my_circle = Circle()    # instance of `Circle` is assigned the variable `my_circle`
+```
+When you construct a class, the class’ *constructor* method is called.
+- `__init__` is special name of the constructor
+- `self` access current instance of object being created
+
+```bash
+class Circle:
+  def __init__(self, radius):   # indentation marks code encapsulated in the class
+    self.radius = radius        # assign input parameter to current instance     
+
+my_circle = Circle(10)          # no indentation 
+```
+Class can have other methods (aka functions) defined on them. 
+```bash
+import math
+
+class Circle:
+  ...
+  def get_area(self):         # self paramenter is required
+    return math.pi * self.radius * self.radius
+...
+print(my_circle.get_area())
+```
+
+On the last line of the code above, the instance of the class, `my_circle`, will be automatically passed as the first parameter (`self`) when calling the `get_area()` method. The `get_area()` method can then access the variable `radius` encapsulated within the object, which is otherwise invisible to the world outside of the object. The method `get_area()` itself can also be accessed via the object/instance only.
+
+Let's run this in VSCode using VSCode (upper right corner `\>` icon). We see the output in the integrated terminal. 
+```bash
+/.../venv/bin/python /.../inflammation/sandbox.py   # the call 
+314.1592653589793                                   # the print out of circle area
+```
+You can also run it directly in the terminal typing
+```bash
+python inflammation/sandbox.py 
+```
+
 > **Key concept** Encapsulation provides information hiding. Abstraction provides implementation hiding.
 
 
-##	10:10	-	 💪 Use Classes to Abstract out Data Loading	-	20'	-	RAUL
+##	10:15	-	 💪 Use Classes to Abstract out Data Loading	-	15'	-	RAUL
 
 see `exercise.md`
 
-##	10:25	-	Review exercise	-	5'	-	RAUL	
+##	10:30	-	Review exercise	-	5'	-	RAUL	
 
-Review exercise
+in `compute_data.py`
 
-##	10:30	-	Break	-	15'
+```bash
+class CSVDataSource:
+    """
+    Loads all the inflammation CSV files within a specified directory.
+    """
+    def __init__(self, dir_path):
+        self.dir_path = dir_path
 
-##	10:45	-	💪  Add an Additional DataSource	-	20'	-	CATA	
+    def load_inflammation_data(self):
+        data_file_paths = glob.glob(os.path.join(self.dir_path, 'inflammation*.csv'))
+        if len(data_file_paths) == 0:
+            raise ValueError(f"No inflammation CSV files found in path {self.dir_path}")
+        data = map(models.load_csv, data_file_paths)
+        return list(data)
+```
+
+in `inflammation-analysis.py`
+```bash
+data_source = CSVDataSource(os.path.dirname(infiles[0]))
+analyse_data(data_source)
+```
+
+The `analyse_data()` function is modified to receive any data source object (that implements the `load_inflammation_data()` method) as a parameter.
+
+```bash
+def analyse_data(data_source):
+    data = data_source.load_inflammation_data()
+    ...
+```
+We have now fully decoupled the reading of the data from the statistical analysis and the analysis is not fixed to reading from a directory of CSV files. Indeed, we can pass various data sources to this function now, as long as they implement the `load_inflammation_data()` method.
+
+While the overall behaviour of the code and its results are unchanged, the way we invoke data analysis has changed.
+
+##	10:35	-	Break	-	15'
+
+##	10:50	-	💪  Add an Additional DataSource	-	20'	-	CATA	
 
 see `exercise.md`
 
 
-##	11:05	-	Review exercise	-	5'	-	CATA	
+##	11:10	-	Review exercise	-	5'	-	CATA	
 
-Review exercise
+The class that reads inflammation data from JSON files could look something like:
+```bash
+class JSONDataSource:
+  """
+  Loads patient data with inflammation values from JSON files within a specified folder.
+  """
+  def __init__(self, dir_path):
+    self.dir_path = dir_path
 
-##	11:10	-	Refactoring	-	10'	-	CATA	
+  def load_inflammation_data(self):
+    data_file_paths = glob.glob(os.path.join(self.dir_path, 'inflammation*.json'))
+    if len(data_file_paths) == 0:
+      raise ValueError(f"No inflammation JSON files found in path {self.dir_path}")
+    data = map(models.load_json, data_file_paths)
+    return list(data)
+```
+in `inflammation-analysis.py`
+```bash
+_, extension = os.path.splitext(infiles[0])
+if extension == '.json':
+  data_source = JSONDataSource(os.path.dirname(infiles[0]))
+elif extension == '.csv':
+  data_source = CSVDataSource(os.path.dirname(infiles[0]))
+else:
+  raise ValueError(f'Unsupported data file format: {extension}')
+analyse_data(data_source)
+```
 
-- Change structure not behaviour.
-  -- abstractions, decoupling, renaming, reorganising, reduce duplication DO NOT fix bugs
-- Writing Tests Before Refactoring
+##	11:15	-	Refactoring	-	10'	-	CATA	
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/34-code-refactoring.html#introduction)
 
-##	11:20	-	Refactoring exercise	-	20'	-	CATA	
+Code *refactoring* is the process of improving the design of an existing code: **change structure not behaviour**.
+
+We have already been refactoring: adding abstractions, decoupling, renaming, reorganising, reducing duplication
+
+When you refactor, contain the urge to fix bugs. You need to be able to run the code an generate the SAME output so that you can verify nothing is broken. If you find a bug: you make a note for future you!
+
+Before we refactor, we should have tests that can verify the code behaviour as it is now. A common strategy is `test at a higher level`, with coarser accuracy. These type of tests are called *regression tests*
+
+We'll write this test in the next exercise. This is the plan: we will modify the function to return the data instead of visualising it because graphs are harder to test automatically (i.e. they need to be viewed and inspected manually in order to determine their correctness). Next, we will make the assert statements verify what the current outcome is, rather than check whether that is correct or not.
+
+
+##	11:25	-	💪 Write Regression Tests	-	20'	-	CATA	
 
 see `exercise.md`
 
- Write regression tests before refactoring
-- git commit
+##	11:45	-	Review exercise	-	5'	-	CATA	
 
-##	11:40	-	Review exercise	-	5'	-	CATA	
+One approach we can take is to:
 
-Review exercise
+- comment out the visualise method on `analyse_data()` (this will cause our test to hang waiting for the result data)
+- return the data (instead of plotting it on a graph), so we can write assert statements on the data
+- see what the calculated result value is, and assert that it is the same as the expected value
+Putting this together, our test may look like:
 
-##	11:45	-	Break	-	15'
+```bash
+import numpy.testing as npt
+from inflammation.compute_data import analyse_data
 
-##	12:00	-	Separating Pure and Impure Code	-	15'	-	RAUL	
+def test_analyse_data():
+    path = os.path.join( os.getcwd(), "../data")
+    data_source = CSVDataSource(path)
+    result = analyse_data(data_source)
+    expected_output = [0.,0.22510286,0.18157299,0.1264423,0.9495481,0.27118211,
+                       0.25104719,0.22330897,0.89680503,0.21573875,1.24235548,0.63042094,
+                       1.57511696,2.18850242,0.3729574,0.69395538,2.52365162,0.3179312,
+                       1.22850657,1.63149639,2.45861227,1.55556052,2.8214853,0.92117578,
+                       0.76176979,2.18346188,0.55368435,1.78441632,0.26549221,1.43938417,
+                       0.78959769,0.64913879,1.16078544,0.42417995,0.36019114,0.80801707,
+                       0.50323031,0.47574665,0.45197398,0.22070227]
+    npt.assert_array_almost_equal(result, expected_output)
+```
 
-- Pure functions: same input always gives same output, no side effects
-- Benefits of Pure functions for testing and reasoning about code
+Note that while the above test will detect if we accidentally break the analysis code and change the output of the analysis, it is still not a complete test for the following reasons:
 
-##	12:15	-	💪 Separating Pure and Impure Code	-	15'	-	RAUL	
+It is not obvious why the `expected_output` is correct
+It does not test edge cases
+If the data files in the directory change - the test will fail
+We would need to add additional tests to check the above.
+
+##	11:50	-	Break	-	15'
+
+##	12:05 -	Separating Pure and Impure Code	-	10'	-	RAUL	
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/34-code-refactoring.html#separating-pure-and-impure-code)
+
+Next step is to separate out as much of code as possible into *pure functions*.
+
+The output of a pure function does not depend on any information which is not present in the input (such as global variables). The same input always gives same output, no side effects.
+
+Pure functions are easier to:
+- understand because they eliminate side effects.
+- reuse as the caller only needs to understand what parameters to provide
+- test 
+
+##	12:15	-	💪 Separating Pure and Impure Code	-	20'	-	RAUL	
 
 see `exercise.md`
 
- Refactor to use a pure function
-- git commit
+##	12:35	-	Review exercise	-	5'	-	RAUL	
 
-##	12:30	-	Review exercise	-	5'	-	RAUL	
+The analysis code will be refactored into a separate function that may look something like:
 
-Review exercise
+```bash
+def compute_standard_deviation_by_day(data):
+    means_by_day = map(models.daily_mean, data)
+    means_by_day_matrix = np.stack(list(means_by_day))
 
-##	12:35	-	Lunch	-	60'
+    daily_standard_deviation = np.std(means_by_day_matrix, axis=0)
+    return daily_standard_deviation
+```
+The `analyse_data()` function now calls the `compute_standard_deviation_by_day()` function, while keeping all the logic for reading the data, processing it and showing it in a graph:
 
-##	13:35	-	The __main__ function and command line arguments	-	15'	-	CATA	
+```bash
+def analyse_data(data_dir):
+    """Calculates the standard deviation by day between datasets.
+    Gets all the inflammation data from CSV files within a directory, works out the mean
+    inflammation value for each day across all datasets, then visualises the
+    standard deviation of these means on a graph."""
+    data_file_paths = glob.glob(os.path.join(data_dir, 'inflammation*.csv'))
+    if len(data_file_paths) == 0:
+        raise ValueError(f"No inflammation csv's found in path {data_dir}")
+    data = map(models.load_csv, data_file_paths)
+    daily_standard_deviation = compute_standard_deviation_by_day(data)
 
-- __name__  __main__
+    graph_data = {
+        'standard deviation by day': daily_standard_deviation,
+    }
+    # views.visualize(graph_data)
+    return daily_standard_deviation
+```
+Make sure to re-run the regression test to check this refactoring has not changed the output of `analyse_data()`.
+
+##	12:40	-	Lunch	-	60'
+
+##	13:40	-	The __main__ function and command line arguments	-	15'	-	CATA	
+
+You will have noticed already that structure of the `inflammation-analysis.py `file follows this pattern:
+```bash
+# import modules
+
+def main(args):
+    # perform some actions
+
+if __name__ == "__main__":
+    # perform some actions before main()
+    main(args)
+```
+
+In this pattern the actions performed by the script are contained within the main function (which does not need to be called main, but using this convention helps others in understanding your code). The main function is then called within the if statement __name__ == "__main__", after some other actions have been performed (usually the parsing of command-line arguments, which will be explained below). __name__ is a special dunder variable which is set, along with a number of other special dunder variables, by the python interpreter before the execution of any code in the source file. What value is given by the interpreter to __name__ is determined by the manner in which it is loaded. 
+
+If we run the source file directly using the Python interpreter, e.g.:
+
+```bash
+$ python3 inflammation-analysis.py
+```
+then the interpreter will assign the hard-coded string "__main__" to the __name__ variable:
+
+```bash
+__name__ = "__main__"
+...
+# rest of your code
+```
+However, if your source file is imported by another Python script, e.g:
+
+```bash
+import inflammation-analysis
+```
+then the interpreter will assign the name "inflammation-analysis" from the import statement to the __name__ variable:
+
+```bash
+__name__ = "inflammation-analysis"
+...
+# rest of your code
+```
+Because of this behaviour of the interpreter, we can put any code that should only be executed when running the script directly within the if __name__ == "__main__": structure, allowing the rest of the code within the script to be safely imported by another script if we so wish.
+
+While it may not seem very useful to have your controller script importable by another script, there are a number of situations in which you would want to do this:
+
+for testing of your code, you can have your testing framework import the main script, and run special test functions which then call the main function directly;
+where you want to not only be able to run your script from the command-line, but also provide a programmer-friendly application programming interface (API) for advanced users.
+
+[TODO expand]
 - argparse basics
 - Positional and optional arguments
 - Run from terminal
 
-##	13:50	-	 💪 Refactor: add optional input parameter	-	15'	-	CATA	
+##	13:55	-	 💪 Add optional input parameter	-	15'	-	CATA	
 
 see `exercise.md`
 
-Add optional parameter:
-  -- a filename for a figure. If paremeter exists, save figure to file insted of plot.show()
-- git commit
+##	14:10	-	Review exercise	-	5'	-	CATA	
 
-##	14:05	-	Review exercise	-	5'	-	CATA	
+[TODO]
 
-Review exercise
-
-##	14:10	-	Organising code into modules	-	10'	-	CATA	
+##	14:15	-	Organising code into modules	-	10'	-	CATA	
 
 - What is a Python module?
 - When to split Code into separate files
 - Imports and namespaces
 - Keeping modules focused: one responsibility per module
 
-##	14:20	-	Refactoring: Organising code into modules	-	15'	-	CATA	
+##	14:25	-	Refactoring: Organising code into modules	-	15'	-	CATA	
 
 see `exercise.md`
 [TODO] rethink this part. Code is already modular. Do we just rename the modules? or is there more separation we can do?
 
-##	14:35	-	Review exercise	-	5'	-	CATA	
+##	14:40	-	Review exercise	-	5'	-	CATA	
 
 Review exercise
 
-##	14:40	-	Break	-	15'	-	0	
+##	14:45	-	Break	-	15'	
 
-Break
 
-##	14:55	-	💪 PRACTICAL -	40'	-	RAUL	
+##	15:00	-	💪 PRACTICAL -	40'	-	RAUL	
 
 options: defensive programming or more refactoring
 - Add preconditions to check correct type and shape of input data
@@ -689,26 +930,22 @@ options: defensive programming or more refactoring
 - Add warnings for suspicious data values
 - Confirm tests still pass
 
-##	15:35	-	Final  review	-	10'	-	RAUL	
+##	15:40	-	Final  review	-	10'	-	RAUL	
 
 - Discuss solutions and common issues
 - Q&a
 
-##	15:45	-	Summarize key points	-	10'	-	RAUL	
+##	15:50	-	Summarize key points	-	10'	-	RAUL	
 
 - Recap: Project structure, abstractions, modules, Pure functions, refactoring
 - Where to go next: packaging, documentation Tools (Sphinx), continuous integration
 - questions and feedback
 
-##	15:55	-	Give feedback about the course	-	5'	-	RAUL	
+##	15:00	-	Give feedback about the course	-	5'	-	RAUL	
 
-##	16:00	-	Good bye
+##	16:05 -	Good bye
 
 # [? for raul]
 - test windows commands -> will do on his computer
-- add `compute_data.py` to exercise.md. And give instructions on how to copy the file.
-
- - instead of more content -> spread time per topic
- - make the practicals
 - add to email -> this course is not for you if you use pytorch
 

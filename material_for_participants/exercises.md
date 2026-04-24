@@ -98,8 +98,6 @@ What happens when you input a non-iterable value (e.g. a single integer)? Write 
 </details>
 
 
-
-
 ## 6 💪 Parametrize unit tests 
 - Rewrite your test function for `daily_min()` to be parameterized
 - Add an extra set of `test_input, test_result`
@@ -113,9 +111,9 @@ What happens when you input a non-iterable value (e.g. a single integer)? Write 
 - Use `pytest tests/test_models.py` or `python -m pytest tests/test_models.py` to run the tests again
 </details>
 
-
 #### 🚀 Optional challenge
 - What edge cases can you think of? Add them to the parametrize sets
+
 
 ## 7 💪 Python Coding Style Guide  
 [TODO rephrase]
@@ -124,22 +122,64 @@ Modify `inflammation-analysis.py` from VSCode, which is helpfully marking incons
 
 - Commit your changes to `git`
 
+
 ## 8 💪 Fix the docstrings
 [TODO rephrase]
 Look into `models.py` from VSCode and improve docstrings for functions `daily_mean , daily_min, daily_max`. 
 - Commit your changes to `git`
 
-## 9 💪 Decouple Data Loading from Data Analysis
+
+## 9 💪 Simulate a contribution from a colleague
+
+- Add a new file inside the folder `inflammation` called `compute_data.py`
+- Copy the following code inside the `compute_data.py` file
+```bash
+"""Module containing mechanism for calculating standard deviation between datasets.
+"""
+
+import glob
+import os
+import numpy as np
+
+from inflammation import models, views
+
+
+def analyse_data(data_dir):
+    """Calculates the standard deviation by day between datasets.
+
+    Gets all the inflammation data from CSV files within a directory,
+    works out the mean inflammation value for each day across all datasets,
+    then plots the graphs of standard deviation of these means."""
+    data_file_paths = glob.glob(os.path.join(data_dir, 'inflammation*.csv'))
+    if len(data_file_paths) == 0:
+        raise ValueError(f"No inflammation data CSV files found in path {data_dir}")
+    data = map(models.load_csv, data_file_paths)
+
+
+    means_by_day = map(models.daily_mean, data)
+    means_by_day_matrix = np.stack(list(means_by_day))
+
+    daily_standard_deviation = np.std(means_by_day_matrix, axis=0)
+
+    graph_data = {
+        'standard deviation by day': daily_standard_deviation,
+    }
+    views.visualize(graph_data)
+
+```
+- Save the file and commit your changes to `git`
+
+## 10 💪 Decouple Data Loading from Data Analysis
 [TODO rephrase]
 Modify `compute_data.py` to separate out the data loading functionality from analyse_data() into a new function load_inflammation_data(), that returns a list of 2D NumPy arrays with inflammation data loaded from all inflammation CSV files found in a specified directory path. Then, change your analyse_data() function to make use of this new function instead.
 
 
-## 9 💪 Use Classes to Abstract out Data Loading
+## 11 💪 Use Classes to Abstract out Data Loading
+[TODO rephrase]
+Inside `compute_data.py`, declare a new class `CSVDataSource` that contains the `load_inflammation_data()` function we wrote in the previous exercise as a method of this class. The directory path where to load the files from should be passed in the class’ constructor method. Finally, construct an instance of the class `CSVDataSource` outside the statistical analysis and pass it to `analyse_data()` function.
 
-Inside compute_data.py, declare a new class CSVDataSource that contains the load_inflammation_data() function we wrote in the previous exercise as a method of this class. The directory path where to load the files from should be passed in the class’ constructor method. Finally, construct an instance of the class CSVDataSource outside the statistical analysis and pass it to analyse_data() function.
 
-
-At the end of this exercise, the code in the analyse_data() function should look like:
+At the end of this exercise, the code in the `analyse_data()` function should look like:
 
 ```bash
 def analyse_data(data_source):
@@ -150,12 +190,99 @@ The controller code should look like:
 ```bash
 data_source = CSVDataSource(os.path.dirname(infiles[0]))
 analyse_data(data_source)
+```
+
+## 12 💪 Add an Additional DataSource
+[TODO rephrase]
+Create another class that supports loading patient data from JSON files, with the appropriate `load_inflammation_data()` method. Here is an example function that you can add to your `models.py` file to load observations from a JSON file:
+
+```bash
+def load_json(filename):
+    """Load a numpy array from a JSON document.
+    
+    Expected format:
+    [
+      {
+        "observations": [0, 1]
+      },
+      {
+        "observations": [0, 2]
+      }    
+    ]
+    :param filename: Filename of CSV to load
+    """
+    with open(filename, 'r', encoding='utf-8') as file:
+        data_as_json = json.load(file)
+        return [np.array(entry['observations']) for entry in data_as_json]
+```
+Finally, at run-time, construct an appropriate data source instance based on the file extension.
+
+
+
+## 13 💪 Write Regression Tests
+[TODO rephrase]
+Modify the `analyse_data()` function not to plot a graph and return the data instead. Then, add a new test file called test_compute_data.py in the tests folder and add a regression test to verify the current output of analyse_data(). We will use this test in the remainder of this section to verify the output `analyse_data()` is unchanged each time we refactor or change code in the future.
+
+Start from the skeleton test code below:
+
+```bash
+from inflammation.compute_data import analyse_data
+
+def test_analyse_data():
+    path = os.path.join( os.getcwd(), "../data")
+    data_source = CSVDataSource(path)
+    result = analyse_data(data_source)
+    # TODO: add assert statement(s) to test the result value is as expected
+```
+Use `assert_array_almost_equal` from the `numpy.testing` library to compare arrays of floating point numbers.
+
 
 <details>
 <summary>🔍 Click here for hints! </summary>
 
-- tip
+When determining the correct return data result to use in tests, it may be helpful to assert the result equals some random made-up data, observe the test fail initially and then copy and paste the correct result into the test.
 </details>
 
 
+## 14 💪 Refactoring To Use a Pure Function
+
+Refactor the `analyse_data()` function to delegate the data analysis to a new pure function `compute_standard_deviation_by_day()` and separate it from the impure code that handles the input and output. The pure function should take in the data, and return the analysis result, as follows:
+
+```bash
+def compute_standard_deviation_by_day(data):
+    # TODO
+    return daily_standard_deviation
+```
+
 #### 🚀 Optional challenge
+
+Add tests for `compute_standard_deviation_by_day()` that check for situations when there is only one file with multiple rows, multiple files with one row, and any other cases you can think of that should be tested.
+
+<details>
+<summary>🔍 Click here for hints! </summary>
+
+You might have thought of more tests, but we can easily extend the test by parametrizing with more inputs and expected outputs:
+```bash
+@pytest.mark.parametrize('data,expected_output', [
+    ([[[0, 1, 0], [0, 2, 0]]], [0, 0, 0]),
+    ([[[0, 2, 0]], [[0, 1, 0]]], [0, math.sqrt(0.25), 0]),
+    ([[[0, 1, 0], [0, 2, 0]], [[0, 1, 0], [0, 2, 0]]], [0, 0, 0])
+],
+ids=['Two patients in same file', 'Two patients in different files', 'Two identical patients in two different files'])
+def test_compute_standard_deviation_by_day(data, expected_output):
+    from inflammation.compute_data import compute_standard_deviation_by_day
+
+    result = compute_standard_deviation_by_day(data)
+    npt.assert_array_almost_equal(result, expected_output)
+
+```
+</details>
+
+## 15 💪 Add optional input parameter
+[TODO rephrase]
+Add optional parameter:
+  -- a filename for a figure. If paremeter exists, save figure to file insted of plot.show()
+- git commit
+
+## 16 💪 Organising code into modules
+[TODO]
