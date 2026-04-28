@@ -564,17 +564,7 @@ Let's `Step into` which takes us to the function `daily_mean`:
 
 
 ##	14:55	-	 💪 PRACTICAL: Catching bugs	-	45'	-	RAUL
-[TODO]
-Consolidation PRACTICAL:
-
-- Introduce an intentional bug and confirm a test catches it
-- Use the debugger to locate the bug
-- Fix the bug and re-run the test suite
-- git commit
-- optional: add test cases for edge cases
- - occurrence of zeros
- - all the values of the array are the same.
- - 
+see `PRACTICAL_unit_testing_debugging.md`
 
 ##	15:40	-	Review PRACTICAL with the group	-	10'	-	RAUL
 
