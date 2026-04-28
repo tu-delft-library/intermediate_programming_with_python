@@ -115,19 +115,46 @@ What happens when you input a non-iterable value (e.g. a single integer)? Write 
 - What edge cases can you think of? Add them to the parametrize sets
 
 
-## 7 💪 Python Coding Style Guide  
-[TODO rephrase]
+## 7 💪 Improve Code Style of Our Project  
 
-Modify `inflammation-analysis.py` from VSCode, which is helpfully marking inconsistencies with coding guidelines by underlying them. 
-
+- Open `inflammation-analysis.py` from VSCode
+- Fix everything that the linter is highlighting
+- After fixing one thing, save the file so that the linter finds the next issue to fix
+- Also check for naming conventions 
 - Commit your changes to `git`
+<details>
+<summary>🔍 Click here for hints! </summary>
 
+For long function calls consider using a `hanging indent` such that:
+ ```bash
+    the_first_line_starts_flush(
+        all_subsequent_lines,
+        are_indented_more,
+    )
+```
+
+</details>
 
 ## 8 💪 Fix the docstrings
-[TODO rephrase]
-Look into `models.py` from VSCode and improve docstrings for functions `daily_mean , daily_min, daily_max`. 
+
+- Look into `models.py` from VSCode
+- Go to the function `daily_mean`
+- Delete the current `docstring`
+- Execute the `Generate docstring` plugin
+- Replace the text `_summary_` with an explanation of *what* the function does
+- Replace the text `_description_` with a description of the variables store, what is the expected shape and type
+- Do the same for `daily_min` and `daily_max`
 - Commit your changes to `git`
 
+<details>
+<summary>🔍 Click here for hints! </summary>
+
+- To generate the docstring:
+    - Stand where you want the `docstring`
+    - Go to `View > Command Palette`, or shortcut `CTRL-SHIFT-P` (Windows, Linux) or `CMD-SHIFT-P` (macOS)
+    - Execute `Generate Docstring`
+
+</details>
 
 ## 9 💪 Simulate a contribution from a colleague
 
