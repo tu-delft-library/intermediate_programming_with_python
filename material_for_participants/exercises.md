@@ -158,8 +158,8 @@ For long function calls consider using a `hanging indent` such that:
 
 ## 9 💪 Simulate a contribution from a colleague
 
-- Add a new file inside the folder `inflammation` called `compute_data.py`
-- Copy the following code inside the `compute_data.py` file
+- Add a new file inside the folder `inflammation` called `analysis.py`
+- Copy the following code inside the `analysis.py` file
 ```bash
 """Module containing mechanism for calculating standard deviation between datasets.
 """
@@ -198,12 +198,12 @@ def analyse_data(data_dir):
 
 ## 10 💪 Decouple Data Loading from Data Analysis
 [TODO rephrase]
-Modify `compute_data.py` to separate out the data loading functionality from analyse_data() into a new function load_inflammation_data(), that returns a list of 2D NumPy arrays with inflammation data loaded from all inflammation CSV files found in a specified directory path. Then, change your analyse_data() function to make use of this new function instead.
+Modify `analysis.py` to separate out the data loading functionality from analyse_data() into a new function load_inflammation_data(), that returns a list of 2D NumPy arrays with inflammation data loaded from all inflammation CSV files found in a specified directory path. Then, change your analyse_data() function to make use of this new function instead.
 
 
 ## 11 💪 Use Classes to Abstract out Data Loading
 [TODO rephrase]
-Inside `compute_data.py`, declare a new class `CSVDataSource` that contains the `load_inflammation_data()` function we wrote in the previous exercise as a method of this class. The directory path where to load the files from should be passed in the class’ constructor method. Finally, construct an instance of the class `CSVDataSource` outside the statistical analysis and pass it to `analyse_data()` function.
+Inside `analysis.py`, declare a new class `CSVDataSource` that contains the `load_inflammation_data()` function we wrote in the previous exercise as a method of this class. The directory path where to load the files from should be passed in the class’ constructor method. Finally, construct an instance of the class `CSVDataSource` outside the statistical analysis and pass it to `analyse_data()` function.
 
 
 At the end of this exercise, the code in the `analyse_data()` function should look like:
@@ -248,12 +248,12 @@ Finally, at run-time, construct an appropriate data source instance based on the
 
 ## 13 💪 Write Regression Tests
 [TODO rephrase]
-Modify the `analyse_data()` function not to plot a graph and return the data instead. Then, add a new test file called test_compute_data.py in the tests folder and add a regression test to verify the current output of analyse_data(). We will use this test in the remainder of this section to verify the output `analyse_data()` is unchanged each time we refactor or change code in the future.
+Modify the `analyse_data()` function not to plot a graph and return the data instead. Then, add a new test file called test_analysis.py in the tests folder and add a regression test to verify the current output of analyse_data(). We will use this test in the remainder of this section to verify the output `analyse_data()` is unchanged each time we refactor or change code in the future.
 
 Start from the skeleton test code below:
 
 ```bash
-from inflammation.compute_data import analyse_data
+from inflammation.analysis import analyse_data
 
 def test_analyse_data():
     path = os.path.join( os.getcwd(), "../data")
@@ -297,7 +297,7 @@ You might have thought of more tests, but we can easily extend the test by param
 ],
 ids=['Two patients in same file', 'Two patients in different files', 'Two identical patients in two different files'])
 def test_compute_standard_deviation_by_day(data, expected_output):
-    from inflammation.compute_data import compute_standard_deviation_by_day
+    from inflammation.analysis import compute_standard_deviation_by_day
 
     result = compute_standard_deviation_by_day(data)
     npt.assert_array_almost_equal(result, expected_output)
