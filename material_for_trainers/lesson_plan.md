@@ -35,7 +35,7 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
     - `README`
     - `LICENSE`
     - `pyproject.toml` configuration file for dependencies (more on this later)
-- Three subfolder:
+- Three subfolders:
     - data -> csv files
     - tests -> a few tests (more on this later)
     - inflammation -> has more `.py` scripts
@@ -157,8 +157,13 @@ An Integrated Development Environments (IDEs) is an application with tools to he
 VSCode is light and general. Which means you need to install what you need.
   - Go to the `Extensions` tab 
   - install `Python` by Microsoft
-  - install `autoDocstring` by Nils Werner
+  - install `autodocstring` by Nils Werner
   - search for `GitHub Copilot` -> `Disable (Workspace)`
+  - setup format for docstring
+    - Open `Code` > `Settings` > `Settings`
+    - Search for `docstringFormat`
+    - Choose `sphinx-notypes`
+
 
 #### Adding a Python interpreter
 First we need to tell the IDE which version of Python we want to use. We do that in the terminal
@@ -418,14 +423,16 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 
 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
 
-- [TODO expand] 
-  - PEP8
-  - Formatting guidelines and show autopep8 in VScode: (Indentation, Maximum Line Length, Line Break, Blank Lines, Whitespace, String Quotes)
-  - Naming Conventions: Function, Variable, Class, Module, Package Naming in Python
-  - Good practices when writting Comments
-  - Set up autopep8 in VSCode
+Let's get a plugin that helps with PEP8 style
+  - Go to the `Extensions` tab 
+  - install `flake8` by Microsoft
 
-##	13:45	-	 💪 Python Coding Style Guide	-	20'	-	CATA
+
+Note the highlighting of `flake8` in `inflammation-analysis.py`
+
+This is called a `linter` and it verifies code style not how the code functions.
+
+##	13:45	-	 💪 Improve Code Style of Our Project -	20'	-	CATA
 see `exercises.md`
 
 solution:
@@ -441,6 +448,8 @@ view_data = {
     'min': models.daily_min(inflammation_data)
 }
 ```
+this type of indent is commonly used for long function calls, lists, and multiline strings.
+
 - Variable `InFiles` in `inflammation-analysis.py` uses `CapitalisedWords` naming convention which is recommended for class names but not variable names. By convention, variable names should be in lowercase with optional underscores so you should rename the variable `InFiles` to, e.g., `infiles` or `in_files`.
 
 - There are two blank lines starting from line 19 in `inflammation-analysis.py`. Normally, you should not use blank lines in the middle of the code unless you want to separate logical units - in which case only one blank line is used. Note how VSCode is warning us by underlining the whole line below.
@@ -456,19 +465,31 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 - Documentation Strings aka Docstrings
 - typehints
 
+Let's get ready for the next exercise:
+- Open `models.py`
+- Option 1:
+    - Delete the `docstring` of `daily_mean`
+    - Stand below the `def` line and type `"""`
+    - A pop up will offer to generate the `docstring`
+    - Press `ENTER` and a template of `doscstring` will appear
+- Option 2: 
+    - Stand where you want the `docstring`
+    - Go to `View > Command Palette`, or shortcut `CTRL-SHIFT-P` (Windows, Linux) or `CMD-SHIFT-P` (macOS)
+    - Execute `Generate Docstring`
+
 ##	14:10	-	💪 Fix the Docstrings	-	20'	-	CATA
 
 see `exercises.md`
 
 solution:
-The improved docstrings for the above functions would contain explanations for parameters and return values.
+The improved `docstrings` for the above functions would contain explanations for parameters and return values.
 
 ```bash
 def daily_mean(data):
    """Calculate the daily mean of a 2D inflammation data array for each day.
 
    :param data: A 2D data array with inflammation data (each row contains measurements for a single patient across all days).
-   :returns: An array of mean values of measurements for each day.
+   :return: An array of mean values of measurements for each day.
    """
    return np.mean(data, axis=0)
 ```
@@ -477,7 +498,7 @@ def daily_max(data):
    """Calculate the daily maximum of a 2D inflammation data array for each day.
 
    :param data: A 2D data array with inflammation data (each row contains measurements for a single patient across all days).
-   :returns: An array of max values of measurements for each day.
+   :return: An array of max values of measurements for each day.
    """
    return np.max(data, axis=0)
 ```
@@ -486,7 +507,7 @@ def daily_min(data):
    """Calculate the daily minimum of a 2D inflammation data array for each day.
 
    :param data: A 2D data array with inflammation data (each row contains measurements for a single patient across all days).
-   :returns: An array of minimum values of measurements for each day.
+   :return: An array of minimum values of measurements for each day.
    """
    return np.min(data, axis=0)
 ```
@@ -503,6 +524,7 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 - Inspecting variables
 - Reading the call stack
 
+
 ##	14:55	-	 💪 PRACTICAL: Testing the inflammation project	-	45'	-	RAUL
 [TODO]
 Consolidation PRACTICAL:
@@ -517,12 +539,11 @@ Consolidation PRACTICAL:
 - Q&a
 
 ##	15:50	-	Summarize key points	-	10'	-	RAUL
-
-- Recap: virtual environments, testing, debugging, style
-- Preview of Day 2:  abstractions, refactoring
+[TODO Vevox]
+- Make a poll and use it to recap: virtual environments, testing, debugging, style
 - Questions
 
-##	16:00	-	Good bye			
+##	16:15	-	Good bye			
 
 # 🌞 DAY 2 🌞				
 ##	9:00	-	Coffee, tea	-	10'	-	RAUL
