@@ -6,9 +6,12 @@
 By the end of this lab you will be able to:
 
 - Recognise how a failing test reveals a bug in production code
+- Read a test failure trace and locate the relevant information
 - Use the VSCode debugger to inspect a program's state at the point of failure
 - Fix a bug and verify the whole test suite passes again
-- *(Optional)* Write new test cases for edge cases
+- Write a data validation test using `pytest.raises`
+- Commit passing code to version control
+- Check code style with the flake8 linter
 
 
 ## Part 1 — Introduce a Bug
@@ -53,7 +56,18 @@ Max absolute difference: 15
  DESIRED: array([1, -9, -1])
 ```
 
-**Answer these questions before moving on:**
+**Read the error trace top to bottom** before answering the questions. Each part tells you something specific:
+
+| Part of the trace | What it tells you |
+|---|---|
+| `FAILED tests/test_models.py::test_daily_min[...]` | Which test failed, and which parametrized case |
+| `>` arrow | The exact line that triggered the failure |
+| `E` lines | What was returned (`ACTUAL`) vs. what was expected (`DESIRED`) |
+| `test_models.py:NN` | The file and line number to go to |
+
+Getting into the habit of reading traces top to bottom — rather than just reacting to the red ❌ — will save you a lot of time when debugging.
+
+**Now answer these questions:**
 
 1. Which parametrized test case failed? (first or second?)
 2. Why did the first test case (`all zeros`) still pass even with the bug present?
@@ -117,6 +131,8 @@ Save the file, then go back to the **Testing** panel and click **Run All Tests**
 
 All tests should be green. ✅
 
+> 🔖 **Commit your work** — Open the **Version Control** panel (branch icon in the left Activity Bar). You should see `models.py` listed as a changed file. Click **+** to stage it, write a short commit message such as `fix: restore daily_min to use axis=0`, and click **Commit**.
+
 
 
 ## Part 5 — Edge Case Tests
@@ -149,12 +165,58 @@ Visually confirm that the expected value actually matches the expected return st
 
 After adding both cases, go to the **Testing** panel and click **Run All Tests** again to confirm they pass.
 
+> 🔖 **Commit your work** — Stage `test_models.py`, write a message such as `test: add edge cases for daily_min`, and commit.
+
+
+## Part 6 — Data Validation with `pytest.raises`
+
+A good test suite checks not just that functions return the right answer for valid input, but also that they fail in the expected way for *invalid* input. This is called **data validation testing**.
+
+The test suite already contains `test_daily_min_string`, which confirms that passing a list of strings raises a `TypeError`.
+
+Now add a new data validation test for `daily_min`. A non-iterable value — such as a plain integer — cannot be reduced along an axis, which causes an `IndexError`. Add the following test to `test_models.py`:
+
+```python
+def test_daily_min_non_iterable():
+    """Test that daily_min raises IndexError when given a non-iterable."""
+    with pytest.raises(IndexError):
+        daily_min(42)
+```
+
+Run the full test suite and confirm everything is green. ✅
+
+> 🔖 **Commit your work** — Stage `test_models.py`, write a message such as `test: add data validation test for daily_min`, and commit.
+
+
+## Part 7 — Check Code Style
+
+### flake8 linter
+
+The flake8 linter checks that code follows the PEP 8 style guide. It does *not* check whether your code is correct — that is what tests are for — but consistent style makes code easier to read and review.
+
+Open `models.py` in the editor. If flake8 is active, any style issues will be underlined. Hover over an underline to read the warning code and message.
+
+Common things to look for:
+
+- **E501** — line too long (over 79 characters)
+- **E302** — expected two blank lines between top-level functions, found one
+- **W291** — trailing whitespace at the end of a line
+
+Work through any warnings flake8 shows until the underlines are gone, then save the file.
+
+### Docstrings
+
+Revise all the `docstrings` and make sure they correctly reflect what each test is doing.
+
+Run the full test suite one more time to confirm that your style fixes have not accidentally broken anything. ✅
+
+> 🔖 **Commit your work** — Stage `models.py`, write a message such as `style: fix flake8 warnings and docstrings`, and commit.
 
 
 ## 🚀  Optional Challenge
 
-Add edge cases for `daily_max`
+Do Part 5, 6, and 7 for `daily_max`
 
-## Key point
+## Key Points
 
-The workflow you just followed — **red → debug → green** — is the core loop of test-driven debugging and something you will use throughout your career.
+The workflow you just followed — **red → debug → green → commit** — is the core loop of test-driven debugging and something you will use throughout your career. Along the way you also practiced reading error traces, testing for invalid inputs, and keeping code style clean — habits that make your code more trustworthy and easier for others (and your future self) to work with.
