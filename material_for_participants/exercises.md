@@ -196,30 +196,98 @@ def analyse_data(data_dir):
 ```
 - Save the file and commit your changes to `git`
 
-## 10 💪 Decouple Data Loading from Data Analysis
-[TODO rephrase]
-Modify `analysis.py` to separate out the data loading functionality from analyse_data() into a new function load_inflammation_data(), that returns a list of 2D NumPy arrays with inflammation data loaded from all inflammation CSV files found in a specified directory path. Then, change your analyse_data() function to make use of this new function instead.
+
+## 10 💪 Write Regression Tests
+
+- Open `analysis.py`
+- Modify the `analyse_data()` function not to plot a graph and return the `daily_standard_deviation` instead. 
+- Add a new test file called `test_analysis.py` in the tests folder from the skeleton test code below:
+
+```bash
+from inflammation.analysis import analyse_data
+
+def test_analyse_data():
+    path = os.path.join( os.getcwd(), "data")
+    result = analyse_data(path)
+    print(result) # TODO: replace print with assert statement(s) to test the result value is as expected
+```
+- Add a breakpoint on the line `print(result)`
+- Run the test in Debug mode (**Debug Test** ▶️  + 🐞)
+- To copy the current result you have two options:
+    - **Safest** Inspect the value of the array `expected_result` in the `VARIABLES` panel on the left. You can copy it from there and past it in the `test_analyse_data` file. 
+    - **Less safe** Continue running the test and copy was is printed on the `Debug Console`. This option is less safe because the printing may be truncated and not show every value.
+- Use `assert_array_almost_equal` from the `numpy.testing` library to compare of floating point numbers.
+- Once all tests pass, commit your changes to `git`
+
+<details>
+<summary>🔍 Click here for hints! </summary>
+
+If the test fails because it doesn't find the path, inspect the value of `path` in the Debug Console and modify the line `path = os.path.join( os.getcwd(), "data")` until it matches the path with the csv files: e.g. `~/Desktop/python-intermediate-inflammation/data`
+</details>
 
 
-## 11 💪 Use Classes to Abstract out Data Loading
-[TODO rephrase]
-Inside `analysis.py`, declare a new class `CSVDataSource` that contains the `load_inflammation_data()` function we wrote in the previous exercise as a method of this class. The directory path where to load the files from should be passed in the class’ constructor method. Finally, construct an instance of the class `CSVDataSource` outside the statistical analysis and pass it to `analyse_data()` function.
+## 11 💪 Decouple Data Loading from Data Analysis
 
+- Open `analysis.py` 
+- Extract the data loading functionality from `analyse_data` into a new function `load_inflammation_data()` that returns a list of 2D NumPy arrays with inflammation data loaded from all inflammation CSV files found in a specified directory path. 
+- Change your `analyse_data()` function to make use of this new function instead.
+- Save the file, then go back to the **Testing** panel and click **Run All Tests** again.
+- All tests should be green ✅
+- Commit your changes to `git`
+
+<details>
+<summary>🔍 Click here for hints! </summary>
+
+- Make sure the parameter `data_dir` is passed to the new function `load_inflammation_data()`
+- Return the results of `data = map(models.load_csv, data_file_paths)` as a list like this:
+`return list(data)`
+</details>
+
+## 12 💪 Add a unit test for `Patient.get_body_mass_index`
+A unit test is an excellent way to test that a new implementation works as expected. Let's test our new `Patient` class.
+
+- Open the file `test_patient.py`
+- Add a `test_case` called `test_compute_bmi`
+- Create an instance of the class `Patient` with the properties:
+    - `name = 'maria'`
+    - `weight = 60`
+    - `height = 1.6`
+- USe `assert_almost_equal` from the `numpy.testing` library to compare the results to the theoretical value of `23.4375`
+- Save the file, then go back to the **Testing** panel and click **Run All Tests** again.
+- All tests should be green ✅
+- Commit your changes to `git`
+
+<details>
+<summary>🔍 Click here for hints! </summary>
+
+- `get_body_mass_index` is a function so it requires that you use the parenthesis at the end when calling it, like this: `get_body_mass_index()` 
+- Remember to import `numpy.testing as npt` at the top of the file. The compare the values like `npt.assert_almost_equal(patient_instance.get_body_mass_index(), expected_bmi)`
+</details>
+
+#### 🚀 Optional challenge
+
+Make sure to pass the parameters to the class constructor using parameters name. Then swap the parameters around and confirm that the test still passes.
+
+## 13 💪 Use Classes to Abstract out Data Loading
+
+- Open `analysis.py`
+- At the bottom of the file, declare a new class `CSVDataSource`
+- Move the function `load_inflammation_data()` inside this new class
+- Define a constructor that takes the directory path where to load the files from
 
 At the end of this exercise, the code in the `analyse_data()` function should look like:
 
 ```bash
-def analyse_data(data_source):
+def analyse_data(data_dir):
+    data_source = CSVDataSource(data_dir)
     data = data_source.load_inflammation_data()
 ```
-The controller code should look like:
+- Save the file, then go back to the **Testing** panel and click **Run All Tests** again.
+- All tests should be green ✅
+- Commit your changes to `git`
 
-```bash
-data_source = CSVDataSource(os.path.dirname(infiles[0]))
-analyse_data(data_source)
-```
 
-## 12 💪 Add an Additional DataSource
+## 15 💪 Add an Additional DataSource
 [TODO rephrase]
 Create another class that supports loading patient data from JSON files, with the appropriate `load_inflammation_data()` method. Here is an example function that you can add to your `models.py` file to load observations from a JSON file:
 
@@ -246,32 +314,8 @@ Finally, at run-time, construct an appropriate data source instance based on the
 
 
 
-## 13 💪 Write Regression Tests
-[TODO rephrase]
-Modify the `analyse_data()` function not to plot a graph and return the data instead. Then, add a new test file called test_analysis.py in the tests folder and add a regression test to verify the current output of analyse_data(). We will use this test in the remainder of this section to verify the output `analyse_data()` is unchanged each time we refactor or change code in the future.
 
-Start from the skeleton test code below:
-
-```bash
-from inflammation.analysis import analyse_data
-
-def test_analyse_data():
-    path = os.path.join( os.getcwd(), "../data")
-    data_source = CSVDataSource(path)
-    result = analyse_data(data_source)
-    # TODO: add assert statement(s) to test the result value is as expected
-```
-Use `assert_array_almost_equal` from the `numpy.testing` library to compare arrays of floating point numbers.
-
-
-<details>
-<summary>🔍 Click here for hints! </summary>
-
-When determining the correct return data result to use in tests, it may be helpful to assert the result equals some random made-up data, observe the test fail initially and then copy and paste the correct result into the test.
-</details>
-
-
-## 14 💪 Refactoring To Use a Pure Function
+## 16 💪 Refactoring To Use a Pure Function
 
 Refactor the `analyse_data()` function to delegate the data analysis to a new pure function `compute_standard_deviation_by_day()` and separate it from the impure code that handles the input and output. The pure function should take in the data, and return the analysis result, as follows:
 
@@ -305,11 +349,8 @@ def test_compute_standard_deviation_by_day(data, expected_output):
 ```
 </details>
 
-## 15 💪 Add optional input parameter
+## 17 💪 Add optional input parameter
 [TODO rephrase]
 Add optional parameter:
   -- a filename for a figure. If paremeter exists, save figure to file insted of plot.show()
 - git commit
-
-## 16 💪 Organising code into modules
-[TODO]
