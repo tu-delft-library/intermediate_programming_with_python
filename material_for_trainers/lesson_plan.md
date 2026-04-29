@@ -328,11 +328,11 @@ The most common errors we can use for data validation:
 ```bash
 import pytest                                          # import `pytest` to use `raises()` 
 
-def test_daily_min_string():
+def test_daily_max_string():
     """Test for TypeError when passing strings"""      # Write summary before code clarifies purpose
 
     with pytest.raises(TypeError):                     # string instead of array give TypeError
-        error_expected = daily_min(['hi', 'there'])    # simple input      
+        error_expected = daily_max(['hi', 'there'])    # simple input      
 ```
 - Git commit
 
@@ -341,7 +341,7 @@ see `exercises.md`
 
 
 solution:
-- copy`test_daily_min_string()`
+- copy`test_daily_max_string()`
 - Paste it right below other  `daily_mean` tests (so that tests are clustered by function)
 - adapt to use `daily_mean`
 ```bash
@@ -401,13 +401,13 @@ solution:
 @pytest.mark.parametrize(
         "test_input, test_result",
         [
-            ([ [0, 0, 0], [0, 0, 0], [0, 0, 0] ], [0, 0, 0]),
-            ([ [1, 2, -1],[3, -2, 4],[5, -9, 6]], [1,-9,-1]),
+            ([[1, 2], [3, 4], [5, 6]], [5, 6]),
+            ([[1, 2, -9], [-3, 4, -2], [-1, 5, -6]], [1, 5, -2]),
         ])
 
-def test_daily_min(test_input, test_result):
-    """Test that min function works for an array of positive and negative integers."""
-    npt.assert_array_equal(daily_min(test_input), test_result)
+def test_daily_max(test_input, test_result):
+    """Test that max function works for an array of positive and negative integers."""
+    npt.assert_array_equal(daily_max(test_input), test_result)
 ```
 > **Remember** Git commit!
 
