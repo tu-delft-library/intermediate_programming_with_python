@@ -55,7 +55,7 @@
 </details>
 
 ## 4 💪 Write some unit tests 
-- Write a unit test for `daily_min()` in a similar format than the test `test_daily_mean_integers()`
+- Write a unit test for `daily_max()` in a similar format than the test `test_daily_mean_integers()`
 - Define `test_input` and `test_result` cases that are suitably different 
 - Once added, run all the tests again and you should also see your new test passing
 - Make sure the `"""docstring"""` reflects the content of the test
@@ -65,14 +65,14 @@
 <summary>🔍 Click here for hints! </summary>
 
 
-- Remember to import the new function to be tested at the top of `test_models.py` > `from inflammation.models import daily_min` 
+- Remember to import the new function to be tested at the top of `test_models.py` > `from inflammation.models import daily_max` 
 - Remember that these functions take a 2D array and return a 1D array with each element the result of analysing each *column* of the data
 - Use `pytest tests/test_models.py` or `python -m pytest tests/test_models.py` to run the tests again
 </details>
 
 
 #### 🚀 Optional challenge
-Do the same for `daily_max`
+Do the same for `daily_min`
 
 
 ## 5 💪 Add data validation unit tests 
@@ -99,7 +99,7 @@ What happens when you input a non-iterable value (e.g. a single integer)? Write 
 
 
 ## 6 💪 Parametrize unit tests 
-- Rewrite your test function for `daily_min()` to be parameterized
+- Rewrite your test function for `daily_max()` to be parameterized
 - Add an extra set of `test_input, test_result`
 - Once added, run all the tests again and you should also see your new test passing
 - Make sure the `"""docstring"""` reflects the content of the test

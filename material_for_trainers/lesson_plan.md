@@ -285,31 +285,27 @@ see `exercises.md`
 
 
 solution:
-- first import `daily_min`
-- copy/paste `test_daily_mean_integers()` and adapt for `daily_min`
+- first import `daily_max`
+- copy/paste `test_daily_mean_integers()` and adapt for `daily_max`
 
 
 ```bash
 
 from inflammation.models import daily_mean, daily_min
 
-def test_daily_min_integers():
+def test_daily_max_integers():
     """Test that the min function works for an array of positive intergers.
     """
 
-    test_input = np.array([[1, 2],
-                           [3, 4],
-                           [5, 6]])
-    test_result = np.array([1, 2])
-    npt.assert_array_equal(daily_min(test_input), test_result)
+    test_input = np.array([[1, 2],[3, 4],[5, 6]])
+    test_result = np.array([5, 6])
+    npt.assert_array_equal(daily_max(test_input), test_result)
 ```
 modify `test_input` and `test_result` to include negative values
 ```bash
 
-    test_input = np.array([[ 4, -2, 5],
-                           [ 1, -6, 2],
-                           [-4, -1, 9]])
-    test_result = np.array([-4, -6, 2])
+    test_input = np.array([[1, 2, -9], [-3, 4, -2], [-1, 5, -6]])
+    test_result = np.array([1, 5, -2])
 
 ```
 > **Remember** Git commit!
