@@ -596,8 +596,64 @@ solution:
 - Follow instructions to generate module with code
 
 
+##	9:30	-	Refactoring	-	10'	-	RAUL	
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/34-code-refactoring.html#introduction)
 
-##	9:30	-	Abstractions and Decoupling	-	10'	-	RAUL	
+Code *refactoring* is the process of improving the design of an existing code: **change structure not behaviour**.
+
+When you refactor, **resist** the urge to fix bugs. You need to be able to run the code an generate the SAME output so that you can verify nothing is broken. If you find a bug: you make a note for future you!
+
+Before we refactor, we should have tests that can verify the code behaviour as it is now. A common strategy is `test at a higher level`, with coarser accuracy. These type of tests are called *regression tests*
+
+We'll write this test in the next exercise. This is the plan: we will modify the function to return the data instead of visualising it because graphs are harder to test automatically (i.e. they need to be viewed and inspected manually in order to determine their correctness). Next, we will make the assert statements verify what the current outcome is, rather than check whether that is correct or not.
+
+
+##	9:40	-	💪 Write Regression Tests	-	15'	-	RAUL	
+
+see `exercise.md`
+
+##	9:55	-	Review exercise	-	5'	-	RAUL
+
+- Delete the visualise method on `analyse_data()` (this will cause our test to hang waiting for the result data)
+- return the data (instead of plotting it on a graph), so we can write assert statements on the data
+```bash
+def analyse_data(data_dir):
+...
+    daily_standard_deviation = np.std(means_by_day_matrix, axis=0)
+    return daily_standard_deviation
+```
+- see what the calculated result value is, and assert that it is the same as the expected value
+
+```bash
+from inflammation.analysis import analyse_data
+import os
+import numpy.testing as npt
+
+
+def test_analyse_data():
+    path = os.path.join(os.getcwd(), "data")
+    result = analyse_data(path)
+    expected_result = [0.        , 0.22510286, 0.18157299, 0.1264423 , 0.9495481 ,
+       0.27118211, 0.25104719, 0.22330897, 0.89680503, 0.21573875,
+       1.24235548, 0.63042094, 1.57511696, 2.18850242, 0.3729574 ,
+       0.69395538, 2.52365162, 0.3179312 , 1.22850657, 1.63149639,
+       2.45861227, 1.55556052, 2.8214853 , 0.92117578, 0.76176979,
+       2.18346188, 0.55368435, 1.78441632, 0.26549221, 1.43938417,
+       0.78959769, 0.64913879, 1.16078544, 0.42417995, 0.36019114,
+       0.80801707, 0.50323031, 0.47574665, 0.45197398, 0.22070227]
+    npt.assert_array_almost_equal(result, expected_result)
+```
+
+Note that while the above test will detect if we accidentally break the analysis code and change the output of the analysis, it is still not a complete test for the following reasons:
+
+- It is not obvious why the `expected_output` is correct
+- It does not test edge cases
+- If the data files in the directory change - the test will fail
+We would need to add additional tests to check the above.
+
+> **Remember** Git commit!
+
+##	10:00	-	Abstractions and Decoupling	-	10'	-	RAUL	
 
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/33-code-decoupling-abstractions.html#introduction)
 
@@ -613,14 +669,14 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
   - when you name your function and use lots of `and's` (e.g. `load_and_compute_and_save()`) this suggests that you should split this function into smaller functions
   
   
-##	9:40	-	 💪 Decouple Data Loading from Data Analysis	-	15'	-	RAUL	
+##	10:10	-	 💪 Decouple Data Loading from Data Analysis	-	15'	-	RAUL	
 
 see `exercise.md`
 
 
-##	9:55	-	Review exercise	-	5'	-	RAUL	
+##	10:25	-	Review exercise	-	5'	-	RAUL	
 
-The new function `load_inflammation_data()` that reads all the inflammation data into the format needed for the analysis could look something like: .
+The new function `load_inflammation_data()` that reads all the inflammation data into the format needed for the analysis could look something like:
 
 ```bash
 def load_inflammation_data(dir_path):
@@ -647,75 +703,126 @@ def analyse_data(data_dir):
     views.visualize(graph_data)
 ```
 The code is now easier to follow since we do not need to understand the data loading part to understand the statistical analysis part, and vice versa. In most cases, functions work best when they are short!
+> **Remember** Git commit!
 
-##	10:00	-	Encapsulations and Classes	-	15'	-	RAUL	
+##	10:30	-	Break	-	15'
+
+##	10:45	-	Encapsulations and Classes	-	20'	-	CATA	
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/33-code-decoupling-abstractions.html#encapsulation-classes
 )
 
-However, even with the change done in the previous exercise the data loading is still coupled with the data analysis to a large extent. For example, if we have to support loading data from different sources (e.g. `JSON` files or an `SQL` database), we would have to pass some kind of a flag into `analyse_data()` indicating the type of data we want to read from. Instead, we would like to decouple the consideration of data source from the `analyse_data()` function entirely. 
+Even with the change done in the previous exercise the data loading is still coupled with the data analysis to a large extent. For example, if we have to support loading data from different sources (e.g. `JSON` files), we would have to pass some kind of a flag into `analyse_data()` indicating the type of data we want to read from. Instead, we would like to decouple the consideration of data source from the `analyse_data()` function entirely. 
 
 One way we can do this is by using *encapsulation*. Encapsulation can be used to group together data with methods that manipulate that data. 
 
 For example a `class` is a very common encapsulation.
 
+🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) to explain class with `Circle` example
+
 > **Analogy** A `class` is a cookie cutter template, and `instances` as the cookies themselves. That is, one class can have many instances.
 
-*Note* adapting Circle example to Patient to be relevant for this course. 
+> *Note to instructor* adapting `Circle` example to `Patient` to be more relevant for this course. 
 
-Open the module `models`
+Open the module `models`. We will create a class called `Patient` here.
 
-```bash
-class Circle:           # how to declare a class 
-  pass                 # notice the name convention > CapitalisedWords
-```
-
-You can construct an instance of a class elsewhere in the code by doing the following:
-```bash
-my_circle = Circle()    # instance of `Circle` is assigned the variable `my_circle`
-```
 When you construct a class, the class’ *constructor* method is called.
 - `__init__` is special name of the constructor
 - `self` access current instance of object being created
 
 ```bash
-class Circle:
-  def __init__(self, radius):   # indentation marks code encapsulated in the class
-    self.radius = radius        # assign input parameter to current instance     
-
-my_circle = Circle(10)          # no indentation 
-```
-Class can have other methods (aka functions) defined on them. 
-```bash
-import math
-
-class Circle:
-  ...
-  def get_area(self):         # self paramenter is required
-    return math.pi * self.radius * self.radius
-...
-print(my_circle.get_area())
+class Patient:            # how to declare a class > CapitalisedWords
+  def __init__(self, name):   # indentation marks code encapsulated in the class
+    self.name = name        # assign input parameter to current instance     
 ```
 
-On the last line of the code above, the instance of the class, `my_circle`, will be automatically passed as the first parameter (`self`) when calling the `get_area()` method. The `get_area()` method can then access the variable `radius` encapsulated within the object, which is otherwise invisible to the world outside of the object. The method `get_area()` itself can also be accessed via the object/instance only.
+We can use this class to fix the test that is broken in `tests/test_patient.py`.
 
-Let's run this in VSCode using VSCode (upper right corner `\>` icon). We see the output in the integrated terminal. 
+The test imports the class `Patient` from the module where we just defined it:
 ```bash
-/.../venv/bin/python /.../inflammation/sandbox.py   # the call 
-314.1592653589793                                   # the print out of circle area
+from inflammation.models import Patient
 ```
-You can also run it directly in the terminal typing
+Here, `test_create_patient` checks that an instance of `Patient` can be created and that the name of instance `p` is the same as what was given to the constructor `p = Patient(name=name)`
+
+Let's run the test to see that it passes. All green  ✅
+
+A Class can have other methods (aka functions) defined on them. 
 ```bash
-python inflammation/sandbox.py 
+class Patient:
+  def __init__(self, name):
+  ... # keep same indentation as constructor
+  # leave one line between def inside class (PEP8)
+  def get_body_mass_index(self):      # self parameter is required
+  """Compute body mass index: weight_in_kg / height_in_meters**2"""
+    return self.weight_kg / self.height_mt**2   # use self to access properties of object
+
+```
+We have the body mass index method, but we still don't know the `Patient`s weight and height. Let's modify the constructor to request this values:
+```bash
+class Patient:
+    def __init__(self, name, weight, height):
+        self.name = name
+        self.weight = weight
+        self.height = height
+```
+Now here is where our documentation becomes really important, to let the user know the units of the `weight` and `height`
+
+```bash
+class Patient:
+    def __init__(self, name:str, weight:float, height:float):
+        """Patient class
+
+        :param name: Name of patient
+        :param weight: Weight in kilograms
+        :param height: Height in meters
+        """
+```
+
+As always, when we make a change, we run the tests to check that nothing was broken. 
+
+Aha! `test_create_patient` is broken because we modified the constructor, and it requires a `weight` and a `height`.
+
+Let's fix that in the test.
+```bash
+def test_create_patient():
+
+    name = 'Alice'
+    w = 50
+    h = 1.8
+    p = Patient(name=name, weight=w, height=h) # with this we fix the test
+
+    assert p.name == name
+    assert p.weight == w        # good practice: test the new properties
+    assert p.height == h        # good practice: test the new properties
 ```
 
 > **Key concept** Encapsulation provides information hiding. Abstraction provides implementation hiding.
 
+> **Remember** Git commit!
 
-##	10:15	-	 💪 Use Classes to Abstract out Data Loading	-	15'	-	RAUL
+##	11:05	-	 💪 Add a unit test for `Patient.get_body_mass_index` - 15' - CATA
+see `exercises.md`
+
+##	11:20	-	Review exercise	-	5'	-	CATA	
+```bash
+import numpy.testing as npt      
+
+def test_compute_bmi():
+    maria = Patient(name='maria',  height=1.6, weight=60)
+    expected_bmi = 23.4375
+
+    npt.assert_almost_equal(maria.get_body_mass_index(), expected_bmi)
+
+```
+- Use `assert_almost_equal` to ignore small computational differences in floats
+- `get_body_mass_index()` is a function so it needs the parenthesis at the end of the call 
+- important to use the name of the parameters to avoid errors by given them in the `wrong` order
+
+
+##	11:25	-	 💪 Use Classes to Abstract out Data Loading	-	10'	-	CATA
 
 see `exercise.md`
 
-##	10:30	-	Review exercise	-	5'	-	RAUL	
+##	11:35	-	Review exercise	-	5'	-	CATA	
 
 in `compute_data.py`
 
@@ -724,18 +831,27 @@ class CSVDataSource:
     """
     Loads all the inflammation CSV files within a specified directory.
     """
-    def __init__(self, dir_path):
-        self.dir_path = dir_path
+    def __init__(self, data_dir):
+        self.data_dir = data_dir
 
     def load_inflammation_data(self):
-        data_file_paths = glob.glob(os.path.join(self.dir_path, 'inflammation*.csv'))
+        data_file_paths = glob.glob(os.path.join(self.data_dir, 'inflammation*.csv'))
         if len(data_file_paths) == 0:
-            raise ValueError(f"No inflammation CSV files found in path {self.dir_path}")
+            raise ValueError(f"No inflammation data CSV files found in path {self.data_dir}")
         data = map(models.load_csv, data_file_paths)
         return list(data)
 ```
 
-in `inflammation-analysis.py`
+
+## 11:40 Use CSVDataSource Loading class in `main` - 10' - CATA
+[WIP]
+Let's now use this class in the main entry script: 
+- Open the file `inflammation-analysis.py`
+- Remember that `CSVDataSource` reads all files in a directory. So we need to create our `CSVDataSource` Inside the loop that processes each `filename`, add a new line that creates an instance of the new class `CSVDataSource`
+- Pass that instance to `analyse_data()` function.
+
+The `inflammation-analysis.py` should look like:
+
 ```bash
 data_source = CSVDataSource(os.path.dirname(infiles[0]))
 analyse_data(data_source)
@@ -752,14 +868,14 @@ We have now fully decoupled the reading of the data from the statistical analysi
 
 While the overall behaviour of the code and its results are unchanged, the way we invoke data analysis has changed.
 
-##	10:35	-	Break	-	15'
+##	11:50	-	Break	-	15'
 
-##	10:50	-	💪  Add an Additional DataSource	-	20'	-	CATA	
+##	12:05	-	💪  Add an Additional DataSource	-	20'	-	CATA	
 
 see `exercise.md`
 
 
-##	11:10	-	Review exercise	-	5'	-	CATA	
+##	12:25	-	Review exercise	-	10'	-	CATA	
 
 The class that reads inflammation data from JSON files could look something like:
 ```bash
@@ -789,61 +905,10 @@ else:
 analyse_data(data_source)
 ```
 
-##	11:15	-	Refactoring	-	10'	-	CATA	
-source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/34-code-refactoring.html#introduction)
 
-Code *refactoring* is the process of improving the design of an existing code: **change structure not behaviour**.
+##	12:35	-	Break	-	60'
 
-We have already been refactoring: adding abstractions, decoupling, renaming, reorganising, reducing duplication
-
-When you refactor, contain the urge to fix bugs. You need to be able to run the code an generate the SAME output so that you can verify nothing is broken. If you find a bug: you make a note for future you!
-
-Before we refactor, we should have tests that can verify the code behaviour as it is now. A common strategy is `test at a higher level`, with coarser accuracy. These type of tests are called *regression tests*
-
-We'll write this test in the next exercise. This is the plan: we will modify the function to return the data instead of visualising it because graphs are harder to test automatically (i.e. they need to be viewed and inspected manually in order to determine their correctness). Next, we will make the assert statements verify what the current outcome is, rather than check whether that is correct or not.
-
-
-##	11:25	-	💪 Write Regression Tests	-	20'	-	CATA	
-
-see `exercise.md`
-
-##	11:45	-	Review exercise	-	5'	-	CATA	
-
-One approach we can take is to:
-
-- comment out the visualise method on `analyse_data()` (this will cause our test to hang waiting for the result data)
-- return the data (instead of plotting it on a graph), so we can write assert statements on the data
-- see what the calculated result value is, and assert that it is the same as the expected value
-Putting this together, our test may look like:
-
-```bash
-import numpy.testing as npt
-from inflammation.compute_data import analyse_data
-
-def test_analyse_data():
-    path = os.path.join( os.getcwd(), "../data")
-    data_source = CSVDataSource(path)
-    result = analyse_data(data_source)
-    expected_output = [0.,0.22510286,0.18157299,0.1264423,0.9495481,0.27118211,
-                       0.25104719,0.22330897,0.89680503,0.21573875,1.24235548,0.63042094,
-                       1.57511696,2.18850242,0.3729574,0.69395538,2.52365162,0.3179312,
-                       1.22850657,1.63149639,2.45861227,1.55556052,2.8214853,0.92117578,
-                       0.76176979,2.18346188,0.55368435,1.78441632,0.26549221,1.43938417,
-                       0.78959769,0.64913879,1.16078544,0.42417995,0.36019114,0.80801707,
-                       0.50323031,0.47574665,0.45197398,0.22070227]
-    npt.assert_array_almost_equal(result, expected_output)
-```
-
-Note that while the above test will detect if we accidentally break the analysis code and change the output of the analysis, it is still not a complete test for the following reasons:
-
-It is not obvious why the `expected_output` is correct
-It does not test edge cases
-If the data files in the directory change - the test will fail
-We would need to add additional tests to check the above.
-
-##	11:50	-	Break	-	15'
-
-##	12:05 -	Separating Pure and Impure Code	-	10'	-	RAUL	
+##	13:35 -	Separating Pure and Impure Code	-	10'	-	RAUL	
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/34-code-refactoring.html#separating-pure-and-impure-code)
 
 Next step is to separate out as much of code as possible into *pure functions*.
@@ -855,11 +920,11 @@ Pure functions are easier to:
 - reuse as the caller only needs to understand what parameters to provide
 - test 
 
-##	12:15	-	💪 Separating Pure and Impure Code	-	20'	-	RAUL	
+##	13:45	-	💪 Separating Pure and Impure Code	-	15'	-	RAUL	
 
 see `exercise.md`
 
-##	12:35	-	Review exercise	-	5'	-	RAUL	
+##	14:00	-	Review exercise	-	5'	-	RAUL	
 
 The analysis code will be refactored into a separate function that may look something like:
 
@@ -893,9 +958,7 @@ def analyse_data(data_dir):
 ```
 Make sure to re-run the regression test to check this refactoring has not changed the output of `analyse_data()`.
 
-##	12:40	-	Lunch	-	60'
-
-##	13:40	-	The __main__ function and command line arguments	-	15'	-	CATA	
+##	14:05	-	The __main__ function and command line arguments	-	10'	-	CATA	
 
 You will have noticed already that structure of the `inflammation-analysis.py `file follows this pattern:
 ```bash
@@ -947,47 +1010,27 @@ where you want to not only be able to run your script from the command-line, but
 - Positional and optional arguments
 - Run from terminal
 
-##	13:55	-	 💪 Add optional input parameter	-	15'	-	CATA	
+##	14:15	-	 💪 Add optional input parameter	-	15'	-	CATA	
 
 see `exercise.md`
 
-##	14:10	-	Review exercise	-	5'	-	CATA	
 
-[TODO]
-
-##	14:15	-	Organising code into modules	-	10'	-	CATA	
-
-- What is a Python module?
-- When to split Code into separate files
-- Imports and namespaces
-- Keeping modules focused: one responsibility per module
-
-##	14:25	-	Refactoring: Organising code into modules	-	15'	-	CATA	
-
-see `exercise.md`
-[TODO] rethink this part. Code is already modular. Do we just rename the modules? or is there more separation we can do?
-[OPTIONAL] fix test_patient test. Requires adding a class inside `models.py` called `Patient` initilaized with a `name`. 
-- Add other properties (weight, height, age)
-- Add a method to compute BMI 
-- To convert weight between kg and pounds
-- To convert hegiht between mts and feet
-
-##	14:40	-	Review exercise	-	5'	-	CATA	
+##	14:30	-	Review exercise	-	5'	-	CATA	
 
 Review exercise
 
-##	14:45	-	Break	-	15'	
+##	14:35	-	Break	-	15'	
 
 
-##	15:00	-	💪 PRACTICAL -	40'	-	RAUL	
-
+##	14:50	-	💪 PRACTICAL -	45'	-	RAUL	
+[TODO]
 options: defensive programming or more refactoring
 - Add preconditions to check correct type and shape of input data
 - Raise errors and fail early
 - Add warnings for suspicious data values
 - Confirm tests still pass
 
-##	15:40	-	Final  review	-	10'	-	RAUL	
+##	15:35	-	Final  review	-	15'	-	RAUL	
 
 - Discuss solutions and common issues
 - Q&a
