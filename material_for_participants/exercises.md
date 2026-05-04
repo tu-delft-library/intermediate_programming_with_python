@@ -118,22 +118,16 @@ What happens when you input a non-iterable value (e.g. a single integer)? Write 
 ## 7 💪 Improve Code Style of Our Project  
 
 - Open `inflammation-analysis.py` from VSCode
-- Fix everything that the linter is highlighting
-- After fixing one thing, save the file so that the linter finds the next issue to fix
-- Also check for naming conventions 
+- Go to `View > Command Palette`, or shortcut `CTRL-SHIFT-P` (Windows, Linux) or `CMD-SHIFT-P` (macOS)
+- Search for `Ruff: format document` 
+- Save `inflammation-analysis.py`
+- Got to the `git view` to see the modifications that were done by the plugin
+- Don't commit yet
+- Go back to `inflammation-analysis.py`
+- Check for naming conventions
+- Save `inflammation-analysis.py`
 - Commit your changes to `git`
-<details>
-<summary>🔍 Click here for hints! </summary>
 
-For long function calls consider using a `hanging indent` such that:
- ```bash
-    the_first_line_starts_flush(
-        all_subsequent_lines,
-        are_indented_more,
-    )
-```
-
-</details>
 
 ## 8 💪 Fix the docstrings
 
@@ -144,6 +138,7 @@ For long function calls consider using a `hanging indent` such that:
 - Replace the text `_summary_` with an explanation of *what* the function does
 - Replace the text `_description_` with a description of the variables store, what is the expected shape and type
 - Do the same for `daily_min` and `daily_max`
+- Add type hints for the input and output parameters
 - Commit your changes to `git`
 
 <details>
@@ -271,7 +266,7 @@ Make sure to pass the parameters to the class constructor using parameters name.
 ## 13 💪 Use Classes to Abstract out Data Loading
 
 - Open `analysis.py`
-- At the bottom of the file, declare a new class `CSVDataSource`
+- At the TOP of the file, declare a new class `CSVDataSource`
 - Move the function `load_inflammation_data()` inside this new class
 - Define a constructor that takes the directory path where to load the files from
 
@@ -312,8 +307,13 @@ def load_json(filename):
 ```
 Finally, at run-time, construct an appropriate data source instance based on the file extension.
 
+- TODO I would love to add a test file for this
 
+<details>
+<summary>🔍 Click here for hints! </summary>
 
+TODO
+</details>
 
 ## 16 💪 Refactoring To Use a Pure Function
 
