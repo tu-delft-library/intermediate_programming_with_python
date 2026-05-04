@@ -421,20 +421,18 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 
 Let's get a plugin that helps with PEP8 style
   - Go to the `Extensions` tab 
-  - install `flake8` by Microsoft
+  - install `Ruff` by Astral Software
 
-
-Note the highlighting of `flake8` in `inflammation-analysis.py`
-
-This is called a `linter` and it verifies code style, not functionality.
+This extension includes a `linter` and it verifies code style, not functionality.
 
 ##	13:45	-	 💪 Improve Code Style of Our Project -	20'	-	CATA
 see `exercises.md`
 
 solution:
-There are a few things to fix in `inflammation-analysis.py`:
 
-- Line 24 in `inflammation-analysis.py` is too long. A better style would be to use multiple lines and hanging indent
+Issues should have been automatically fixed by `Ruff`:
+
+- Line 24 in `inflammation-analysis.py` is too long. Fixed with hanging indent
 
 ```bash
 # Using hanging indent with the, closing '}' aligned with the start of the multiline contruct
@@ -444,34 +442,39 @@ view_data = {
     'min': models.daily_min(inflammation_data)
 }
 ```
-this type of indent is commonly used for long function calls, lists, and multiline strings.
-
-- Variable `InFiles` in `inflammation-analysis.py` uses `CapitalisedWords` naming convention which is recommended for class names but not variable names. By convention, variable names should be in lowercase with optional underscores so you should rename the variable `InFiles` to, e.g., `infiles` or `in_files`.
 
 - There are two blank lines starting from line 19 in `inflammation-analysis.py`. Normally, you should not use blank lines in the middle of the code unless you want to separate logical units - in which case only one blank line is used. Note how VSCode is warning us by underlining the whole line below.
 
 - Only one blank line after the end of definition of function `main` and the rest of the code below line 27 in `inflammation-analysis.py` - should be two blank lines (PEP 8 recommends surrounding top-level function (and class) definitions with two blank lines). Note how VSCode is warning us by underlining the whole line below.
+
+- Double quotes for strings `' -> "`
+
+One naming convention to be fixed:
+- Variable `InFiles` in `inflammation-analysis.py` uses `CapitalisedWords` naming convention which is recommended for class names but not variable names. By convention, variable names should be in lowercase with optional underscores so you should rename the variable `InFiles` to, e.g., `infiles` or `in_files`.
 
 > **Remember** Git commit!
 
 ##	14:05	-	Python Coding Style Guide	-	10'	-	CATA
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/15-coding-conventions.html#documentation-strings-aka-docstrings)
 
-[TODO expand]
-- Documentation Strings aka Docstrings
-- typehints
+Let's now talk about documentation of functions. 
+- Docstrings are special comment strings immediately below the function definition is called a `docstring`. The triple quotes `""""` allows to break the string in multiple lines. 
+- The docstring of a function is return when using the `help` function.
+- Docstrings can also be placed at the top of a module. For example, at the top of `modules.py` we see a docstring with the explanation of what the module does.
 
 Let's get ready for the next exercise:
 - Open `models.py`
-- Option 1:
-    - Delete the `docstring` of `daily_mean`
-    - Stand below the `def` line and type `"""`
-    - A pop up will offer to generate the `docstring`
-    - Press `ENTER` and a template of `doscstring` will appear
-- Option 2: 
-    - Stand where you want the `docstring`
-    - Go to `View > Command Palette`, or shortcut `CTRL-SHIFT-P` (Windows, Linux) or `CMD-SHIFT-P` (macOS)
-    - Execute `Generate Docstring`
+- Delete the `docstring` of `daily_mean`
+- Stand below the `def` line and type `"""`
+- A pop up will offer to generate the `docstring`
+- Press `ENTER` and a template of `doscstring` will appear
+
+
+Finally, a very useful tool are `typehints`. They are a way to communicate what are the types expected as input and what is the type of the return values. Type hints are set by using a colon `:` and the type after each variable name. Like this
+
+```def daily_mean(data: np.ndarray) -> np.ndarray:```
+Important to note that the types are not enforced by python. They are a `hint` for the user to know what type of parameter to pass. It becomes part of the documentation.
+
 
 ##	14:15	-	💪 Fix the Docstrings	-	15'	-	CATA
 
@@ -481,7 +484,7 @@ solution:
 The improved `docstrings` for the above functions would contain explanations for parameters and return values.
 
 ```bash
-def daily_mean(data):
+def daily_mean(data: np.ndarray) -> np.ndarray:
    """Calculate the daily mean of a 2D inflammation data array for each day.
 
    :param data: A 2D data array with inflammation data (each row contains measurements for a single patient across all days).
@@ -490,7 +493,7 @@ def daily_mean(data):
    return np.mean(data, axis=0)
 ```
 ```bash
-def daily_max(data):
+def daily_mean(data: np.ndarray) -> np.ndarray:
    """Calculate the daily maximum of a 2D inflammation data array for each day.
 
    :param data: A 2D data array with inflammation data (each row contains measurements for a single patient across all days).
@@ -499,7 +502,7 @@ def daily_max(data):
    return np.max(data, axis=0)
 ```
 ```bash
-def daily_min(data):
+def daily_mean(data: np.ndarray) -> np.ndarray:
    """Calculate the daily minimum of a 2D inflammation data array for each day.
 
    :param data: A 2D data array with inflammation data (each row contains measurements for a single patient across all days).
@@ -568,7 +571,7 @@ see `PRACTICAL_unit_testing_debugging.md`
 - Q&a
 
 ##	15:50	-	Summarize key points	-	10'	-	RAUL
-[TODO Vevox]
+
 - Make a poll and use it to recap: virtual environments, testing, debugging, style
 - Questions
 
@@ -649,6 +652,7 @@ Note that while the above test will detect if we accidentally break the analysis
 - It is not obvious why the `expected_output` is correct
 - It does not test edge cases
 - If the data files in the directory change - the test will fail
+
 We would need to add additional tests to check the above.
 
 > **Remember** Git commit!
@@ -724,6 +728,8 @@ For example a `class` is a very common encapsulation.
 > *Note to instructor* adapting `Circle` example to `Patient` to be more relevant for this course. 
 
 Open the module `models`. We will create a class called `Patient` here.
+
+> *REMEMBER* it is best to define the Classes at the top of the file so that it can be found by the code in the rest of the file
 
 When you construct a class, the class’ *constructor* method is called.
 - `__init__` is special name of the constructor
@@ -826,6 +832,8 @@ see `exercise.md`
 
 in `compute_data.py`
 
+> *IMPORTANT* define the class at the top of the file, so that it can be found by the code in the rest of the file
+
 ```bash
 class CSVDataSource:
     """
@@ -844,20 +852,18 @@ class CSVDataSource:
 
 
 ## 11:40 Use CSVDataSource Loading class in `main` - 10' - CATA
-[WIP]
+
 Let's now use this class in the main entry script: 
 - Open the file `inflammation-analysis.py`
-- Remember that `CSVDataSource` reads all files in a directory. So we need to create our `CSVDataSource` Inside the loop that processes each `filename`, add a new line that creates an instance of the new class `CSVDataSource`
-- Pass that instance to `analyse_data()` function.
-
-The `inflammation-analysis.py` should look like:
-
+- Remember that `CSVDataSource` reads all files in a **directory**. So we need to create our `CSVDataSource` outside the loop that processes each `filename`
+- Add a new line that creates an instance of the new class `CSVDataSource`
 ```bash
-data_source = CSVDataSource(os.path.dirname(infiles[0]))
+data_source = CSVDataSource(os.path.dirname(infiles[0]))    # pick dir from first file
 analyse_data(data_source)
 ```
-
-The `analyse_data()` function is modified to receive any data source object (that implements the `load_inflammation_data()` method) as a parameter.
+- We need to modify `analyse_data()` to recieve the `CSVDataSource` class instead of a string with the `data_dir`
+- As `data_source` is created outside this function, we can delete the line that creates an instance of `CSVDataSource` inside `analyse_data`
+- `CSVDataSource` implements the `load_inflammation_data()` method as a parameter.
 
 ```bash
 def analyse_data(data_source):
@@ -866,7 +872,13 @@ def analyse_data(data_source):
 ```
 We have now fully decoupled the reading of the data from the statistical analysis and the analysis is not fixed to reading from a directory of CSV files. Indeed, we can pass various data sources to this function now, as long as they implement the `load_inflammation_data()` method.
 
-While the overall behaviour of the code and its results are unchanged, the way we invoke data analysis has changed.
+As always, when we make a change, we run the tests to check that nothing was broken. 
+We need to fix the regression test
+```bash
+    data_source = CSVDataSource(path)
+    result = analyse_data(data_source)
+```
+> **Remember** Git commit!
 
 ##	11:50	-	Break	-	15'
 
@@ -895,14 +907,14 @@ class JSONDataSource:
 ```
 in `inflammation-analysis.py`
 ```bash
-_, extension = os.path.splitext(infiles[0])
-if extension == '.json':
-  data_source = JSONDataSource(os.path.dirname(infiles[0]))
-elif extension == '.csv':
-  data_source = CSVDataSource(os.path.dirname(infiles[0]))
-else:
-  raise ValueError(f'Unsupported data file format: {extension}')
-analyse_data(data_source)
+    _, extension = os.path.splitext(in_files[0])
+    if extension == '.json':
+        data_source = analysis.JSONDataSource(os.path.dirname(in_files[0]))
+    elif extension == '.csv':
+        data_source = analysis.CSVDataSource(os.path.dirname(in_files[0]))
+    else:
+        raise ValueError(f'Unsupported data file format: {extension}')
+    analysis.analyse_data(data_source)
 ```
 
 
