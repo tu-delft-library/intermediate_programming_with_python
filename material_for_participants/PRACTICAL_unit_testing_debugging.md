@@ -131,7 +131,7 @@ Save the file, then go back to the **Testing** panel and click **Run All Tests**
 
 All tests should be green. ✅
 
-> 🔖 **Commit your work** — Open the **Version Control** panel (branch icon in the left Activity Bar). You should see `models.py` listed as a changed file. Click **+** to stage it, write a short commit message such as `fix: restore daily_min to use axis=0`, and click **Commit**.
+> 🔖 **Commit your work to git**
 
 
 
@@ -165,7 +165,7 @@ Visually confirm that the expected value actually matches the expected return st
 
 After adding both cases, go to the **Testing** panel and click **Run All Tests** again to confirm they pass.
 
-> 🔖 **Commit your work** — Stage `test_models.py`, write a message such as `test: add edge cases for daily_min`, and commit.
+> 🔖 **Commit your work to git**
 
 
 ## Part 6 — Data Validation with `pytest.raises`
@@ -185,7 +185,7 @@ def test_daily_min_non_iterable():
 
 Run the full test suite and confirm everything is green. ✅
 
-> 🔖 **Commit your work** — Stage `test_models.py`, write a message such as `test: add data validation test for daily_min`, and commit.
+> 🔖 **Commit your work to git**
 
 
 ## Part 7 — Check Code Style
@@ -210,7 +210,7 @@ Revise all the `docstrings` and make sure they correctly reflect what each test 
 
 Run the full test suite one more time to confirm that your style fixes have not accidentally broken anything. ✅
 
-> 🔖 **Commit your work** — Stage `models.py`, write a message such as `style: fix flake8 warnings and docstrings`, and commit.
+> 🔖 **Commit your work to git**
 
 
 ## 🚀  Optional Challenge
