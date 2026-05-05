@@ -14,7 +14,7 @@
 - 🙋 Getting help (🆘 red  ✅ green stickers)
 
 ##	9:25	-	A short icebreaker	-	5'	-	RAUL
-[TODO]
+
 
 ##	9:30	-	Introduction	-	15'	-	RAUL
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/10-section1-intro.html) 
@@ -889,7 +889,9 @@ see `exercise.md`
 
 ##	12:25	-	Review exercise	-	10'	-	CATA	
 
-The class that reads inflammation data from JSON files could look something like:
+- The function `load_json` requires to load the module `json` at the top of `models.py`
+
+- The `load_inflammation_data` method in `JSONDataSource` should filter files by `"inflammation*.json"`
 ```bash
 class JSONDataSource:
   """
@@ -905,7 +907,7 @@ class JSONDataSource:
     data = map(models.load_json, data_file_paths)
     return list(data)
 ```
-in `inflammation-analysis.py`
+In `inflammation-analysis.py`-> `  _, extension = os.path.splitext(in_files[0])` to split the file extension. Then use the variable `extension` in the `if .. elif` statement to choose the data source class
 ```bash
     _, extension = os.path.splitext(in_files[0])
     if extension == '.json':
@@ -916,6 +918,9 @@ in `inflammation-analysis.py`
         raise ValueError(f'Unsupported data file format: {extension}')
     analysis.analyse_data(data_source)
 ```
+
+
+
 
 
 ##	12:35	-	Break	-	60'
@@ -948,31 +953,25 @@ def compute_standard_deviation_by_day(data):
     daily_standard_deviation = np.std(means_by_day_matrix, axis=0)
     return daily_standard_deviation
 ```
-The `analyse_data()` function now calls the `compute_standard_deviation_by_day()` function, while keeping all the logic for reading the data, processing it and showing it in a graph:
+The `analyse_data()` function now calls the `compute_standard_deviation_by_day()` function, while keeping all the logic for reading the data and return it.
 
 ```bash
-def analyse_data(data_dir):
+def analyse_data(data_source):
     """Calculates the standard deviation by day between datasets.
-    Gets all the inflammation data from CSV files within a directory, works out the mean
-    inflammation value for each day across all datasets, then visualises the
-    standard deviation of these means on a graph."""
-    data_file_paths = glob.glob(os.path.join(data_dir, 'inflammation*.csv'))
-    if len(data_file_paths) == 0:
-        raise ValueError(f"No inflammation csv's found in path {data_dir}")
-    data = map(models.load_csv, data_file_paths)
-    daily_standard_deviation = compute_standard_deviation_by_day(data)
 
-    graph_data = {
-        'standard deviation by day': daily_standard_deviation,
-    }
-    # views.visualize(graph_data)
+    Gets all the inflammation data from files within a directory,
+    works out the mean inflammation value for each day across all datasets, computes the standard deviation of these means."""
+    data = data_source.load_inflammation_data()
+    daily_standard_deviation = compute_standard_deviation_by_day(data)
     return daily_standard_deviation
 ```
-Make sure to re-run the regression test to check this refactoring has not changed the output of `analyse_data()`.
+- Confirm all test still pass ✅
 
 ##	14:05	-	The __main__ function and command line arguments	-	10'	-	CATA	
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/35-software-architecture-revisited.html#controller-structure)
 
-You will have noticed already that structure of the `inflammation-analysis.py `file follows this pattern:
+You will have noticed already that structure of the `inflammation-analysis.py` file follows this pattern:
+
 ```bash
 # import modules
 
@@ -983,68 +982,89 @@ if __name__ == "__main__":
     # perform some actions before main()
     main(args)
 ```
+The bit of code under `if __name__ == "__main__":` is only executed when the code is run as a script (from command line or IDE) but not when it is imported like: `import inflammation-analysis`
 
-In this pattern the actions performed by the script are contained within the main function (which does not need to be called main, but using this convention helps others in understanding your code). The main function is then called within the if statement __name__ == "__main__", after some other actions have been performed (usually the parsing of command-line arguments, which will be explained below). __name__ is a special dunder variable which is set, along with a number of other special dunder variables, by the python interpreter before the execution of any code in the source file. What value is given by the interpreter to __name__ is determined by the manner in which it is loaded. 
+The `main` function is  called within the `if` statement `__name__ == "__main__"`, after some other actions have been performed. 
 
-If we run the source file directly using the Python interpreter, e.g.:
+Normally we use this section for parsing of command-line arguments. Here we use the package `argparse`.
+```bash
+    parser.add_argument(
+        "infiles",      # name of the argument
+        nargs="+",      # number of arguments expected + means 1 or more 
+        help="Input CSV(s) containing inflammation series for each patient", # help string
+    )
+```
+We can also add optional parameters by using a `'-'` or `'--'`
 
 ```bash
-$ python3 inflammation-analysis.py
+    parser.add_argument(
+        "-outdir",
+        help="Output directory to save figures as PNG",
+    )
 ```
-then the interpreter will assign the hard-coded string "__main__" to the __name__ variable:
-
+then in the `main` function we can use this new argument
 ```bash
-__name__ = "__main__"
-...
-# rest of your code
+    if args.outdir:
+        outdir = args.outdir
 ```
-However, if your source file is imported by another Python script, e.g:
-
+we want to create a figure for each csv file we read, so we need to generate outpufiles inside the loop:
 ```bash
-import inflammation-analysis
+    outfile = os.path.basename(filename).replace('.csv','.png')
+    outpath = os.path.join(outdir, outfile)
 ```
-then the interpreter will assign the name "inflammation-analysis" from the import statement to the __name__ variable:
+then we can pass the variable `outpath` to `views.visualize()`
 
+We can now add this parameter on the terminal like this:
 ```bash
-__name__ = "inflammation-analysis"
-...
-# rest of your code
+python inflammation-analysis.py data/inflammation-01.csv -outdir data
 ```
-Because of this behaviour of the interpreter, we can put any code that should only be executed when running the script directly within the if __name__ == "__main__": structure, allowing the rest of the code within the script to be safely imported by another script if we so wish.
 
-While it may not seem very useful to have your controller script importable by another script, there are a number of situations in which you would want to do this:
-
-for testing of your code, you can have your testing framework import the main script, and run special test functions which then call the main function directly;
-where you want to not only be able to run your script from the command-line, but also provide a programmer-friendly application programming interface (API) for advanced users.
-
-[TODO expand]
-- argparse basics
-- Positional and optional arguments
-- Run from terminal
-
-##	14:15	-	 💪 Add optional input parameter	-	15'	-	CATA	
+##	14:15	-	 💪 Use optional input parameter to save figures	-	15'	-	CATA	
 
 see `exercise.md`
 
 
 ##	14:30	-	Review exercise	-	5'	-	CATA	
 
-Review exercise
+in `inflammation-analysis.py` the call for views.visualize() will have a new parameter
+```bash
+views.visualize(view_data, outpath )
+```
+in `views.py` 
+```bash
+def visualize(data_dict, outfile):
+....
+    if outfile:
+        plt.savefig(outfile)
+    else:
+        fig.tight_layout()          # this command triggers the show
+        plt.show()
+```
 
 ##	14:35	-	Break	-	15'	
 
 
 ##	14:50	-	💪 PRACTICAL -	45'	-	RAUL	
-[TODO]
-options: defensive programming or more refactoring
-- Add preconditions to check correct type and shape of input data
-- Raise errors and fail early
-- Add warnings for suspicious data values
-- Confirm tests still pass
+
+see `PRACTICAL_refactoring_classes.md`
+
 
 ##	15:35	-	Final  review	-	15'	-	RAUL	
 
-- Discuss solutions and common issues
+## Key Points
+
+You have practised the complete Day 2 workflow:
+
+| Concept | Where you used it |
+|---|---|
+| **Classes** | Added a method and validation to `Patient` |
+| **Data validation** | Raised `ValueError` in the constructor; tested with `pytest.raises` |
+| **Refactoring** | Extracted `compute_bmi` without changing observable behaviour |
+| **Pure functions** | `compute_bmi` takes only its parameters and returns a result |
+| **Tests stay green** | Ran tests after every change |
+| **Git commits** | Committed at each logical checkpoint |
+
+
 - Q&a
 
 ##	15:50	-	Summarize key points	-	10'	-	RAUL	
