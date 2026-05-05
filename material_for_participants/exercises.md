@@ -283,8 +283,9 @@ def analyse_data(data_dir):
 
 
 ## 15 💪 Add an Additional DataSource
-[TODO rephrase]
-Create another class that supports loading patient data from JSON files, with the appropriate `load_inflammation_data()` method. Here is an example function that you can add to your `models.py` file to load observations from a JSON file:
+
+- Open `models.py`
+- Add this function which load observations from a JSON file:
 
 ```bash
 def load_json(filename):
@@ -305,25 +306,37 @@ def load_json(filename):
         data_as_json = json.load(file)
         return [np.array(entry['observations']) for entry in data_as_json]
 ```
-Finally, at run-time, construct an appropriate data source instance based on the file extension.
+- Open `analysis.py`
+- Duplicate the `CSVDataSource` class and rename as `JSONDataSource`
+- Adapt `JSONDataSource` to load `JSON` files
+- Modify the docstring accordingly
+- Open `inflammation-analysis.py`
+- Replace the line that creates an instance of `CSVDataSource` with an `if .. elif` logic that constructs an appropriate data source instance based on the file extension
 
-- TODO I would love to add a test file for this
 
 <details>
 <summary>🔍 Click here for hints! </summary>
 
-TODO
+- The function `load_json` requires to load the module `json` at the top of `models.py`
+- The `load_inflammation_data` method in `JSONDataSource` should filter files by `"inflammation*.json"`
+- Use `  _, extension = os.path.splitext(in_files[0])` to split the file extension. Then use the variable `extension` in the `if .. elif` statement to choose the data source class
 </details>
 
 ## 16 💪 Refactoring To Use a Pure Function
 
-Refactor the `analyse_data()` function to delegate the data analysis to a new pure function `compute_standard_deviation_by_day()` and separate it from the impure code that handles the input and output. The pure function should take in the data, and return the analysis result, as follows:
+- Open `analysis.py`
+- Refactor the `analyse_data()` function to delegate the data analysis to a new pure function `compute_standard_deviation_by_day()`
+- The pure function should take in the data, and return the analysis result, as follows:
 
 ```bash
 def compute_standard_deviation_by_day(data):
-    # TODO
+    ...
     return daily_standard_deviation
 ```
+- Save the file, then go back to the **Testing** panel and click **Run All Tests** again.
+- All tests should be green ✅
+- Commit your changes to `git`
+
 
 #### 🚀 Optional challenge
 
@@ -333,6 +346,7 @@ Add tests for `compute_standard_deviation_by_day()` that check for situations wh
 <summary>🔍 Click here for hints! </summary>
 
 You might have thought of more tests, but we can easily extend the test by parametrizing with more inputs and expected outputs:
+
 ```bash
 @pytest.mark.parametrize('data,expected_output', [
     ([[[0, 1, 0], [0, 2, 0]]], [0, 0, 0]),
@@ -340,6 +354,7 @@ You might have thought of more tests, but we can easily extend the test by param
     ([[[0, 1, 0], [0, 2, 0]], [[0, 1, 0], [0, 2, 0]]], [0, 0, 0])
 ],
 ids=['Two patients in same file', 'Two patients in different files', 'Two identical patients in two different files'])
+
 def test_compute_standard_deviation_by_day(data, expected_output):
     from inflammation.analysis import compute_standard_deviation_by_day
 
@@ -349,8 +364,23 @@ def test_compute_standard_deviation_by_day(data, expected_output):
 ```
 </details>
 
-## 17 💪 Add optional input parameter
-[TODO rephrase]
-Add optional parameter:
-  -- a filename for a figure. If paremeter exists, save figure to file insted of plot.show()
-- git commit
+## 17 💪 Use optional input parameter to save figures
+
+- Open `inflammation-analysis.py`
+- Add our new parameter `outpath` to the `views.visualize()` call
+- Open `views.py`
+- Modify `visualize` to receive another argument `outfile`
+- Use an `if ... else` statement to either save the figure to `outfile` or show the figure 
+- Run the script from the integrated terminal in different conditions:
+ - single file, no `-outdir`
+ - single file, `-outdir data`
+ - with multiple input files, no `-outdir`
+ - multiple input files,  `-outdir data`
+- Check that the `.png` files were saved in the `data` folder
+- Commit your changes to `git`
+
+<details>
+<summary>🔍 Click here for hints! </summary>
+
+- If the figure is still showing, move `fig.tight_layout()` inside the `else: .... plt.show()` block
+</details>
