@@ -284,7 +284,7 @@ test_result = np.array([3, 4])
 see `exercises.md`
 
 
-solution:
+----
 - first import `daily_max`
 - copy/paste `test_daily_mean_integers()` and adapt for `daily_max`
 
@@ -340,7 +340,7 @@ def test_daily_max_string():
 see `exercises.md`
 
 
-solution:
+----
 - copy`test_daily_max_string()`
 - Paste it right below other  `daily_mean` tests (so that tests are clustered by function)
 - adapt to use `daily_mean`
@@ -396,7 +396,7 @@ Once the tests are passing, we can **commit!**
 
 see `exercises.md`
 
-solution:
+----
 ```bash
 @pytest.mark.parametrize(
         "test_input, test_result",
@@ -425,10 +425,10 @@ Let's get a plugin that helps with PEP8 style
 
 This extension includes a `linter` and it verifies code style, not functionality.
 
-##	13:45	-	 💪 Improve Code Style of Our Project -	20'	-	CATA
+##	13:45	-	 💪 Improve Code Style of Our Project -	15'	-	CATA
 see `exercises.md`
 
-solution:
+----
 
 Issues should have been automatically fixed by `Ruff`:
 
@@ -454,7 +454,7 @@ One naming convention to be fixed:
 
 > **Remember** Git commit!
 
-##	14:05	-	Python Coding Style Guide	-	10'	-	CATA
+##	14:00	-	Python Coding Style Guide	-	10'	-	CATA
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/15-coding-conventions.html#documentation-strings-aka-docstrings)
 
 Let's now talk about documentation of functions. 
@@ -476,11 +476,11 @@ Finally, a very useful tool are `typehints`. They are a way to communicate what 
 Important to note that the types are not enforced by python. They are a `hint` for the user to know what type of parameter to pass. It becomes part of the documentation.
 
 
-##	14:15	-	💪 Fix the Docstrings	-	15'	-	CATA
+##	14:10	-	💪 Fix the Docstrings	-	15'	-	CATA
 
 see `exercises.md`
 
-solution:
+----
 The improved `docstrings` for the above functions would contain explanations for parameters and return values.
 
 ```bash
@@ -510,9 +510,9 @@ def daily_mean(data: np.ndarray) -> np.ndarray:
    """
    return np.min(data, axis=0)
 ```
-##	14:30	-	Break	-	10'			
+##	14:25	-	Break	-	10'			
 
-##	14:40	-	Debugging in the IDE	-	15'	-	RAUL
+##	14:35	-	Debugging in the IDE	-	15'	-	RAUL
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/24-diagnosing-issues-improving-robustness.html#debugging-in-an-ide)
 
 A bug is an expected behavior of code. Debugging means "finding and fixing a bug". 
@@ -562,20 +562,21 @@ Let's `Step into` which takes us to the function `daily_mean`:
 - And `Continue` executing and note how the variables change in each iteration
 
 
-##	14:55	-	 💪 PRACTICAL: Catching bugs	-	45'	-	RAUL
+##	14:50	-	 💪 PRACTICAL: Catching bugs	-	45'	-	RAUL
 see `PRACTICAL_unit_testing_debugging.md`
 
-##	15:40	-	Review PRACTICAL with the group	-	10'	-	RAUL
+##	15:35	-	Review PRACTICAL with the group	-	10'	-	RAUL
 
 - Discuss solutions and common issues
 - Q&a
 
-##	15:50	-	Summarize key points	-	10'	-	RAUL
+##	15:45	-	Summarize key points	-	15'	-	RAUL
 
 - Make a poll and use it to recap: virtual environments, testing, debugging, style
 - Questions
 
-##	16:15	-	Good bye			
+
+##	16:00	-	Good bye			
 
 # 🌞 DAY 2 🌞				
 ##	9:00	-	Coffee, tea	-	10'	-	RAUL
@@ -593,7 +594,7 @@ see `PRACTICAL_unit_testing_debugging.md`
 ##	9:25	-	 💪 Simulate a contribution from a colleague	-	5'	-	RAUL	
 see `exercises.md`
 
-solution:
+----
 - Open `exercises.md` 
 - Go to `💪 Simulate a contribution from a colleague`
 - Follow instructions to generate module with code
@@ -611,11 +612,11 @@ Before we refactor, we should have tests that can verify the code behaviour as i
 We'll write this test in the next exercise. This is the plan: we will modify the function to return the data instead of visualising it because graphs are harder to test automatically (i.e. they need to be viewed and inspected manually in order to determine their correctness). Next, we will make the assert statements verify what the current outcome is, rather than check whether that is correct or not.
 
 
-##	9:40	-	💪 Write Regression Tests	-	15'	-	RAUL	
+##	9:40	-	💪 Write Regression Tests	-	20'	-	RAUL	
 
 see `exercise.md`
 
-##	9:55	-	Review exercise	-	5'	-	RAUL
+----
 
 - Delete the visualise method on `analyse_data()` (this will cause our test to hang waiting for the result data)
 - return the data (instead of plotting it on a graph), so we can write assert statements on the data
@@ -673,12 +674,11 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
   - when you name your function and use lots of `and's` (e.g. `load_and_compute_and_save()`) this suggests that you should split this function into smaller functions
   
   
-##	10:10	-	 💪 Decouple Data Loading from Data Analysis	-	15'	-	RAUL	
+##	10:10	-	 💪 Decouple Data Loading from Data Analysis	-	20'	-	RAUL	
 
 see `exercise.md`
 
-
-##	10:25	-	Review exercise	-	5'	-	RAUL	
+---	
 
 The new function `load_inflammation_data()` that reads all the inflammation data into the format needed for the analysis could look something like:
 
@@ -805,10 +805,10 @@ def test_create_patient():
 
 > **Remember** Git commit!
 
-##	11:05	-	 💪 Add a unit test for `Patient.get_body_mass_index` - 15' - CATA
+##	11:05	-	 💪 Add a unit test for `Patient.get_body_mass_index` - 20' - CATA
 see `exercises.md`
 
-##	11:20	-	Review exercise	-	5'	-	CATA	
+----	
 ```bash
 import numpy.testing as npt      
 
@@ -824,11 +824,11 @@ def test_compute_bmi():
 - important to use the name of the parameters to avoid errors by given them in the `wrong` order
 
 
-##	11:25	-	 💪 Use Classes to Abstract out Data Loading	-	10'	-	CATA
+##	11:25	-	 💪 Use Classes to Abstract out Data Loading	-	15'	-	CATA
 
 see `exercise.md`
 
-##	11:35	-	Review exercise	-	5'	-	CATA	
+---	
 
 in `compute_data.py`
 
@@ -886,8 +886,7 @@ We need to fix the regression test
 
 see `exercise.md`
 
-
-##	12:25	-	Review exercise	-	10'	-	CATA	
+----	
 
 - The function `load_json` requires to load the module `json` at the top of `models.py`
 
@@ -937,11 +936,11 @@ Pure functions are easier to:
 - reuse as the caller only needs to understand what parameters to provide
 - test 
 
-##	13:45	-	💪 Separating Pure and Impure Code	-	15'	-	RAUL	
+##	13:45	-	💪 Separating Pure and Impure Code	-	20'	-	RAUL	
 
 see `exercise.md`
 
-##	14:00	-	Review exercise	-	5'	-	RAUL	
+----	
 
 The analysis code will be refactored into a separate function that may look something like:
 
@@ -1019,12 +1018,11 @@ We can now add this parameter on the terminal like this:
 python inflammation-analysis.py data/inflammation-01.csv -outdir data
 ```
 
-##	14:15	-	 💪 Use optional input parameter to save figures	-	15'	-	CATA	
+##	14:15	-	 💪 Use optional input parameter to save figures	-	20'	-	CATA	
 
 see `exercise.md`
 
-
-##	14:30	-	Review exercise	-	5'	-	CATA	
+---	
 
 in `inflammation-analysis.py` the call for views.visualize() will have a new parameter
 ```bash
