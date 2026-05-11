@@ -2,6 +2,8 @@
 
 ## 1 💪 Have a peek at the data
 
+Using the integrated `Terminal` in VS code, answer these two questions:
+
 - How many rows does `inflammation-01.csv` have?
 - How many rows does `small-01.csv` have?
 
