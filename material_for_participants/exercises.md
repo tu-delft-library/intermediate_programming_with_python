@@ -13,7 +13,7 @@
 
 ## 2 💪 Create a `venv`
 - Deactivate your current `venv` to go back to system Python
-- Navigate to your `Desktop`
+- Navigate to your `~/Desktop`
 - Make a new directory called `sandbox`
 - Navigate inside the `sandbox` directory
 - Create a new environment using `venv`
@@ -24,7 +24,7 @@
 - Export the environment into a `requirements.txt`
 - View the contents of `requirements.txt`
 - Deactivate the `venv` to go back to system Python
-- Navigate back to `python-intermediate-inflammation`
+- Navigate back to `~/Desktop/python-intermediate-inflammation`
 
 
 <details>
