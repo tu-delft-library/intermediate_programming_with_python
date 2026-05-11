@@ -1,6 +1,14 @@
 # 🌞 DAY 1 🌞
 
-##	9:00	-	Installation check	-	20'	-	RAUL
+##	9:00	-	Land	-	5'	-	RAUL
+- Coffee / Tea
+
+##	9:05	-	Welcome	-	5'	-	RAUL
+
+- ✅ Roll call + 🤝 Code of Conduct
+- 🙋 Getting help (🆘 red  ✅ green stickers)
+
+##	9:10	-	Installation check	-	15'	-	RAUL
 
 🖥 Tools that should be installed:
 - Python
@@ -9,18 +17,16 @@
 - Forked and cloned `python-intermediate-inflammation`
 
 Let's confirm installation:
-- Open terminal Windows `Git bash` or Mac/Unix `Terminal`
-- type `python --version` and and see in the screen  `Python 3.x.x`
+- Open terminal:
+    - Windows `Git bash` 
+    - Mac/Unix `Terminal`
+- type `python --version` and see in the screen  `Python 3.x.x`
 - type `ssh -T git@github.com` and see in the screen 
 ```bash
 Hi USERNAME! You've successfully authenticated, but GitHub does not provide shell access.
 ```
 - You see a folder named `python-intermediate-inflammation` in your `Desktop` (or another folder of your choice that you know how to find :))
-    
-##	9:20	-	Welcome	-	5'	-	RAUL
 
-- ✅ Roll call + 🤝 Code of Conduct
-- 🙋 Getting help (🆘 red  ✅ green stickers)
 
 ##	9:25	-	A short icebreaker	-	5'	-	RAUL
 
