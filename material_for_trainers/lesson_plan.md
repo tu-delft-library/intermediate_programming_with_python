@@ -44,32 +44,51 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 - Why project structure matters from day one
 - Setting the scene
 
-##	9:45	-	Our project structure	-	5'	-	RAUL
-- Root folder:
-    - `inflammation-analysis.py` main entry point
-    - `README`
-    - `LICENSE`
-    - `pyproject.toml` configuration file for dependencies (more on this later)
-- Three subfolders:
-    - data -> csv files
-    - tests -> a few tests (more on this later)
-    - inflammation -> has more `.py` scripts
+##	9:45	-	Our project structure using VS Code	-	10'	-	RAUL
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/13-ides.html)
+
+#### Starting with a software project
+An Integrated Development Environments (IDEs) is an application with tools to help software development. We will use VS Code.
+- Open folder -> navigate to `~/Desktop/python-intermediate-inflammation/`
+- Icons on the left bar access key views of VS Code.  
+- In the `Explorer` tab we see the project structure (browse through the folders).
+    - Root folder:
+        - `inflammation-analysis.py` main entry point
+        - `README`
+        - `LICENSE`
+        - `pyproject.toml` configuration file for dependencies (more on this later)
+    - Three subfolders:
+        - data -> csv files
+        - tests -> a few tests (more on this later)
+        - inflammation -> has more `.py` scripts
+
+#### Integrated TERMINAL
+
+- Click on `Terminal` -> `New Terminal`
+- This `Terminal` works the same as external terminals (not in VS Code)
+- The default working directory is the directory of the project you opened in VS Code using `Open Folder`
+```bash
+pwd                 # confirm current workind dir
+/Users/USERNAME/Desktop/python-intermediate-inflammation
+```
+- Let's explore the contents of our project from the terminal as well. 
+
 ```bash
 ls -lF      # detailed list of the contents
 ls tests
 ls inflammation/
 ```
 
-##	9:50	-	2 💪 Have a peek at the data - 5' - RAUL
+##	9:55	-	2 💪 Have a peek at the data - 5' - RAUL
 see `exercises.md`
 
 Solution
 ```bash
-wc -l data/inflammation-01.csv
-wc -l data/small-01.csv
+wc -l data/inflammation-01.csv      # 60 lines
+wc -l data/small-01.csv             # 2 lines
 ```
 
-##	9:55	-	Virtual Environments For Software Development	-	10'	-	RAUL
+##	10:00	-	Virtual Environments For Software Development	-	10'	-	RAUL
 🎦 Introduce Virtual environments with the kitchen analogy using [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
 
 ```bash
@@ -87,7 +106,7 @@ cat inflammation/views.py           # numpy and matplotlib external packages
 
 - There many options for package managers and venv managers. Some of them (like `conda`) do both roles together. In this course we use `pip` as package manager and `venv` as virtual environment manager
 
-##	10:05	-	Creating Virtual Environments Using `venv`	-	15'	-	RAUL
+##	10:10	-	Creating Virtual Environments Using `venv`	-	15'	-	RAUL
 
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/12-virtual-environments.html)
 
@@ -137,7 +156,7 @@ python3 inflammation-analysis.py    # use python3 to run script in current direc
 python3 inflammation-analysis.py data/inflammation-01.csv # add input file
 ```
 
-##	10:20	-	💪 Creating Virtual Environments Using `venv` - 10' - RAUL 
+##	10:25	-	💪 Creating Virtual Environments Using `venv` - 10' - RAUL 
 see `exercises.md`
 
 solution
@@ -157,16 +176,11 @@ deactivate
 cd ~/Desktop/python-intermediate-inflammation/
 ```
 
-##	10:30	-	Break	-	10'	
+##	10:35	-	Break	-	10'	
 
-##	10:40	-	VSCode orientation	-	15'	-	CATA
+##	10:45	-	VSCode orientation	-	10'	-	CATA
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/13-ides.html)
 
-#### Starting with a software project
-An Integrated Development Environments (IDEs) is an application with tools to help software development. We will use VS Code.
-- Open folder -> navigate to `~/Desktop/python-intermediate-inflammation/`
-- Icons on the left bar access key views of VS Code.  
-- In the `Explorer` tab we see the project structure (browse through the folders).
   
 #### Installing extensions
 VSCode is light and general. Which means you need to install what you need.
