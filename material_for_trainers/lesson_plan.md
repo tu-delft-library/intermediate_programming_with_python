@@ -134,6 +134,8 @@ python3 -m pip show numpy               # display info of package
 python3 -m pip list                     # list all packages in venv
 python3 -m pip uninstall matplotlib     # just demo. Answer n
 ```
+> **POTENTIAL WARNING** If you get this message: `WARNING: Cache entry deserialization failed, entry ignored` you can clean up your cache using `pip cache purge`
+
 How to install our local project as a package. Allows to call the Python code we are writing from another location.
 ```bash
 python3 -m pip install --editable .     # --editable change dynamically as we develop, . current dir
