@@ -113,7 +113,7 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 How to create virtual environments
 ```bash
 pwd                         # ensure standing in python-intermediate-inflammation/
-python3 -m venv venv       # path convention venv (hidden)
+python3 -m venv venv       # path convention venv
 ls -l                       # new  folder venv
 ls -l venv                  # bin for python interpreter (Scripts for Windows)
 ls venv/lib/pythonX.X/site-packages/    # independent python packages
