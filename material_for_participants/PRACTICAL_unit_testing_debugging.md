@@ -11,10 +11,36 @@ By the end of this lab you will be able to:
 - Fix a bug and verify the whole test suite passes again
 - Write a data validation test using `pytest.raises`
 - Commit passing code to version control
-- Check code style with the flake8 linter
+- Check code style with a linter
+
+## Part 1 - Add another unit test
+Open the file `test_models.py` and copy the following parametrized unit test in it.
+
+```bash
+@pytest.mark.parametrize(
+        "test_input, test_result",
+        [
+            ([ [0, 0, 0], [0, 0, 0], [0, 0, 0] ], [0, 0, 0]),
+            ([ [1, 2, -1],[3, -2, 4],[5, -9, 6]], [1,-9,-1]),
+        ])
+def test_daily_min(test_input, test_result):
+    """Test that min function works for an array of positive and negative integers."""
+    npt.assert_array_equal(daily_min(test_input), test_result)
+
+```
+Remember to import the function `daily_min` at the top of the `test_models.py` file
+```bash
+from inflammation.models import daily_mean, daily_max, daily_min   ## <--- add daily_min
+```
+
+Open the **Testing** panel in VSCode by clicking the flask icon in the left `Activity Bar`, or via the menu **View → Testing**.
+
+If this is your first time, VSCode will ask you to configure a test framework — select **pytest** and point it at your `tests/` folder. Once configured, you will see your test files and individual test functions listed in a tree.
+
+Click **Run All Tests** (the ▶▶ button at the top of the Testing panel). After a few seconds, the tree will update with ALL tests passing ✅ 
 
 
-## Part 1 — Introduce a Bug
+## Part 2 — Introduce a Bug
 
 You are going to deliberately break `daily_min` so that a test catches it. This simulates the kind of copy-paste mistake that is easy to make in real life.
 
@@ -34,9 +60,9 @@ def daily_min(data):
 
 Save the file
 
-## Part 2 — Run the Tests and Watch One Fail
+## Part 3 — Run the Tests and Watch One Fail
 
-Open the **Testing** panel in VSCode by clicking the flask icon (⚗️) in the left Activity Bar, or via the menu **View → Testing**.
+Open the **Testing** panel in VSCode by clicking the flask icon in the left `Activity Bar`, or via the menu **View → Testing**.
 
 If this is your first time, VSCode will ask you to configure a test framework — select **pytest** and point it at your `tests/` folder. Once configured, you will see your test files and individual test functions listed in a tree.
 
@@ -73,7 +99,7 @@ Getting into the habit of reading traces top to bottom — rather than just reac
 2. Why did the first test case (`all zeros`) still pass even with the bug present?
 
 
-## Part 3 — Use the Debugger to Locate the Bug
+## Part 4 — Use the Debugger to Locate the Bug
 
 Rather than just reading the error message, you will step through the code with the VSCode debugger to see *exactly* what is happening at runtime.
 
@@ -110,14 +136,9 @@ Compare the two results. You should be able to see clearly that `np.min(data, ax
 In the `CALL STACK` click on `test_daily_min` to verify what is the expected value of `test_result`. Then click again on `daily_min` and confirm that `np.min(data, axis=0)` gives the expected value.
 
 
-### Remove the breakpoint
-
-Press **Stop** once you have confirmed the bug.
-
-Click the red dot in the gutter again to remove it before moving on.
 
 
-## Part 4 — Fix the Bug and Re-run the Suite
+## Part 5 — Fix the Bug and Re-run the Suite
 
 Restore the correct implementation:
 
@@ -135,78 +156,81 @@ All tests should be green. ✅
 
 
 
-## Part 5 — Edge Case Tests
+## Part 6 — Edge Case Tests
 
 The current test suite does not check a couple of important edge cases. Add the following parametrized cases to the **existing** `@pytest.mark.parametrize` block for `test_daily_min` in `test_models.py`:
 
-### Edge case 1 — Array containing zeros
-
 ```python
-([[0, 1, 2], [0, 3, 4]], [0, 1, 2]),
+([[0, 1, 2], [0, 3, 4]], [0, 1, 2]),     # array containing zeros
+([[3, 3, 3], [3, 3, 3], [3, 3, 3]], [3, 3, 3]), # all values the same
 ```
 
-Use `Step Over` to see in `VARIABLES` the `(return)` value of `daily_min` before `npt.assert_array_equal` is executed.
+There should still be a `breakpoint 🔴` inside the function `daily_min` in the module `models.py`. If not, add it again by clicking in the **gutter** (the narrow strip just to the left of the line numbers) on the `return` line inside `daily_min`.
 
-Visually confirm that the expected value actually matches the expected return stored in `test_result`
-
-
-**What to check:** Does `daily_min` return `0` correctly when zeros are present, rather than accidentally treating zero as "no data"?
-
-### Edge case 2 — All values the same
-
-```python
-([[3, 3, 3], [3, 3, 3], [3, 3, 3]], [3, 3, 3]),
-```
-
-Use `Step Over` to see in `VARIABLES` the `(return)` value of `daily_min` before `npt.assert_array_equal` is executed.
-
-Visually confirm that the expected value actually matches the expected return stored in `test_result`
+In the **Testing** panel, find test `test_daily_min`. Hover over it and click on **Debug Test** ▶️  + 🐞.
 
 
-After adding both cases, go to the **Testing** panel and click **Run All Tests** again to confirm they pass.
+Use `Step Over (F10)` to see in `VARIABLES` the `(return)` value of `daily_min` before `npt.assert_array_equal` is executed.
+
+Visually confirm that the expected value actually matches the expected return stored in `test_result`. Keep pressing `Step Over (F10)` to go through all the test cases.
+
+When the tests stop running, All tests should be green ✅
+
 
 > 🔖 **Commit your work to git**
 
 
-## Part 6 — Data Validation with `pytest.raises`
+## Part 7 — Data Validation with `pytest.raises`
 
 A good test suite checks not just that functions return the right answer for valid input, but also that they fail in the expected way for *invalid* input. This is called **data validation testing**.
 
-The test suite already contains `test_daily_min_string`, which confirms that passing a list of strings raises a `TypeError`.
+The test suite already contains `test_daily_max_string`, which confirms that passing a list of strings raises a `TypeError`.
 
-Now add a new data validation test for `daily_min`. A non-iterable value — such as a plain integer — cannot be reduced along an axis, which causes an `IndexError`. Add the following test to `test_models.py`:
+Now add a new data validation test for `daily_max`. An empty array cannot be reduced along an axis, which causes an `ValueError`. Add the following test to `test_models.py`:
 
 ```python
-def test_daily_min_non_iterable():
-    """Test that daily_min raises IndexError when given a non-iterable."""
-    with pytest.raises(IndexError):
-        daily_min(42)
+def test_daily_max_empty_array():
+    """Test that daily_max raises ValueError when given an empty array."""
+    with pytest.raises(ValueError):
+        daily_max([])
 ```
 
-Run the full test suite and confirm everything is green. ✅
+Another very useful test uses `NaN` values in the input array. The current behavior of the function `daily_max` is to select `np.nan` as the maximum value. Add the test below to the `test_models.py` file.
+
+```bash
+`def test_daily_max_nan_propagation():
+    data = np.array([[1, np.nan], [3, 4]])
+    result = daily_max(data)
+    assert np.isnan(result[1])  # documents current behavior
+```
+Add a breakpoint on the line `result = daily_max(data)`. Run the test in Debug mode: in the **Testing** panel, find test `test_daily_max_nan_propagation`. Hover over it and click on **Debug Test** ▶️  + 🐞.
+
+Use `Step Over (F10)` to see in `VARIABLES` the `result` before `assert np.isnan` is executed. Stop the debugger
+
+Run the full test suite and confirm everything is green ✅
 
 > 🔖 **Commit your work to git**
 
 
-## Part 7 — Check Code Style
+## Part 8 — Check Code Style
 
-### flake8 linter
+### Ruff linter
 
-The flake8 linter checks that code follows the PEP 8 style guide. It does *not* check whether your code is correct — that is what tests are for — but consistent style makes code easier to read and review.
+The Ruff linter checks that code follows the PEP 8 style guide. It does *not* check whether your code is correct — that is what tests are for — but consistent style makes code easier to read and review.
 
-Open `models.py` in the editor. If flake8 is active, any style issues will be underlined. Hover over an underline to read the warning code and message.
+With the file `test_models.py` open in the editor, open the Command Palette (`View > Command Palette`, or shortcut `CTRL-SHIFT-P` (Windows, Linux) or `CMD-SHIFT-P` (macOS))
 
-Common things to look for:
+Search for `Ruff: format document` and enter to execute. Save the file.
 
-- **E501** — line too long (over 79 characters)
-- **E302** — expected two blank lines between top-level functions, found one
-- **W291** — trailing whitespace at the end of a line
+Go to the `git view` to see the modifications that were done by the plugin.
 
-Work through any warnings flake8 shows until the underlines are gone, then save the file.
+Check any other warnings underlined in yellow by the Ruff plugin. Fix them if possible.
+
+> 🔖 **Commit your work to git**
 
 ### Docstrings
 
-Revise all the `docstrings` and make sure they correctly reflect what each test is doing.
+Revise all the `docstrings` in `test_models.py` to make sure they correctly reflect what each test is doing.
 
 Run the full test suite one more time to confirm that your style fixes have not accidentally broken anything. ✅
 
@@ -215,7 +239,7 @@ Run the full test suite one more time to confirm that your style fixes have not 
 
 ## 🚀  Optional Challenge
 
-Do Part 5, 6, and 7 for `daily_max`
+Do Part 6, 7, and 8 for `daily_max`
 
 ## Key Points
 
