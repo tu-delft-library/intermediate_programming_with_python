@@ -1038,18 +1038,19 @@ We can also add optional parameters by using a `'-'` or `'--'`
         help="Output directory to save figures as PNG",
     )
 ```
-then in the `main` function we can use this new argument
-```bash
-    if args.outdir:
-        outdir = args.outdir
-```
+then in the `main` function we can use this new argument.
 we want to create a figure for each csv file we read, so we need to generate outpufiles inside the loop:
 ```bash
-    outfile = os.path.basename(filename).replace('.csv','.png')
-    outpath = os.path.join(outdir, outfile)
+        if args.outdir is not None: 
+            outpath = os.path.join(args.outdir, outfile)
+        else:
+            outpath = None
+
 ```
 then we can pass the variable `outpath` to `views.visualize()`
-
+```bash
+        views.visualize(view_data, outpath )
+```
 We can now add this parameter on the terminal like this:
 ```bash
 python inflammation-analysis.py data/inflammation-01.csv -outdir data
