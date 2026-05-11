@@ -7,6 +7,15 @@
 - VScode
 - GitHub SSH key
 - Forked and cloned `python-intermediate-inflammation`
+
+Let's confirm installation:
+- Open terminal Windows `Git bash` or Mac/Unix `Terminal`
+- type `python --version` and and see in the screen  `Python 3.x.x`
+- type `ssh -T git@github.com` and see in the screen 
+```bash
+Hi USERNAME! You've successfully authenticated, but GitHub does not provide shell access.
+```
+- You see a folder named `python-intermediate-inflammation` in your `Desktop` (or another folder of your choice that you know how to find :))
     
 ##	9:20	-	Welcome	-	5'	-	RAUL
 
