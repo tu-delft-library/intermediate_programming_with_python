@@ -198,7 +198,7 @@ VSCode is light and general. Which means you need to install what you need.
 
 #### Adding a Python interpreter
 First we need to tell the IDE which version of Python we want to use. We do that in the terminal
-- Open `Terminal` > `New Terminal` and type `source /venv/bin/activate`
+- Open `Terminal` > `New Terminal` and type `source venv/bin/activate`
 - Next step should not be necessary, but it's good to check
   - Go to `View > Command Palette`, or shortcut `CTRL-SHIFT-P` (Windows, Linux) or `CMD-SHIFT-P` (macOS)
   - Search for `Python: Select Interpreter` 
@@ -304,12 +304,13 @@ Read it top to bottom:
 - `E lines` — the error message, what `pytest` expected vs. got
 - `File path + line number — tests/test_models.py:39` — where to go fix it
 
-Fix the test before continuing:
+Fix the test before continuing. Remember here is important to have input data for which we easily calculate the theoretical output:
+- column 0 -> average of `1 + 3 + 5 = 9` divided by 3 entries -> `9 / 3 = 3`
+- column 1 -> average of `2 + 4 + 6 = 12` divided by 3 entries -> `12/3 = 4`
 
 ```bash
 test_result = np.array([3, 4])
 ```
-> **OPTIONAL** Use git to reverse broken test (using discard changes)
 
 ##	11:25	-	💪 Unit testing with Pytest	-	10'	-	CATA
 see `exercises.md`
