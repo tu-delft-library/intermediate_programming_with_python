@@ -198,7 +198,7 @@ from inflammation.models import Patient, compute_bmi
     (90,  1.80, 27.777777777777779),
     (50,  1.60, 19.531250),
 ])
-def test_compute_bmi(weight, height, expected_bmi):
+def test_compute_bmi_pure(weight, height, expected_bmi):
     """Test that compute_bmi returns the correct value for various inputs."""
     npt.assert_almost_equal(compute_bmi(weight, height), expected_bmi)
 ```
@@ -222,7 +222,7 @@ Open `inflammation-analysis.py`. In the `if __name__ == "__main__":` block, add 
 
 ```python
 parser.add_argument(
-    "--patient",
+    "-patient",
     type=int,
     help="Row index (0-based) of the patient to summarise",
 )
@@ -246,7 +246,7 @@ def summarise_patient(inflammation_data, patient_index):
           f"min={row.min():.0f}")
 ```
 
-### Step 3 — Call the helper from `main()`
+### Step 3 — Call the helper function from `main()`
 
 Inside `main()`, after loading `inflammation_data`, add:
 
@@ -258,7 +258,7 @@ if args.patient is not None:
 ### Step 4 — Test it from the terminal
 
 ```bash
-python inflammation-analysis.py data/inflammation-01.csv -outdir data --patient 0
+python inflammation-analysis.py data/inflammation-01.csv -outdir data -patient 0
 ```
 
 You should see a line like:
