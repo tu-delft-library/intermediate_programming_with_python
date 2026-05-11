@@ -58,7 +58,8 @@ Using the integrated `Terminal` in VS code, answer these two questions:
 
 ## 4 💪 Write some unit tests 
 - Write a unit test for `daily_max()` in a similar format than the test `test_daily_mean_integers()`
-- Define `test_input` and `test_result` cases that are suitably different 
+- Modify `test_input` including to include negative values
+- Modify `test_result` to match the current `test_input` 
 - Once added, run all the tests again and you should also see your new test passing
 - Make sure the `"""docstring"""` reflects the content of the test
 - Once all tests pass, commit your changes to `git`
@@ -66,7 +67,7 @@ Using the integrated `Terminal` in VS code, answer these two questions:
 <details>
 <summary>🔍 Click here for hints! </summary>
 
-
+- Start by duplicating an existing test and adapting it to the new function you want to test
 - Remember to import the new function to be tested at the top of `test_models.py` > `from inflammation.models import daily_max` 
 - Remember that these functions take a 2D array and return a 1D array with each element the result of analysing each *column* of the data
 - Use `pytest tests/test_models.py` or `python -m pytest tests/test_models.py` to run the tests again
@@ -86,6 +87,7 @@ Do the same for `daily_min`
 <details>
 <summary>🔍 Click here for hints! </summary>
 
+- Start by duplicating an existing test and adapting it to the new function you want to test
 - Use `pytest tests/test_models.py` or `python -m pytest tests/test_models.py` to run the tests again
 </details>
 
@@ -96,7 +98,7 @@ What happens when you input a non-iterable value (e.g. a single integer)? Write 
 <details>
 <summary>🔍 Click here for hints! </summary>
 
-- The error type raise in this case is `IndexError`
+- The error type raised in this case is `IndexError`
 </details>
 
 
@@ -110,6 +112,7 @@ What happens when you input a non-iterable value (e.g. a single integer)? Write 
 <details>
 <summary>🔍 Click here for hints! </summary>
 
+- Start by duplicating an existing test with parametrized input and adapting it to the new function you want to test
 - Use `pytest tests/test_models.py` or `python -m pytest tests/test_models.py` to run the tests again
 </details>
 

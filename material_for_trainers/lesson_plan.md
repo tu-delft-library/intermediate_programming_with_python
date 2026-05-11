@@ -326,20 +326,22 @@ see `exercises.md`
 from inflammation.models import daily_mean, daily_min
 
 def test_daily_max_integers():
-    """Test that the min function works for an array of positive intergers.
+    """Test that the min function works for an array of positive integers.
     """
 
     test_input = np.array([[1, 2],[3, 4],[5, 6]])
     test_result = np.array([5, 6])
     npt.assert_array_equal(daily_max(test_input), test_result)
 ```
-modify `test_input` and `test_result` to include negative values
+modify `test_input` include negative values
 ```bash
-
+    """Test that the min function works for an array of positive and negative integers.
+    """
     test_input = np.array([[1, 2, -9], [-3, 4, -2], [-1, 5, -6]])
-    test_result = np.array([1, 5, -2])
+    test_result = np.array([1, 5, -2])              # update test_output accordingly
 
 ```
+- run the tests in the terminal
 > **Remember** Git commit!
 
 ##	11:35	-	Break	-	10'
@@ -383,6 +385,7 @@ def test_daily_mean_string():
     with pytest.raises(TypeError):
         error_expected = daily_mean(['hi','there'])
 ```
+- run the tests in the terminal
 
 > **Remember** Git commit!
 
@@ -396,14 +399,16 @@ We can make this code more efficient by *parametrizing* the tests with multiple 
 @pytest.mark.parametrize(                       # python decorator
         "test_input, test_result",                # name of arguments
         [
-            ([ [0, 0], [0, 0], [0, 0] ], [0, 0]),   # values of arguments
+            ([ [0, 0], [0, 0], [0, 0] ], [0, 0]),   # values of arguments (copy from existing tests below)
             ([ [1, 2], [3, 4], [5, 6] ], [3, 4]),
         ])
 
-def test_daily_mean(test_input, test_result):
+def test_daily_mean(test_input, test_result): # add input arguments from the parametrize decorator
     """Test that mean function works for an array of zeros and positive integers."""
     npt.assert_array_equal(daily_mean(test_input), test_result)
 ```
+Delete the old test cases `test_daily_mean_zeros` and `test_daily_mean_integers`
+
 After this is working we can use this test to investigate *edge cases*: unexpected circumstances or extreme input values. 
 
 For example:
@@ -475,9 +480,9 @@ view_data = {
 }
 ```
 
-- There are two blank lines starting from line 19 in `inflammation-analysis.py`. Normally, you should not use blank lines in the middle of the code unless you want to separate logical units - in which case only one blank line is used. Note how VSCode is warning us by underlining the whole line below.
+- There are two blank lines starting from line 19 in `inflammation-analysis.py`. Normally, you should not use blank lines in the middle of the code unless you want to separate logical units - in which case only one blank line is used.
 
-- Only one blank line after the end of definition of function `main` and the rest of the code below line 27 in `inflammation-analysis.py` - should be two blank lines (PEP 8 recommends surrounding top-level function (and class) definitions with two blank lines). Note how VSCode is warning us by underlining the whole line below.
+- Only one blank line after the end of definition of function `main` and the rest of the code below line 27 in `inflammation-analysis.py` - should be two blank lines (PEP 8 recommends surrounding top-level function (and class) definitions with two blank lines).
 
 - Double quotes for strings `' -> "`
 
