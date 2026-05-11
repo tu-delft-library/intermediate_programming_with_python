@@ -189,7 +189,7 @@ VSCode is light and general. Which means you need to install what you need.
   - Go to the `Extensions` tab 
   - install `Python` by Microsoft
   - install `autodocstring` by Nils Werner
-  - search for `GitHub Copilot` -> `Disable (Workspace)`
+  - search for `GitHub Copilot Chat` -> `Disable AI Features (Workspace)`
   - setup format for docstring
     - Open `Code` > `Settings` > `Settings`
     - Search for `docstringFormat`
