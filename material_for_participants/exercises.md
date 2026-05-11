@@ -126,7 +126,7 @@ What happens when you input a non-iterable value (e.g. a single integer)? Write 
 - Go to `View > Command Palette`, or shortcut `CTRL-SHIFT-P` (Windows, Linux) or `CMD-SHIFT-P` (macOS)
 - Search for `Ruff: format document` 
 - Save `inflammation-analysis.py`
-- Got to the `git view` to see the modifications that were done by the plugin
+- Go to the `git view` to see the modifications that were done by the plugin
 - Don't commit yet
 - Go back to `inflammation-analysis.py`
 - Check for naming conventions
