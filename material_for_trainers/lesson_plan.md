@@ -91,9 +91,9 @@ wc -l data/small-01.csv             # 2 lines
 ##	10:00	-	Virtual Environments For Software Development	-	10'	-	RAUL
 🎦 Introduce Virtual environments with the kitchen analogy using [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
 
-```bash
-cat inflammation/views.py           # numpy and matplotlib external packages
-```
+- Double click on the file `inflammation/views.py` using the `File Explorer`
+- File is opened in the `Text editor`
+- See that this file uses the packages `matplotlib` and `numpy`
 - These packages are not installed in the basic version of python. We use a package manager to install `extra` packages.
 
 - If you work on multiple projects, you may need specific versions of each library. For this we use `virtual environments` which create an isolated bubble of the libraries so they don't conflict with each other. A virtual environment is *simply* an isolated directory with their own Python interpreter and packages.
