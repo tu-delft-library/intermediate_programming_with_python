@@ -609,7 +609,7 @@ see `PRACTICAL_unit_testing_debugging.md`
 
 ##	15:45	-	Summarize key points	-	15'	-	RAUL
 
-- Make a poll and use it to recap: virtual environments, testing, debugging, style
+- Recap: virtual environments, testing, debugging, style
 - Questions
 
 
@@ -766,7 +766,7 @@ For example a `class` is a very common encapsulation.
 
 Open the module `models`. We will create a class called `Patient` here.
 
-> *REMEMBER* it is best to define the Classes at the top of the file so that it can be found by the code in the rest of the file
+> *REMEMBER* conventional python style is to define the Classes at the top of the file it makes it easier to read
 
 When you construct a class, the class’ *constructor* method is called.
 - `__init__` is special name of the constructor
@@ -869,7 +869,7 @@ see `exercise.md`
 
 in `compute_data.py`
 
-> *IMPORTANT* define the class at the top of the file, so that it can be found by the code in the rest of the file
+> *IMPORTANT* define the class at the top of the file, to follow python style 
 
 ```bash
 class CSVDataSource:
