@@ -598,22 +598,22 @@ Let's `Step into` which takes us to the function `daily_mean`:
 - `Step over` to go back to `test_daily_mean`
 - And `Continue` executing and note how the variables change in each iteration
 
-
-##	14:50	-	 💪 PRACTICAL: Catching bugs	-	45'	-	RAUL
+##	14:50	-	Break	-	10'	
+##	15:00	-	 💪 PRACTICAL: Catching bugs	-	45'	-	RAUL
 see `PRACTICAL_unit_testing_debugging.md`
 
-##	15:35	-	Review PRACTICAL with the group	-	10'	-	RAUL
+##	15:45	-	Review PRACTICAL with the group	-	10'	-	RAUL
 
 - Discuss solutions and common issues
 - Q&a
 
-##	15:45	-	Summarize key points	-	15'	-	RAUL
+##	15:55	-	Summarize key points	-	15'	-	RAUL
 
 - Recap: virtual environments, testing, debugging, style
 - Questions
 
 
-##	16:00	-	Good bye			
+##	16:10	-	Good bye			
 
 # 🌞 DAY 2 🌞				
 ##	9:00	-	Coffee, tea	-	10'	-	RAUL
@@ -1081,7 +1081,7 @@ def visualize(data_dict, outfile):
 ##	14:35	-	Break	-	15'	
 
 
-##	14:50	-	💪 PRACTICAL -	45'	-	RAUL	
+##	14:50	-	💪 PRACTICAL: Refactoring classes - 45'	-	RAUL	
 
 see `PRACTICAL_refactoring_classes.md`
 
