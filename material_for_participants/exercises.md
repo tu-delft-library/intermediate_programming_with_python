@@ -212,17 +212,20 @@ def test_analyse_data():
     print(result) # TODO: replace print with assert statement(s) to test the result value is as expected
 ```
 - Add a breakpoint on the line `print(result)`
-- Run the test in Debug mode (**Debug Test** ▶️  + 🐞)
+- In the **Testing** panel, find test `test_analyse_data`. Hover over it and click on **Debug Test** ▶️  + 🐞.
 - To copy the current result you have two options:
-    - **Safest** Inspect the value of the array `expected_result` in the `VARIABLES` panel on the left. You can copy it from there and past it in the `test_analyse_data` file. 
+    - **Safest** Inspect the value of the array `result` in the `VARIABLES` panel on the left. You can copy it from there. 
     - **Less safe** Continue running the test and copy was is printed on the `Debug Console`. This option is less safe because the printing may be truncated and not show every value.
-- Use `assert_array_almost_equal` from the `numpy.testing` library to compare of floating point numbers.
+- Store the array copied from the previous step in a variable called `expected`
+- Replace the `print(result)` statement with an `assert_array_almost_equal` from the `numpy.testing` library to compare of floating point numbers.
 - Once all tests pass, commit your changes to `git`
 
 <details>
 <summary>🔍 Click here for hints! </summary>
 
-If the test fails because it doesn't find the path, inspect the value of `path` in the Debug Console and modify the line `path = os.path.join( os.getcwd(), "data")` until it matches the path with the csv files: e.g. `~/Desktop/python-intermediate-inflammation/data`
+- Remember to `import` the package `os` at the top of the `test_analyse_data`
+- Remember to `import` the package `numpy.testing as npt` at the top of the `test_analyse_data`
+- If the test fails because it doesn't find the path, inspect the value of `path` in the `Debug Console` and modify the line `path = os.path.join( os.getcwd(), "data")` until it matches the path with the csv files: e.g. `~/Desktop/python-intermediate-inflammation/data`
 </details>
 
 
@@ -252,7 +255,7 @@ A unit test is an excellent way to test that a new implementation works as expec
     - `name = 'maria'`
     - `weight = 60`
     - `height = 1.6`
-- USe `assert_almost_equal` from the `numpy.testing` library to compare the results to the theoretical value of `23.4375`
+- Use `assert_almost_equal` from the `numpy.testing` library to compare the results to the theoretical value of `23.4375`
 - Save the file, then go back to the **Testing** panel and click **Run All Tests** again.
 - All tests should be green ✅
 - Commit your changes to `git`
@@ -261,7 +264,7 @@ A unit test is an excellent way to test that a new implementation works as expec
 <summary>🔍 Click here for hints! </summary>
 
 - `get_body_mass_index` is a function so it requires that you use the parenthesis at the end when calling it, like this: `get_body_mass_index()` 
-- Remember to import `numpy.testing as npt` at the top of the file. The compare the values like `npt.assert_almost_equal(patient_instance.get_body_mass_index(), expected_bmi)`
+- Remember to import `numpy.testing as npt` at the top of the file. Then compare the values like `npt.assert_almost_equal(patient_instance.get_body_mass_index(), expected_bmi)`
 </details>
 
 #### 🚀 Optional challenge
@@ -272,8 +275,9 @@ Make sure to pass the parameters to the class constructor using parameters name.
 
 - Open `analysis.py`
 - At the TOP of the file, declare a new class `CSVDataSource`
-- Move the function `load_inflammation_data()` inside this new class
 - Define a constructor that takes the directory path where to load the files from
+- Move the function `load_inflammation_data()` inside this new class
+- Modify `analyse_data` to use this class to load files from `data_dir`
 
 At the end of this exercise, the code in the `analyse_data()` function should look like:
 
@@ -286,6 +290,14 @@ def analyse_data(data_dir):
 - All tests should be green ✅
 - Commit your changes to `git`
 
+<details>
+<summary>🔍 Click here for hints! </summary>
+
+- Once the method `load_inflammation_data` is inside the class `CSVDataSource`, use `self.data_dir` inside the `glob` function call to collect the `data_file_paths`
+
+- `load_inflammation_data` is a function so it requires that you use the parenthesis at the end when calling it, like this: `load_inflammation_data()` 
+
+</details>
 
 ## 15 💪 Add an Additional DataSource
 
