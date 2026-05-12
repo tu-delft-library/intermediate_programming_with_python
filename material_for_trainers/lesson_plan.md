@@ -796,7 +796,7 @@ class Patient:
   # leave one line between def inside class (PEP8)
   def get_body_mass_index(self):      # self parameter is required
   """Compute body mass index: weight_in_kg / height_in_meters**2"""
-    return self.weight / self.height_mt**2   # use self to access properties of object
+    return self.weight / self.height**2   # use self to access properties of object
 
 ```
 We have the body mass index method, but we still don't know the `Patient`s weight and height. Let's modify the constructor to request this values:
