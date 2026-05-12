@@ -1041,10 +1041,11 @@ We can also add optional parameters by using a `'-'` or `'--'`
 then in the `main` function we can use this new argument.
 we want to create a figure for each csv file we read, so we need to generate outpufiles inside the loop:
 ```bash
-        if args.outdir is not None: 
-            outpath = os.path.join(args.outdir, outfile)
-        else:
+        outfile = os.path.basename(filename).replace('.csv','.png')
+        if args.outdir is None: 
             outpath = None
+        else:
+            outpath = os.path.join(args.outdir, outfile)
 
 ```
 then we can pass the variable `outpath` to `views.visualize()`
