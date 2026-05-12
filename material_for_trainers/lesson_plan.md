@@ -886,7 +886,11 @@ class CSVDataSource:
         data = map(models.load_csv, data_file_paths)
         return list(data)
 ```
-
+and inside `analyse_data`
+```bash
+    data_source = CSVDataSource(data_dir=data_dir)
+    data = data_source.load_inflammation_data()
+``` 
 
 ## 11:40 Use CSVDataSource Loading class in `main` - 10' - CATA
 
