@@ -98,7 +98,7 @@ What happens when you input a non-iterable value (e.g. a single integer)? Write 
 <details>
 <summary>🔍 Click here for hints! </summary>
 
-- The error type raised in this case is `IndexError`
+- The error raised in this case is not `TypeError`. Adapt the test to use the error type (e.g. `AxisError`, `IndexError`)
 </details>
 
 
