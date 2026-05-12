@@ -899,8 +899,8 @@ Let's now use this class in the main entry script:
 - Remember that `CSVDataSource` reads all files in a **directory**. So we need to create our `CSVDataSource` outside the loop that processes each `filename`
 - Add a new line that creates an instance of the new class `CSVDataSource`
 ```bash
-data_source = CSVDataSource(os.path.dirname(infiles[0]))    # pick dir from first file
-analyse_data(data_source)
+data_source = analysis.CSVDataSource(os.path.dirname(infiles[0]))    # pick dir from first file
+analysis.analyse_data(data_source)
 ```
 - We need to modify `analyse_data()` to recieve the `CSVDataSource` class instead of a string with the `data_dir`
 - As `data_source` is created outside this function, we can delete the line that creates an instance of `CSVDataSource` inside `analyse_data`
@@ -947,13 +947,13 @@ class JSONDataSource:
     data = map(models.load_json, data_file_paths)
     return list(data)
 ```
-In `inflammation-analysis.py`-> `  _, extension = os.path.splitext(in_files[0])` to split the file extension. Then use the variable `extension` in the `if .. elif` statement to choose the data source class
+In `inflammation-analysis.py`-> `  _, extension = os.path.splitext(infiles[0])` to split the file extension. Then use the variable `extension` in the `if .. elif` statement to choose the data source class
 ```bash
-    _, extension = os.path.splitext(in_files[0])
+    _, extension = os.path.splitext(infiles[0])
     if extension == '.json':
-        data_source = analysis.JSONDataSource(os.path.dirname(in_files[0]))
+        data_source = analysis.JSONDataSource(os.path.dirname(infiles[0]))
     elif extension == '.csv':
-        data_source = analysis.CSVDataSource(os.path.dirname(in_files[0]))
+        data_source = analysis.CSVDataSource(os.path.dirname(infiles[0]))
     else:
         raise ValueError(f'Unsupported data file format: {extension}')
     analysis.analyse_data(data_source)
