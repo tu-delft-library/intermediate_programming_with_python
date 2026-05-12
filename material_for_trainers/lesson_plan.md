@@ -158,7 +158,7 @@ python3 inflammation-analysis.py    # use python3 to run script in current direc
 python3 inflammation-analysis.py data/inflammation-01.csv # add input file
 ```
 
-##	10:25	-	💪 Creating Virtual Environments Using `venv` - 10' - RAUL 
+##	10:25	-	💪 Create a `venv` - 10' - RAUL 
 see `exercises.md`
 
 solution
@@ -312,7 +312,7 @@ Fix the test before continuing. Remember here is important to have input data fo
 test_result = np.array([3, 4])
 ```
 
-##	11:25	-	💪 Unit testing with Pytest	-	10'	-	CATA
+##	11:25	-	💪 Write some unit tests -	10'	-	CATA
 see `exercises.md`
 
 
@@ -370,7 +370,7 @@ def test_daily_max_string():
 ```
 - Git commit
 
-##	11:55	-	 💪 Data validation	-	10'	-	RAUL
+##	11:55	-	 💪 Add data validation unit tests	-	10'	-	RAUL
 see `exercises.md`
 
 
@@ -429,7 +429,7 @@ For example:
 Once the tests are passing, we can **commit!**
 
 
-##	12:15	-	 💪 Test parametrization	-	15'	-	RAUL
+##	12:15	-	 💪 Parametrize unit tests	-	15'	-	RAUL
 
 see `exercises.md`
 
@@ -973,7 +973,7 @@ Pure functions are easier to:
 - reuse as the caller only needs to understand what parameters to provide
 - test 
 
-##	13:45	-	💪 Separating Pure and Impure Code	-	20'	-	RAUL	
+##	13:45	-	💪 Refactoring To Use a Pure Function	-	20'	-	RAUL	
 
 see `exercise.md`
 
