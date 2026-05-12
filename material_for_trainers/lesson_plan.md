@@ -867,7 +867,7 @@ see `exercise.md`
 
 ---	
 
-in `compute_data.py`
+in `analysis.py`
 
 > *IMPORTANT* define the class at the top of the file, to follow python style 
 
