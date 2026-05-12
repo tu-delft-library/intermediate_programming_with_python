@@ -1060,6 +1060,7 @@ We can now add this parameter on the terminal like this:
 ```bash
 python inflammation-analysis.py data/inflammation-01.csv -outdir data
 ```
+Oh oh! this is broken! You are going to fix it in the next exercise!
 
 ##	14:15	-	 💪 Use optional input parameter to save figures	-	20'	-	CATA	
 
