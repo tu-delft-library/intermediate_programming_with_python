@@ -383,8 +383,6 @@ def test_compute_standard_deviation_by_day(data, expected_output):
 
 ## 17 💪 Use optional input parameter to save figures
 
-- Open `inflammation-analysis.py`
-- Add our new parameter `outpath` to the `views.visualize()` call
 - Open `views.py`
 - Modify `visualize` to receive another argument `outfile`
 - Use an `if ... else` statement to either save the figure to `outfile` or show the figure 
@@ -399,5 +397,6 @@ def test_compute_standard_deviation_by_day(data, expected_output):
 <details>
 <summary>🔍 Click here for hints! </summary>
 
+- Use `plt.savefig(outfile)` to save the file to disk
 - If the figure is still showing, move `fig.tight_layout()` inside the `else: .... plt.show()` block
 </details>
