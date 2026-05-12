@@ -530,7 +530,7 @@ def daily_mean(data: np.ndarray) -> np.ndarray:
    return np.mean(data, axis=0)
 ```
 ```bash
-def daily_mean(data: np.ndarray) -> np.ndarray:
+def daily_max(data: np.ndarray) -> np.ndarray:
    """Calculate the daily maximum of a 2D inflammation data array for each day.
 
    :param data: A 2D data array with inflammation data (each row contains measurements for a single patient across all days).
@@ -539,7 +539,7 @@ def daily_mean(data: np.ndarray) -> np.ndarray:
    return np.max(data, axis=0)
 ```
 ```bash
-def daily_mean(data: np.ndarray) -> np.ndarray:
+def daily_min(data: np.ndarray) -> np.ndarray:
    """Calculate the daily minimum of a 2D inflammation data array for each day.
 
    :param data: A 2D data array with inflammation data (each row contains measurements for a single patient across all days).
