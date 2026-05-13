@@ -1118,8 +1118,3 @@ You have practised the complete Day 2 workflow:
 ##	15:00	-	Give feedback about the course	-	5'	-	RAUL	
 
 ##	16:05 -	Good bye
-
-# [? for raul]
-- test windows commands -> will do on his computer
-- add to email -> this course is not for you if you use pytorch
-
