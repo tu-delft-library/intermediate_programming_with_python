@@ -387,10 +387,10 @@ def test_compute_standard_deviation_by_day(data, expected_output):
 - Modify `visualize` to receive another argument `outfile`
 - Use an `if ... else` statement to either save the figure to `outfile` or show the figure 
 - Run the script from the integrated terminal in different conditions:
- - single file, no `-outdir`
- - single file, `-outdir data`
- - with multiple input files, no `-outdir`
- - multiple input files,  `-outdir data`
+    - single file, no `-outdir`
+    - single file, `-outdir data`
+    - with multiple input files, no `-outdir`
+    - multiple input files,  `-outdir data`
 - Check that the `.png` files were saved in the `data` folder
 - Commit your changes to `git`
 
