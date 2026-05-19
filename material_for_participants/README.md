@@ -3,7 +3,7 @@
 Software repository in Github: https://github.com/carpentries-incubator/python-intermediate-inflammation
 
 # Solutions
-You can find the history of the live coding and exercises in [this repository](https://github.com/catactg/python-intermediate-inflammation/commits/main/)
+You can find the history of the live coding and exercises in [this repository](https://github.com/catactg/python-intermediate-inflammation-solved/commits/main/)
 starting from commit `Version control using IDE` with hash `f7ae20b`
 
 # Feedback
