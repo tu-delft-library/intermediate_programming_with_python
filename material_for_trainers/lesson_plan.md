@@ -168,7 +168,7 @@ mkdir sandbox
 cd sandbox/
 python3 -m venv venv
 ls -al
-source venv/bin/activate
+source venv/bin/activate # source venv/Scripts/activate for windows
 python3 -m pip install numpy
 python3 -m pip install requests
 python3 -m pip list
@@ -198,7 +198,7 @@ VSCode is light and general. Which means you need to install what you need.
 
 #### Adding a Python interpreter
 First we need to tell the IDE which version of Python we want to use. We do that in the terminal
-- Open `Terminal` > `New Terminal` and type `source venv/bin/activate`
+- Open `Terminal` > `New Terminal` and type `source venv/bin/activate` OR `source venv/Scripts/activate` for windows
 - Next step should not be necessary, but it's good to check
   - Go to `View > Command Palette`, or shortcut `CTRL-SHIFT-P` (Windows, Linux) or `CMD-SHIFT-P` (macOS)
   - Search for `Python: Select Interpreter` 
