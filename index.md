@@ -9,7 +9,7 @@ title: Readiness Quiz - Intermediate Programming
 
 - It is **not graded**
 
-- If the test felt too hard, we recommend taking the [Intermediate Programming with Python](TODO) at TU Delft
+- If the test felt too hard, we recommend taking the [Intermediate Programming with Python](https://www.tudelft.nl/library/data-management/trainingen/trainingen-voor-onderzoekers-en/intermediate-programming-with-python)) at TU Delft
 
  
 --- 
