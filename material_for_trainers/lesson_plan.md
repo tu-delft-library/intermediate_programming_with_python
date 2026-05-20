@@ -335,7 +335,7 @@ see `exercises.md`
 from inflammation.models import daily_mean, daily_min
 
 def test_daily_max_integers():
-    """Test that the min function works for an array of positive integers.
+    """Test that the max function works for an array of positive integers.
     """
 
     test_input = np.array([[1, 2],[3, 4],[5, 6]])
@@ -344,7 +344,7 @@ def test_daily_max_integers():
 ```
 modify `test_input` include negative values
 ```bash
-    """Test that the min function works for an array of positive and negative integers.
+    """Test that the max function works for an array of positive and negative integers.
     """
     test_input = np.array([[1, 2, -9], [-3, 4, -2], [-1, 5, -6]])
     test_result = np.array([1, 5, -2])              # update test_output accordingly
