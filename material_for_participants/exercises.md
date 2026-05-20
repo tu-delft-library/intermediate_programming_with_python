@@ -18,14 +18,14 @@ Using the integrated `Terminal` in VS code, answer these two questions:
 - Navigate to your `~/Desktop`
 - Make a new directory called `sandbox`
 - Navigate inside the `sandbox` directory
-- Create a new environment using `venv`
+- Create a new environment using called `purple` using `venv` command
 - Verify that the new environment is saved in the current directory
 - Activate it
 - Install the following packages: `numpy`, `requests`
 - Verify the packages were installed
 - Export the environment into a `requirements.txt`
 - View the contents of `requirements.txt`
-- Deactivate the `venv` to go back to system Python
+- Deactivate `purple` to go back to system Python
 - Navigate back to `~/Desktop/python-intermediate-inflammation`
 
 
