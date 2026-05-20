@@ -113,34 +113,34 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 How to create virtual environments
 ```bash
 pwd                         # ensure standing in python-intermediate-inflammation/
-python3 -m venv venv       # path convention venv
-ls -l                       # new  folder venv
-ls -l venv                  # bin for python interpreter (Scripts for Windows)
-ls venv/lib/pythonX.X/site-packages/    # independent python packages
-ls venv\Lib\site-packages               # on windows
-source venv/bin/activate                # activate (enter kitchen) 
-                                        # note name (venv) before $
-source venv/Scripts/activate            # for windows
-which python3                           # notice full path inside venv
+python3 -m venv my_env      # second argument is the name of the environment
+ls -l                       # new  folder my_env
+ls -l my_env                 # bin for python interpreter (Scripts for Windows)
+ls my_env/lib/pythonX.X/site-packages/    # independent python packages
+ls my_env\Lib\site-packages               # on windows
+source my_env/bin/activate                # activate (enter kitchen) 
+                                        # note name (my_env) before $
+source my_env/Scripts/activate            # for windows
+which python3                           # notice full path inside my_env
 deactivate                              # exit environment (exit kitchen)
 ```
-Let's now install packages. First, activate the local `venv` to continue working
+Let's now install packages. First, activate `my_env` to continue working
 ```bash
-source venv/bin/activate                # reactivate to continue working
+source my_env/bin/activate                # reactivate to continue working
 ```
->>**WHICH VENV?** Super important to check the right environment is activate. You want to see `(venv)` at the start of the command line. For example:
-`(venv) (base) COMPUTER_NAME:python-intermediate-inflammation USER_NAME$`
+>>**WHICH VENV?** Super important to check the right environment is activate. You want to see `(my_env)` at the start of the command line. For example:
+`(my_env) (base) COMPUTER_NAME:python-intermediate-inflammation USER_NAME$`
 
 >> You can confirm which python is activate by typing:
-`which python` and it should print something like: `/WORKING_DIR/python-intermediate-inflammation/venv/bin/python`
+`which python` and it should print something like: `/WORKING_DIR/python-intermediate-inflammation/my_env/bin/python`
 
-Once the local `venv` is active, we start installing packages:
+Once `my_env` is active, we start installing packages:
 ```bash
 python3 -m pip install numpy            # pip install
 python3 -m pip install matplotlib
 python3 -m pip install numpy>=1.2       # set minimum version of package 
 python3 -m pip show numpy               # display info of package
-python3 -m pip list                     # list all packages in venv
+python3 -m pip list                     # list all packages in my_env
 python3 -m pip uninstall matplotlib     # just demo. Answer n
 ```
 > **POTENTIAL WARNING** If you get this message: `WARNING: Cache entry deserialization failed, entry ignored` you can clean up your cache using `pip cache purge`
@@ -175,9 +175,9 @@ solution
 cd ~/Desktop/
 mkdir sandbox
 cd sandbox/
-python3 -m venv venv
+python3 -m venv purple
 ls -al
-source venv/bin/activate # source venv/Scripts/activate for windows
+source purple/bin/activate # source purple/Scripts/activate for windows
 python3 -m pip install numpy
 python3 -m pip install requests
 python3 -m pip list
@@ -207,11 +207,11 @@ VSCode is light and general. Which means you need to install what you need.
 
 #### Adding a Python interpreter
 First we need to tell the IDE which version of Python we want to use. We do that in the terminal
-- Open `Terminal` > `New Terminal` and type `source venv/bin/activate` OR `source venv/Scripts/activate` for windows
+- Open `Terminal` > `New Terminal` and type `source my_env/bin/activate` OR `source my_env/Scripts/activate` for windows
 - Next step should not be necessary, but it's good to check
   - Go to `View > Command Palette`, or shortcut `CTRL-SHIFT-P` (Windows, Linux) or `CMD-SHIFT-P` (macOS)
   - Search for `Python: Select Interpreter` 
-  - Select the one in `Workspace` -> the `venv` we set up earlier today
+  - Select the one in `Workspace` ->  environment `my_env` we set up earlier today
 - Open `inflammation-analysis.py` in code editor
   - We can check that the *correct* python interpreter is installed in the lower right corner. 
 - Notice the Python syntax highlighting: comments, special language words (`import`, `from`, `if`), modules, function names, strings.
@@ -236,9 +236,9 @@ python3 -m pip freeze --exclude-editable > requirements.txt # remember the --exc
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/13-ides.html#version-control)
 
 In the `Version control` view we see a little blue notification. It means `git` has found a change
-  - Let's verify that files inside `venv` are not tracked by `git`
+  - Let's verify that files inside `my_env` are not tracked by `git`
   - `venv` automatically adds a `.gitignore` file
-  > **explicitly ask** if `venv` is not ignored. If so ask helpers add `venv/*` to `.gitignore`
+  > **EXPLICITLY ASK** if the files inside `my_env` are not ignored. If so ask helpers add `my_env/*` to `.gitignore`
   - `requirements.txt` is untracked (`U`)
   - click on `+` to stage changes (add new file)
   - Write commit message and click on `Commit`
