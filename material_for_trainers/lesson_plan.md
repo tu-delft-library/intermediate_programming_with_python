@@ -124,9 +124,18 @@ source venv/Scripts/activate            # for windows
 which python3                           # notice full path inside venv
 deactivate                              # exit environment (exit kitchen)
 ```
-How to install packages
+Let's now install packages. First, activate the local `venv` to continue working
 ```bash
 source venv/bin/activate                # reactivate to continue working
+```
+>>**WHICH VENV?** Super important to check the right environment is activate. You want to see `(venv)` at the start of the command line. For example:
+`(venv) (base) COMPUTER_NAME:python-intermediate-inflammation USER_NAME$`
+
+>> You can confirm which python is activate by typing:
+`which python` and it should print something like: `/WORKING_DIR/python-intermediate-inflammation/venv/bin/python`
+
+Once the local `venv` is active, we start installing packages:
+```bash
 python3 -m pip install numpy            # pip install
 python3 -m pip install matplotlib
 python3 -m pip install numpy>=1.2       # set minimum version of package 
