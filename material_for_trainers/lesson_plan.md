@@ -508,6 +508,15 @@ Let's now talk about documentation of functions.
 - The docstring of a function is return when using the `help` function.
 - Docstrings can also be placed at the top of a module. For example, at the top of `modules.py` we see a docstring with the explanation of what the module does.
 
+Apart from `docstrings`, a very useful documentation practice is using `typehints`. They are a way to communicate what types are expected as input and what is the type of the return values. 
+
+- Open `models.py`
+- Go to `def daily_mean`
+- Add the type hints by using a colon `:` and the type after each variable name:
+```def daily_mean(data: np.ndarray) -> np.ndarray:```
+
+Important to note that the types are not enforced by python. They are a `hint` for the user to know what type of parameter to pass. It becomes part of the documentation.
+
 Let's get ready for the next exercise:
 - Open `models.py`
 - Delete the `docstring` of `daily_mean`
@@ -516,10 +525,7 @@ Let's get ready for the next exercise:
 - Press `ENTER` and a template of `doscstring` will appear
 
 
-Finally, a very useful tool are `typehints`. They are a way to communicate what are the types expected as input and what is the type of the return values. Type hints are set by using a colon `:` and the type after each variable name. Like this
 
-```def daily_mean(data: np.ndarray) -> np.ndarray:```
-Important to note that the types are not enforced by python. They are a `hint` for the user to know what type of parameter to pass. It becomes part of the documentation.
 
 
 ##	14:10	-	💪 Fix the Docstrings	-	15'	-	CATA
@@ -558,7 +564,7 @@ def daily_min(data: np.ndarray) -> np.ndarray:
 ```
 ##	14:25	-	Break	-	10'			
 
-##	14:35	-	Debugging in the IDE	-	15'	-	RAUL
+##	14:35	-	Debugging in the IDE	-	15'	-	CATA
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/24-diagnosing-issues-improving-robustness.html#debugging-in-an-ide)
 
 A bug is an expected behavior of code. Debugging means "finding and fixing a bug". 
@@ -608,10 +614,10 @@ Let's `Step into` which takes us to the function `daily_mean`:
 - And `Continue` executing and note how the variables change in each iteration
 
 ##	14:50	-	Break	-	10'	
-##	15:00	-	 💪 PRACTICAL: Catching bugs	-	45'	-	RAUL
+##	15:00	-	 💪 PRACTICAL: Catching bugs	-	45'	-	CATA
 see `PRACTICAL_unit_testing_debugging.md`
 
-##	15:45	-	Review PRACTICAL with the group	-	10'	-	RAUL
+##	15:45	-	Review PRACTICAL with the group	-	10'	-	RAUL/CATA
 
 - Discuss solutions and common issues
 - Q&a
