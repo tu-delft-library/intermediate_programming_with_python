@@ -53,7 +53,7 @@ Using the integrated `Terminal` in VS code, answer these two questions:
 
 - Use `python3 -m pip list` to see the list of packages in the current virtual environment
 - Use `cat a_file.txt` to see the contents of the `a_file.txt`
-- Use `python3 -m pip freeze --exclude-editable > requirements.txt` to generate a new `requirements.txt` file
+- Use `python3 -m pip freeze > requirements.txt` to generate a new `requirements.txt` file
 </details>
 
 ## 4 💪 Write some unit tests 
