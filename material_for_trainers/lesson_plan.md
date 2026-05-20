@@ -65,7 +65,7 @@ An Integrated Development Environments (IDEs) is an application with tools to he
 
 - Click on `Terminal` -> `New Terminal`
 - This `Terminal` works the same as external terminals (not in VS Code)
->>** WHICH SHELL?** VSCode can have any shell as default (WindowsPowerShell, GitBash, Bash, etc). Make sure to select the type of sheel to `bash` in Mac/Linux or `git bash` in Windows
+>>**WHICH SHELL?** VSCode can have any shell as default (WindowsPowerShell, GitBash, Bash, etc). Make sure to select the type of shell to `bash` in Mac/Linux or `git bash` in Windows
 - The default working directory is the directory of the project you opened in VS Code using `Open Folder`
 ```bash
 pwd                 # confirm current workind dir
