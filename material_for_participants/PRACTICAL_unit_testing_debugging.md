@@ -28,8 +28,9 @@ def test_daily_min(test_input, test_result):
     npt.assert_array_equal(daily_min(test_input), test_result)
 
 ```
-Remember to import the function `daily_min` at the top of the `test_models.py` file
+This unit test requires importing `pytest` to use `parametrize`. Also, remember to import the function `daily_min` at the top of the `test_models.py` file
 ```bash
+import pytest       ## <--- if you haven't already
 from inflammation.models import daily_mean, daily_max, daily_min   ## <--- add daily_min
 ```
 
@@ -135,7 +136,7 @@ Compare the two results. You should be able to see clearly that `np.min(data, ax
 
 In the `CALL STACK` click on `test_daily_min` to verify what is the expected value of `test_result`. Then click again on `daily_min` and confirm that `np.min(data, axis=0)` gives the expected value.
 
-
+End the debugger session with ⏹ Stop or `Shift+F5` 
 
 
 ## Part 5 — Fix the Bug and Re-run the Suite
@@ -195,10 +196,15 @@ def test_daily_max_empty_array():
         daily_max([])
 ```
 
+Save the file, then go back to the Testing panel and click Run All Tests again.
+
+All tests should be green. ✅
+
+## Part 8 — Data Validation with `NaN`
 Another very useful test uses `NaN` values in the input array. The current behavior of the function `daily_max` is to select `np.nan` as the maximum value. Add the test below to the `test_models.py` file.
 
-```bash
-`def test_daily_max_nan_propagation():
+```python
+def test_daily_max_nan_propagation():
     data = np.array([[1, np.nan], [3, 4]])
     result = daily_max(data)
     assert np.isnan(result[1])  # documents current behavior
@@ -212,7 +218,7 @@ Run the full test suite and confirm everything is green ✅
 > 🔖 **Commit your work to git**
 
 
-## Part 8 — Check Code Style
+## Part 9 — Check Code Style
 
 ### Ruff linter
 
@@ -239,7 +245,7 @@ Run the full test suite one more time to confirm that your style fixes have not 
 
 ## 🚀  Optional Challenge
 
-Do Part 6, 7, and 8 for `daily_max`
+Do Part 6, 7, 8 and 9 for `daily_max`
 
 ## Key Points
 
