@@ -660,6 +660,7 @@ see `exercises.md`
 - Go to `💪 Simulate a contribution from a colleague`
 - Follow instructions to generate module with code
 
+>>**DIVERGENCE!!!** Materials in the carpentries require switching to a different branch with script `compute_data.py` in it to do the following sections. Here, instead of switching, we build up on the `analysis.py` script from this exercise.
 
 ##	9:30	-	Refactoring	-	10'	-	RAUL	
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/34-code-refactoring.html#introduction)
