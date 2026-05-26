@@ -15,7 +15,7 @@ Using the integrated `Terminal` in VS code, answer these two questions:
 
 ## 2 💪 Create a `venv`
 - Deactivate your current `venv` to go back to system Python
-- Navigate to your `~/Desktop`
+- Navigate to your `~/Documents`
 - Make a new directory called `sandbox`
 - Navigate inside the `sandbox` directory
 - Create a new environment using called `purple` using `venv` command
