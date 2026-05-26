@@ -167,6 +167,7 @@ What happens when you input a non-iterable value (e.g. a single integer)? Write 
 import glob
 import os
 import numpy as np
+import argparse
 
 from inflammation import models, views
 
@@ -193,6 +194,24 @@ def analyse_data(data_dir):
     }
     views.visualize(graph_data)
 
+if __name__ == '__main__':
+    # Initialize the parser
+    parser = argparse.ArgumentParser(
+        description="Calculate standard deviation by day between datasets."
+    )
+    
+    # Add the data_dir argument
+    parser.add_argument(
+        'data_dir', 
+        type=str, 
+        help="Path to the directory containing the inflammation CSV files."
+    )
+    
+    # Parse the arguments from the command line
+    args = parser.parse_args()
+    
+    # Run the function using the provided argument
+    analyse_data(args.data_dir)
 ```
 - Save the file and commit your changes to `git`
 
