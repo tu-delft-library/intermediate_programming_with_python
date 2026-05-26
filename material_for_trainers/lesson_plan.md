@@ -68,9 +68,11 @@ An Integrated Development Environments (IDEs) is an application with tools to he
 >>**WHICH SHELL?** VSCode can have any shell as default (WindowsPowerShell, GitBash, Bash, etc). Make sure to select the type of shell to `bash` in Mac/Linux or `git bash` in Windows
 - The default working directory is the directory of the project you opened in VS Code using `Open Folder`
 ```bash
-pwd                 # confirm current workind dir
-/Users/USERNAME/Desktop/python-intermediate-inflammation
+pwd                 # confirm current working dir
+/Users/USERNAME/Documents/python-intermediate-inflammation
 ```
+>>**Prefer Documents over Desktop** TUD-managed systems connected to the campus network (eduroam,dastud,vpn) mount the Desktop to Onedrive and change the location. Furthermore, the network mounts modify some read/write/execute permissions. Documents seemed to work better than Desktop in that regard, particularly for the venv steps
+
 - Let's explore the contents of our project from the terminal as well. 
 
 ```bash
@@ -112,59 +114,65 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 
 How to create virtual environments
 ```bash
-pwd                         # ensure standing in python-intermediate-inflammation/
-python3 -m venv my_env      # second argument is the name of the environment
-ls -l                       # new  folder my_env
-ls -l my_env                 # bin for python interpreter (Scripts for Windows)
+pwd                                       # ensure standing in python-intermediate-inflammation/
+python -m venv my_env                     # second argument is the name of the environment
+ls -l                                     # new  folder my_env
+ls -l my_env                              # bin for python interpreter (Scripts for Windows)
 ls my_env/lib/pythonX.X/site-packages/    # independent python packages
 ls my_env\Lib\site-packages               # on windows
 source my_env/bin/activate                # activate (enter kitchen) 
-                                        # note name (my_env) before $
+                                          # note name (my_env) before $
 source my_env/Scripts/activate            # for windows
-which python3                           # notice full path inside my_env
-deactivate                              # exit environment (exit kitchen)
+which python                              # notice full path inside my_env
+deactivate                                # exit environment (exit kitchen)
 ```
 Let's now install packages. First, activate `my_env` to continue working
 ```bash
 source my_env/bin/activate                # reactivate to continue working
 ```
->>**WHICH VENV?** Super important to check the right environment is activate. You want to see `(my_env)` at the start of the command line. For example:
+>>**WHICH PYTHON?** A system may have different python distros with slightly different aliases. In my system (Raúl) `python3` overrides everything and does not allow loading `venv`-generated environments. `python` and `python.exe` point to different writtable locations so I use `python` only.
+
+>>**WHICH VENV?** Super important to check the right environment is active. You want to see `(my_env)` at the start of the command line. For example:
 `(my_env) (base) COMPUTER_NAME:python-intermediate-inflammation USER_NAME$`
 
 >> You can confirm which python is activate by typing:
 `which python` and it should print something like: `/WORKING_DIR/python-intermediate-inflammation/my_env/bin/python`
 
+>> Point VScode to the enviroment. Might need to open `inflammation-analysis.py` in the editor for the selection to appear in the bottom left. Then select the environment
+
 Once `my_env` is active, we start installing packages:
 ```bash
-python3 -m pip install numpy            # pip install
-python3 -m pip install matplotlib
-python3 -m pip install numpy>=1.2       # set minimum version of package 
-python3 -m pip show numpy               # display info of package
-python3 -m pip list                     # list all packages in my_env
-python3 -m pip uninstall matplotlib     # just demo. Answer n
+python -m pip list                      # list all packages in my_env; only pip
+python -m pip install numpy             # pip install
+python -m pip list                      # list all packages in my_env; now numpy
+python -m pip install matplotlib
+python -m pip install numpy>=1.2        # set minimum version of package 
+python -m pip show numpy                # display info of package
+python -m pip list                      # list all packages in my_env
+#python -m pip uninstall matplotlib     # just demo
 ```
 > **POTENTIAL WARNING** If you get this message: `WARNING: Cache entry deserialization failed, entry ignored` you can clean up your cache using `pip cache purge`
 
 How to install our local project as a package. Allows to call the Python code we are writing from another location.
 ```bash
-python3 -m pip install --editable .     # --editable change dynamically as we develop, . current dir
-python3 -m pip install --upgrade pip    # if above fails -> update pip          
-python3 -m pip list                     # note our package on the list
+python -m pip install --editable .     # --editable change dynamically as we develop, . current dir
+python -m pip install --upgrade pip    # if above fails -> update pip          
+python -m pip list                     # note our package on the list
 ```
 How to replicate an environment. For your colleagues (and future self) to be able to reproduce your environment with all its dependencies. 
 ```bash
-python3 -m pip freeze --exclude-editable > requirements.txt    # produce list of packages, exclude our package, save into a txt file
+python -m pip freeze --exclude-editable > requirements.txt    # produce list of packages, exclude our package, save into a txt file
 cat requirements.txt                # see the list of packages with versions!
 ```
 The `requirements.txt` file can be committed to version control and used later to recreate the environment like this:
 ```bash
-python3 -m pip install -r requirements.txt --editable .
+python -m pip install -r requirements.txt --editable .
 ```
 How to run Python scripts from the command line
 ```bash
 pwd                         # ensure standing in python-intermediate-inflammation/ 
-python3 inflammation-analysis.py    # use python3 to run script in current directory  
-python3 inflammation-analysis.py data/inflammation-01.csv # add input file
+python inflammation-analysis.py    # use python to run script in current directory  
+python inflammation-analysis.py data/inflammation-01.csv # add input file
 ```
 
 ##	10:25	-	💪 Create a `venv` - 10' - RAUL 
@@ -172,19 +180,19 @@ see `exercises.md`
 
 solution
 ```bash
-cd ~/Desktop/
+cd ..
 mkdir sandbox
 cd sandbox/
-python3 -m venv purple
+python -m venv purple
 ls -al
 source purple/bin/activate # source purple/Scripts/activate for windows
-python3 -m pip install numpy
-python3 -m pip install requests
-python3 -m pip list
-python3 -m pip freeze > requirements.txt
+python -m pip install numpy
+python -m pip install requests
+python -m pip list
+python -m pip freeze > requirements.txt
 cat requirements.txt 
 deactivate
-cd ~/Desktop/python-intermediate-inflammation/
+cd ../python-intermediate-inflammation/
 ```
 
 ##	10:35	-	Break	-	10'	
@@ -219,17 +227,17 @@ First we need to tell the IDE which version of Python we want to use. We do that
 #### Adding external dependency
 To add an external dependency (an extra package) we use the integrated terminal
 - Go back to the terminal
-- Type `python3 -m pip install pytest`
+- Type `python -m pip install pytest`
 
 ##	10:55	-	💪 Requirements file - 5' - CATA 
 see `exercises.md`
 
 solution
 ```bash
-python3 -m pip list       # see list of packages
-cat requirements.txt      # see contents of requirements.txt -> pytest is missing
-python3 -m pip freeze > requirements.txt  # regenerate requirements.txt
-python3 -m pip freeze --exclude-editable > requirements.txt # remember the --exclude-editable flag for your current project
+python -m pip list                       # see list of packages
+cat requirements.txt                     # see contents of requirements.txt -> pytest is missing
+python -m pip freeze > requirements.txt  # regenerate requirements.txt
+python -m pip freeze --exclude-editable > requirements.txt # remember the --exclude-editable flag for your current project
 ```
 
 ##	11:00	-	Version control using IDE - 10' - CATA 
@@ -278,6 +286,7 @@ Let's run the tests using `pytest`
 ```bash
 pytest tests/test_models.py  # run one file (same as python3 -m pytest tests/test_models.py)
 ```
+>>**CAREFUL WITH PYTEST INVOCATION** Check callout in https://carpentries-incubator.github.io/python-intermediate-development/21-automatically-testing-software.html#installing-pytest . Prefer `python3 -m pytest` and Not `pytest` to avoid `ModuleNotFoundError`
 
 Now, what happens when the test we wrote is not working properly? Let's deliberately break this test
 ```bash
@@ -405,14 +414,14 @@ Let's take a look at our tests so far. They seem to have a lot of the same lines
 
 We can make this code more efficient by *parametrizing* the tests with multiple test inputs. We add a *python decorator* right above the test function we want to use.
 ```bash
-@pytest.mark.parametrize(                       # python decorator
-        "test_input, test_result",                # name of arguments
+@pytest.mark.parametrize(                           # python decorator
+        "test_input, test_result",                  # name of arguments
         [
             ([ [0, 0], [0, 0], [0, 0] ], [0, 0]),   # values of arguments (copy from existing tests below)
             ([ [1, 2], [3, 4], [5, 6] ], [3, 4]),
         ])
 
-def test_daily_mean(test_input, test_result): # add input arguments from the parametrize decorator
+def test_daily_mean(test_input, test_result):       # add input arguments from the parametrize decorator
     """Test that mean function works for an array of zeros and positive integers."""
     npt.assert_array_equal(daily_mean(test_input), test_result)
 ```
@@ -651,6 +660,7 @@ see `exercises.md`
 - Go to `💪 Simulate a contribution from a colleague`
 - Follow instructions to generate module with code
 
+>>**DIVERGENCE!!!** Materials in the carpentries require switching to a different branch with script `compute_data.py` in it to do the following sections. Here, instead of switching, we build up on the `analysis.py` script from this exercise.
 
 ##	9:30	-	Refactoring	-	10'	-	RAUL	
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/34-code-refactoring.html#introduction)
