@@ -662,6 +662,8 @@ see `exercises.md`
 
 >>**DIVERGENCE!!!** Materials in the carpentries require switching to a different branch with script `compute_data.py` in it to do the following sections. Here, instead of switching, we build up on the `analysis.py` script from this exercise.
 
+>>**ENHANCEMENT!!!** Added argparse so it can run with `python inflammation/analysis.py data/` or `python inflammation/analysis.py -h`
+
 ##	9:30	-	Refactoring	-	10'	-	RAUL	
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/34-code-refactoring.html#introduction)
 
@@ -686,7 +688,7 @@ see `exercise.md`
 def analyse_data(data_dir):
 ...
     daily_standard_deviation = np.std(means_by_day_matrix, axis=0)
-    return daily_standard_deviation
+    print(daily_standard_deviation)
 ```
 - see what the calculated result value is, and assert that it is the same as the expected value
 
