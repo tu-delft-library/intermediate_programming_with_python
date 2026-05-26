@@ -748,10 +748,10 @@ see `exercise.md`
 The new function `load_inflammation_data()` that reads all the inflammation data into the format needed for the analysis could look something like:
 
 ```bash
-def load_inflammation_data(dir_path):
-    data_file_paths = glob.glob(os.path.join(dir_path, 'inflammation*.csv'))
+def load_inflammation_data(data_dir):
+    data_file_paths = glob.glob(os.path.join(data_dir, 'inflammation*.csv'))
     if len(data_file_paths) == 0:
-        raise ValueError(f"No inflammation CSV files found in path {dir_path}")
+        raise ValueError(f"No inflammation CSV files found in path {data_dir}")
     data = map(models.load_csv, data_file_paths) # Load inflammation data from each CSV file
     return list(data) # Return the list of 2D NumPy arrays with inflammation data
 ```
