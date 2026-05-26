@@ -699,6 +699,7 @@ def analyse_data(data_dir):
 ...
     daily_standard_deviation = np.std(means_by_day_matrix, axis=0)
     print(daily_standard_deviation)
+    return daily_standard_deviation
 ```
 - see what the calculated result value is, and assert that it is the same as the expected value
 
