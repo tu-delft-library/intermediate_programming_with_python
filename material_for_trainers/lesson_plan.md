@@ -4,7 +4,7 @@
 - Coffee / Tea
 
 ##	9:05	-	Welcome	-	5'	-	RAUL
-
+> **pilot** 3 people arrived late
 - ✅ Roll call + 🤝 Code of Conduct
 - 🙋 Getting help (🆘 red  ✅ green stickers)
 
@@ -26,9 +26,9 @@ Let's confirm installation:
 Hi USERNAME! You've successfully authenticated, but GitHub does not provide shell access.
 ```
 - You see a folder named `python-intermediate-inflammation` in your `Desktop` (or another folder of your choice that you know how to find :))
-
+> **pilot** terminal installation check was not done.
 ##	9:25	-	A short icebreaker	-	5'	-	RAUL
-
+> **pilot** RAUL did not use the prepared icebreaker. Instead asked him about what PhD year are you.
 
 ##	9:30	-	Introduction	-	15'	-	RAUL
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/10-section1-intro.html) 
@@ -42,6 +42,7 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 - How this course fits into a researcher's workflow
 - Why project structure matters from day one
 - Setting the scene
+> **pilot** The plots about AI are barely visible. Make them bigger/more contrast
 
 ##	9:45	-	Our project structure using VS Code	-	10'	-	RAUL
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/13-ides.html)
@@ -62,6 +63,7 @@ An Integrated Development Environments (IDEs) is an application with tools to he
         - inflammation -> has more `.py` scripts
 
 #### Integrated TERMINAL
+> **pilot** started around 9:30 due to no installation issues
 
 - Click on `Terminal` -> `New Terminal`
 - This `Terminal` works the same as external terminals (not in VS Code)
@@ -89,6 +91,7 @@ Solution
 wc -l data/inflammation-01.csv      # 60 lines
 wc -l data/small-01.csv             # 2 lines
 ```
+> **pilot** one person that arrived late did not clone the repo but we managed to do it during these 5mins.
 
 ##	10:00	-	Virtual Environments For Software Development	-	10'	-	RAUL
 🎦 Introduce Virtual environments with the kitchen analogy using [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
@@ -174,6 +177,7 @@ pwd                         # ensure standing in python-intermediate-inflammatio
 python inflammation-analysis.py    # use python to run script in current directory  
 python inflammation-analysis.py data/inflammation-01.csv # add input file
 ```
+> **pilot** this one took a while becuase of installation issues. Some problems becuase of working on one drive. So maybe better to spend some time at the start to make sure everyone is working in C:
 
 ##	10:25	-	💪 Create a `venv` - 10' - RAUL 
 see `exercises.md`
@@ -364,7 +368,7 @@ modify `test_input` include negative values
 
 ##	11:35	-	Break	-	10'
 
-
+> **pilot** raul democratically force an early lunch. Cata hopes that cognitive load for afternoon remains ok. Also we were running 15mins late due to difficulties with venv
 ##	11:45	-	Data validation	-	10'	-	RAUL
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/21-automatically-testing-software.html#what-about-testing-for-errors)
 
@@ -413,6 +417,7 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 Let's take a look at our tests so far. They seem to have a lot of the same lines of code. The main difference is the input/result arrays.
 
 We can make this code more efficient by *parametrizing* the tests with multiple test inputs. We add a *python decorator* right above the test function we want to use.
+> **IMPORTANT** explain how the decorator works. That it only applies the parametrization to the function right below it
 ```bash
 @pytest.mark.parametrize(                           # python decorator
         "test_input, test_result",                  # name of arguments
@@ -572,7 +577,7 @@ def daily_min(data: np.ndarray) -> np.ndarray:
    return np.min(data, axis=0)
 ```
 ##	14:25	-	Break	-	10'			
-
+> **pilot** we did not do this break
 ##	14:35	-	Debugging in the IDE	-	15'	-	CATA
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/24-diagnosing-issues-improving-robustness.html#debugging-in-an-ide)
 
@@ -590,6 +595,7 @@ Let's configure pytest in VSCode.
     - Note that one test is deliberately broken. So ignore the `pytest discovery error` message
 - Run all the tests clicking the ▶️ icon next to the top entry `tests`
 - You can run an individual test clicking the ▶️ icon next to the specific test case
+> **IMPORTANT** Go slow when demoing this.
 
 Now let's ask the debugger to stop at a specific point. We do this by adding a `breakpoint 🔴` in the **gutter** (the narrow strip just to the left of the line numbers):
 - Add a break point in `test_daily_mean` on the line where `npt.assert_array_equal` is executed (e.g. line 19)
@@ -625,9 +631,10 @@ Let's `Step into` which takes us to the function `daily_mean`:
 ##	14:50	-	Break	-	10'	
 ##	15:00	-	 💪 PRACTICAL: Catching bugs	-	45'	-	CATA
 see `PRACTICAL_unit_testing_debugging.md`
+> **pilot** not many questions
 
 ##	15:45	-	Review PRACTICAL with the group	-	10'	-	RAUL/CATA
-
+> **pilot** where to put the breakpoint? Step into vs step over
 - Discuss solutions and common issues
 - Q&a
 
@@ -635,12 +642,15 @@ see `PRACTICAL_unit_testing_debugging.md`
 
 - Recap: virtual environments, testing, debugging, style
 - Questions
+- What to expect of tomorrow: refactoring, abstractions, classes, the main function, command line arguments
 
 
-##	16:10	-	Good bye			
+##	16:10	-	Good bye	
+> **pilot** end time 15:50		
 
 # 🌞 DAY 2 🌞				
 ##	9:00	-	Coffee, tea	-	10'	-	RAUL
+> **pilot** people arrived a bit later today
 
 ##	9:10	-	Welcome	-	5'	-	RAUL
 
@@ -1143,3 +1153,6 @@ You have practised the complete Day 2 workflow:
 ##	15:00	-	Give feedback about the course	-	5'	-	RAUL	
 
 ##	16:05 -	Good bye
+
+
+> **follow up** share the slides? or add links to the README and send email
