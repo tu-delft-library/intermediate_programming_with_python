@@ -672,6 +672,8 @@ see `exercises.md`
 
 >>**DIVERGENCE!!!** Materials in the carpentries require switching to a different branch with script `compute_data.py` in it to do the following sections. Here, instead of switching, we build up on the `analysis.py` script from this exercise.
 
+>>**ENHANCEMENT!!!** Added argparse so it can run with `python inflammation/analysis.py data/` or `python inflammation/analysis.py -h`
+
 ##	9:30	-	Refactoring	-	10'	-	RAUL	
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/34-code-refactoring.html#introduction)
 
@@ -696,6 +698,7 @@ see `exercise.md`
 def analyse_data(data_dir):
 ...
     daily_standard_deviation = np.std(means_by_day_matrix, axis=0)
+    print(daily_standard_deviation)
     return daily_standard_deviation
 ```
 - see what the calculated result value is, and assert that it is the same as the expected value
@@ -755,10 +758,10 @@ see `exercise.md`
 The new function `load_inflammation_data()` that reads all the inflammation data into the format needed for the analysis could look something like:
 
 ```bash
-def load_inflammation_data(dir_path):
-    data_file_paths = glob.glob(os.path.join(dir_path, 'inflammation*.csv'))
+def load_inflammation_data(data_dir):
+    data_file_paths = glob.glob(os.path.join(data_dir, 'inflammation*.csv'))
     if len(data_file_paths) == 0:
-        raise ValueError(f"No inflammation CSV files found in path {dir_path}")
+        raise ValueError(f"No inflammation CSV files found in path {data_dir}")
     data = map(models.load_csv, data_file_paths) # Load inflammation data from each CSV file
     return list(data) # Return the list of 2D NumPy arrays with inflammation data
 ```
