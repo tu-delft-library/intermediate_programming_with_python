@@ -1,14 +1,14 @@
 # 🌞 DAY 1 🌞
 
-##	9:00	-	Land	-	5'	-	RAUL
+##	9:00	-	Land	-	5'
 - Coffee / Tea
 
-##	9:05	-	Welcome	-	5'	-	RAUL
+##	9:05	-	Welcome	-	5'
 
 - ✅ Roll call + 🤝 Code of Conduct
 - 🙋 Getting help (🆘 red  ✅ green stickers)
 
-##	9:10	-	Installation check	-	15'	-	RAUL
+##	9:10	-	Installation check	-	15'
 
 🖥 Tools that should be installed:
 - Python
@@ -27,9 +27,9 @@ Hi USERNAME! You've successfully authenticated, but GitHub does not provide shel
 ```
 - You see a folder named `python-intermediate-inflammation` in your `Desktop` (or another folder of your choice that you know how to find :))
 
-##	9:25	-	A short icebreaker	-	5'	-	RAUL
+##	9:25	-	A short icebreaker	-	5'
 
-##	9:30	-	Introduction	-	15'	-	RAUL
+##	9:30	-	Introduction	-	15'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/10-section1-intro.html) 
 
 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
@@ -43,7 +43,7 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 - Setting the scene
 
 
-##	9:45	-	Our project structure using VS Code	-	10'	-	RAUL
+##	9:45	-	Our project structure using VS Code	-	10'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/13-ides.html)
 
 #### Starting with a software project
@@ -81,7 +81,7 @@ ls tests
 ls inflammation/
 ```
 
-##	9:55	-	2 💪 Have a peek at the data - 5' - RAUL
+##	9:55	-	2 💪 Have a peek at the data - 5'
 see `exercises.md`
 
 Solution
@@ -90,7 +90,7 @@ wc -l data/inflammation-01.csv      # 60 lines
 wc -l data/small-01.csv             # 2 lines
 ```
 
-##	10:00	-	Virtual Environments For Software Development	-	10'	-	RAUL
+##	10:00	-	Virtual Environments For Software Development	-	10'
 🎦 Introduce Virtual environments with the kitchen analogy using [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
 
 - Double click on the file `inflammation/views.py` using the `File Explorer`
@@ -108,7 +108,7 @@ wc -l data/small-01.csv             # 2 lines
 
 - There many options for package managers and venv managers. Some of them (like `conda`) do both roles together. In this course we use `pip` as package manager and `venv` as virtual environment manager
 
-##	10:10	-	Creating Virtual Environments Using `venv`	-	15'	-	RAUL
+##	10:10	-	Creating Virtual Environments Using `venv`	-	15'
 
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/12-virtual-environments.html)
 
@@ -175,7 +175,7 @@ python inflammation-analysis.py    # use python to run script in current directo
 python inflammation-analysis.py data/inflammation-01.csv # add input file
 ```
 
-##	10:25	-	💪 Create a `venv` - 10' - RAUL 
+##	10:25	-	💪 Create a `venv` - 10' 
 see `exercises.md`
 
 solution
@@ -197,7 +197,7 @@ cd ../python-intermediate-inflammation/
 
 ##	10:35	-	Break	-	10'	
 
-##	10:45	-	VSCode orientation	-	10'	-	CATA
+##	10:45	-	VSCode orientation	-	10'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/13-ides.html)
 
   
@@ -229,7 +229,7 @@ To add an external dependency (an extra package) we use the integrated terminal
 - Go back to the terminal
 - Type `python -m pip install pytest`
 
-##	10:55	-	💪 Requirements file - 5' - CATA 
+##	10:55	-	💪 Requirements file - 5' 
 see `exercises.md`
 
 solution
@@ -240,7 +240,7 @@ python -m pip freeze > requirements.txt  # regenerate requirements.txt
 python -m pip freeze --exclude-editable > requirements.txt # remember the --exclude-editable flag for your current project
 ```
 
-##	11:00	-	Version control using IDE - 10' - CATA 
+##	11:00	-	Version control using IDE - 10' 
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/13-ides.html#version-control)
 
 In the `Version control` view we see a little blue notification. It means `git` has found a change
@@ -253,7 +253,7 @@ In the `Version control` view we see a little blue notification. It means `git` 
   - Notice update on log history in the `GRAPH` below
   - Finally, we can `Sync Changes` which means `Pull + Push`.
   
-  ##	11:10	-	Why testing matters	-	5'	-	CATA
+  ##	11:10	-	Why testing matters	-	5'
 
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/21-automatically-testing-software.html#what-is-software-testing)
 
@@ -269,7 +269,7 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
   - regression tests: whole pipelines. Ensures output has not changed. Normally requires input data.
 
 
-##	11:15	-	Unit testing with Pytest	-	10'	-	CATA
+##	11:15	-	Unit testing with Pytest	-	10'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/21-automatically-testing-software.html#using-a-testing-framework)
 
 Let's open the file `inflammation/models.py`. Note function `daily_mean()` which calculates mean *vertically* across the data.
@@ -330,7 +330,7 @@ Fix the test before continuing. Remember here is important to have input data fo
 test_result = np.array([3, 4])
 ```
 
-##	11:25	-	💪 Write some unit tests -	10'	-	CATA
+##	11:25	-	💪 Write some unit tests -	10'
 see `exercises.md`
 
 
@@ -364,7 +364,7 @@ modify `test_input` include negative values
 
 ##	11:35	-	Break	-	10'
 
-##	11:45	-	Data validation	-	10'	-	RAUL
+##	11:45	-	Data validation	-	10'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/21-automatically-testing-software.html#what-about-testing-for-errors)
 
 Testing the behaviour of inputs, both valid and invalid, is a really good idea and is known as *data validation*.
@@ -387,7 +387,7 @@ def test_daily_max_string():
 ```
 - Git commit
 
-##	11:55	-	 💪 Add data validation unit tests	-	10'	-	RAUL
+##	11:55	-	 💪 Add data validation unit tests	-	10'
 see `exercises.md`
 
 
@@ -406,7 +406,7 @@ def test_daily_mean_string():
 
 > **Remember** Git commit!
 
-##	12:05	-	Test parametrization	-	10'	-	RAUL
+##	12:05	-	Test parametrization	-	10'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/22-scaling-up-unit-testing.html#parameterising-our-unit-tests)
 
 Let's take a look at our tests so far. They seem to have a lot of the same lines of code. The main difference is the input/result arrays.
@@ -447,7 +447,7 @@ For example:
 Once the tests are passing, we can **commit!**
 
 
-##	12:15	-	 💪 Parametrize unit tests	-	15'	-	RAUL
+##	12:15	-	 💪 Parametrize unit tests	-	15'
 
 see `exercises.md`
 
@@ -469,7 +469,7 @@ def test_daily_max(test_input, test_result):
 ##	12:30	-	Lunch	-	60'	
 
 
-##	13:30	-	Python Coding Style Guide	-	15'	-	CATA
+##	13:30	-	Python Coding Style Guide	-	15'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/15-coding-conventions.html)
 
 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
@@ -480,7 +480,7 @@ Let's get a plugin that helps with PEP8 style
 
 This extension includes a `linter` and it verifies code style, not functionality.
 
-##	13:45	-	 💪 Improve Code Style of Our Project -	15'	-	CATA
+##	13:45	-	 💪 Improve Code Style of Our Project -	15'
 see `exercises.md`
 
 ----
@@ -509,7 +509,7 @@ One naming convention to be fixed:
 
 > **Remember** Git commit!
 
-##	14:00	-	Python Coding Style Guide	-	10'	-	CATA
+##	14:00	-	Python Coding Style Guide	-	10'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/15-coding-conventions.html#documentation-strings-aka-docstrings)
 
 Let's now talk about documentation of functions. 
@@ -537,7 +537,7 @@ Let's get ready for the next exercise:
 
 
 
-##	14:10	-	💪 Fix the Docstrings	-	15'	-	CATA
+##	14:10	-	💪 Fix the Docstrings	-	15'
 
 see `exercises.md`
 
@@ -573,7 +573,7 @@ def daily_min(data: np.ndarray) -> np.ndarray:
 ```
 ##	14:25	-	Break	-	10'			
 
-##	14:35	-	Debugging in the IDE	-	15'	-	CATA
+##	14:35	-	Debugging in the IDE	-	15'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/24-diagnosing-issues-improving-robustness.html#debugging-in-an-ide)
 
 A bug is an expected behavior of code. Debugging means "finding and fixing a bug". 
@@ -624,16 +624,16 @@ Let's `Step into` which takes us to the function `daily_mean`:
 - And `Continue` executing and note how the variables change in each iteration
 
 ##	14:50	-	Break	-	10'	
-##	15:00	-	 💪 PRACTICAL: Catching bugs	-	45'	-	CATA
+##	15:00	-	 💪 PRACTICAL: Catching bugs	-	45'
 see `PRACTICAL_unit_testing_debugging.md`
 
 
-##	15:45	-	Review PRACTICAL with the group	-	10'	-	RAUL/CATA
+##	15:45	-	Review PRACTICAL with the group	-	10'
 - Discuss solutions and common issues
 - Q&a
 - E.G. where to put the breakpoint, step into vs step over
 
-##	15:55	-	Summarize key points	-	15'	-	RAUL
+##	15:55	-	Summarize key points	-	15'
 
 - Recap: virtual environments, testing, debugging, style
 - Questions
@@ -643,19 +643,19 @@ see `PRACTICAL_unit_testing_debugging.md`
 ##	16:10	-	Good bye		
 
 # 🌞 DAY 2 🌞				
-##	9:00	-	Coffee, tea	-	10'	-	RAUL
+##	9:00	-	Coffee, tea	-	10'
 
-##	9:10	-	Welcome	-	5'	-	RAUL
+##	9:10	-	Welcome	-	5'
 
 - ✅ Roll call + 🤝 Code of Conduct
 - 🙋 Getting help (🆘 red  ✅ green stickers)
 
-##	9:15	-	Recap from day one	-	10'	-	RAUL	
+##	9:15	-	Recap from day one	-	10'	
 
 - Key concepts from Day 1: environments, testing, debugging, style
 - Questions from participants
 
-##	9:25	-	 💪 Simulate a contribution from a colleague	-	5'	-	RAUL	
+##	9:25	-	 💪 Simulate a contribution from a colleague	-	5'	
 see `exercises.md`
 
 ----
@@ -667,7 +667,7 @@ see `exercises.md`
 
 >>**ENHANCEMENT!!!** Added argparse so it can run with `python inflammation/analysis.py data/` or `python inflammation/analysis.py -h`
 
-##	9:30	-	Refactoring	-	10'	-	RAUL	
+##	9:30	-	Refactoring	-	10'	
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/34-code-refactoring.html#introduction)
 
 Code *refactoring* is the process of improving the design of an existing code: **change structure not behaviour**.
@@ -679,7 +679,7 @@ Before we refactor, we should have tests that can verify the code behaviour as i
 We'll write this test in the next exercise. This is the plan: we will modify the function to return the data instead of visualising it because graphs are harder to test automatically (i.e. they need to be viewed and inspected manually in order to determine their correctness). Next, we will make the assert statements verify what the current outcome is, rather than check whether that is correct or not.
 
 
-##	9:40	-	💪 Write Regression Tests	-	20'	-	RAUL	
+##	9:40	-	💪 Write Regression Tests	-	20'	
 
 >>**DO NOT LIVE CODE!!!** Let hte participants face the exercise and then solve it afterwards
 
@@ -729,7 +729,7 @@ We would need to add additional tests to check the above.
 > **Remember** Git commit!
 
 
-##	10:00	-	Abstractions and Decoupling	-	10'	-	RAUL	
+##	10:00	-	Abstractions and Decoupling	-	10'	
 
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/33-code-decoupling-abstractions.html#introduction)
 
@@ -745,7 +745,7 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
   - when you name your function and use lots of `and's` (e.g. `load_and_compute_and_save()`) this suggests that you should split this function into smaller functions
 
   
-##	10:10	-	 💪 Decouple Data Loading from Data Analysis	-	20'	-	RAUL	
+##	10:10	-	 💪 Decouple Data Loading from Data Analysis	-	20'	
 
 >>**DO NOT LIVE CODE!!!** Let hte participants face the exercise and then solve it afterwards
 
@@ -784,7 +784,7 @@ The code is now easier to follow since we do not need to understand the data loa
 
 ##	10:30	-	Break	-	15'
 
-##	10:45	-	Encapsulations and Classes	-	20'	-	CATA	
+##	10:45	-	Encapsulations and Classes	-	20'	
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/33-code-decoupling-abstractions.html#encapsulation-classes
 )
 
@@ -883,7 +883,7 @@ def test_create_patient():
 
 > **Remember** Git commit!
 
-##	11:05	-	 💪 Add a unit test for `Patient.get_body_mass_index` - 20' - CATA
+##	11:05	-	 💪 Add a unit test for `Patient.get_body_mass_index` - 20'
 see `exercises.md`
 
 ----	
@@ -902,7 +902,7 @@ def test_compute_bmi():
 - important to use the name of the parameters to avoid errors by given them in the `wrong` order
 
 
-##	11:25	-	 💪 Use Classes to Abstract out Data Loading	-	15'	-	CATA
+##	11:25	-	 💪 Use Classes to Abstract out Data Loading	-	15'
 
 see `exercise.md`
 
@@ -933,7 +933,7 @@ and inside `analyse_data`
     data = data_source.load_inflammation_data()
 ``` 
 
-## 11:40 Use CSVDataSource Loading class in `main` - 10' - CATA
+## 11:40 Use CSVDataSource Loading class in `main` - 10'
 
 Let's now use this class in the main entry script: 
 - Open the file `inflammation-analysis.py`
@@ -964,7 +964,7 @@ We need to fix the regression test
 
 ##	11:50	-	Break	-	15'
 
-##	12:05	-	💪  Add an Additional DataSource	-	20'	-	CATA	
+##	12:05	-	💪  Add an Additional DataSource	-	20'	
 
 see `exercise.md`
 
@@ -1006,7 +1006,7 @@ In `inflammation-analysis.py`-> `  _, extension = os.path.splitext(infiles[0])` 
 
 ##	12:35	-	Break	-	60'
 
-##	13:35 -	Separating Pure and Impure Code	-	10'	-	RAUL	
+##	13:35 -	Separating Pure and Impure Code	-	10'	
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/34-code-refactoring.html#separating-pure-and-impure-code)
 
 Next step is to separate out as much of code as possible into *pure functions*.
@@ -1019,7 +1019,7 @@ Pure functions are easier to:
 - test 
 
 
-##	13:45	-	💪 Refactoring To Use a Pure Function	-	20'	-	RAUL	
+##	13:45	-	💪 Refactoring To Use a Pure Function	-	20'	
 
 see `exercise.md`
 
@@ -1049,7 +1049,7 @@ def analyse_data(data_source):
 ```
 - Confirm all test still pass ✅
 
-##	14:05	-	The __main__ function and command line arguments	-	10'	-	CATA	
+##	14:05	-	The __main__ function and command line arguments	-	10'	
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/35-software-architecture-revisited.html#controller-structure)
 
 You will have noticed already that structure of the `inflammation-analysis.py` file follows this pattern:
@@ -1104,7 +1104,7 @@ python inflammation-analysis.py data/inflammation-01.csv -outdir data
 ```
 Oh oh! this is broken! You are going to fix it in the next exercise!
 
-##	14:15	-	 💪 Use optional input parameter to save figures	-	20'	-	CATA	
+##	14:15	-	 💪 Use optional input parameter to save figures	-	20'	
 
 see `exercise.md`
 
@@ -1128,12 +1128,12 @@ def visualize(data_dict, outfile):
 ##	14:35	-	Break	-	15'	
 
 
-##	14:50	-	💪 PRACTICAL: Refactoring classes - 45'	-	RAUL	
+##	14:50	-	💪 PRACTICAL: Refactoring classes - 45'	
 
 see `PRACTICAL_refactoring_classes.md`
 
 
-##	15:35	-	Final  review	-	15'	-	RAUL	
+##	15:35	-	Final  review	-	15'	
 
 ## Key Points
 
@@ -1151,15 +1151,17 @@ You have practised the complete Day 2 workflow:
 
 - Q&a
 
-##	15:50	-	Summarize key points	-	10'	-	RAUL	
+##	15:50	-	Summarize key points	-	10'	
 
 - Recap: Project structure, abstractions, modules, Pure functions, refactoring
 - Where to go next: packaging, documentation Tools (Sphinx), continuous integration
 - questions and feedback
 
-##	15:00	-	Give feedback about the course	-	5'	-	RAUL	
+##	15:00	-	Give feedback about the course	-	5'	
 
 ##	16:05 -	Good bye
 
 
-> **follow up** share the slides? or add links to the README and send email
+# 🌞 DAY 3 🌞	
+
+Collaborative software development
