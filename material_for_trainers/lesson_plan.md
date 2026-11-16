@@ -4,7 +4,7 @@
 - Coffee / Tea
 
 ##	9:05	-	Welcome	-	5'	-	RAUL
-> **pilot** 3 people arrived late
+
 - ✅ Roll call + 🤝 Code of Conduct
 - 🙋 Getting help (🆘 red  ✅ green stickers)
 
@@ -26,9 +26,8 @@ Let's confirm installation:
 Hi USERNAME! You've successfully authenticated, but GitHub does not provide shell access.
 ```
 - You see a folder named `python-intermediate-inflammation` in your `Desktop` (or another folder of your choice that you know how to find :))
-> **pilot** terminal installation check was not done.
+
 ##	9:25	-	A short icebreaker	-	5'	-	RAUL
-> **pilot** RAUL did not use the prepared icebreaker. Instead asked him about what PhD year are you.
 
 ##	9:30	-	Introduction	-	15'	-	RAUL
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/10-section1-intro.html) 
@@ -42,7 +41,7 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 - How this course fits into a researcher's workflow
 - Why project structure matters from day one
 - Setting the scene
-> **pilot** The plots about AI are barely visible. Make them bigger/more contrast
+
 
 ##	9:45	-	Our project structure using VS Code	-	10'	-	RAUL
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/13-ides.html)
@@ -63,7 +62,6 @@ An Integrated Development Environments (IDEs) is an application with tools to he
         - inflammation -> has more `.py` scripts
 
 #### Integrated TERMINAL
-> **pilot** started around 9:30 due to no installation issues
 
 - Click on `Terminal` -> `New Terminal`
 - This `Terminal` works the same as external terminals (not in VS Code)
@@ -91,7 +89,6 @@ Solution
 wc -l data/inflammation-01.csv      # 60 lines
 wc -l data/small-01.csv             # 2 lines
 ```
-> **pilot** one person that arrived late did not clone the repo but we managed to do it during these 5mins.
 
 ##	10:00	-	Virtual Environments For Software Development	-	10'	-	RAUL
 🎦 Introduce Virtual environments with the kitchen analogy using [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
@@ -177,7 +174,6 @@ pwd                         # ensure standing in python-intermediate-inflammatio
 python inflammation-analysis.py    # use python to run script in current directory  
 python inflammation-analysis.py data/inflammation-01.csv # add input file
 ```
-> **pilot** this one took a while becuase of installation issues. Some problems becuase of working on one drive. So maybe better to spend some time at the start to make sure everyone is working in C:
 
 ##	10:25	-	💪 Create a `venv` - 10' - RAUL 
 see `exercises.md`
@@ -368,7 +364,6 @@ modify `test_input` include negative values
 
 ##	11:35	-	Break	-	10'
 
-> **pilot** raul democratically force an early lunch. Cata hopes that cognitive load for afternoon remains ok. Also we were running 15mins late due to difficulties with venv
 ##	11:45	-	Data validation	-	10'	-	RAUL
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/21-automatically-testing-software.html#what-about-testing-for-errors)
 
@@ -577,7 +572,7 @@ def daily_min(data: np.ndarray) -> np.ndarray:
    return np.min(data, axis=0)
 ```
 ##	14:25	-	Break	-	10'			
-> **pilot** we did not do this break
+
 ##	14:35	-	Debugging in the IDE	-	15'	-	CATA
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/24-diagnosing-issues-improving-robustness.html#debugging-in-an-ide)
 
@@ -631,12 +626,12 @@ Let's `Step into` which takes us to the function `daily_mean`:
 ##	14:50	-	Break	-	10'	
 ##	15:00	-	 💪 PRACTICAL: Catching bugs	-	45'	-	CATA
 see `PRACTICAL_unit_testing_debugging.md`
-> **pilot** not many questions
+
 
 ##	15:45	-	Review PRACTICAL with the group	-	10'	-	RAUL/CATA
-> **pilot** where to put the breakpoint? Step into vs step over
 - Discuss solutions and common issues
 - Q&a
+- E.G. where to put the breakpoint, step into vs step over
 
 ##	15:55	-	Summarize key points	-	15'	-	RAUL
 
@@ -645,12 +640,10 @@ see `PRACTICAL_unit_testing_debugging.md`
 - What to expect of tomorrow: refactoring, abstractions, classes, the main function, command line arguments
 
 
-##	16:10	-	Good bye	
-> **pilot** end time 15:50		
+##	16:10	-	Good bye		
 
 # 🌞 DAY 2 🌞				
 ##	9:00	-	Coffee, tea	-	10'	-	RAUL
-> **pilot** people arrived a bit later today
 
 ##	9:10	-	Welcome	-	5'	-	RAUL
 
@@ -687,6 +680,8 @@ We'll write this test in the next exercise. This is the plan: we will modify the
 
 
 ##	9:40	-	💪 Write Regression Tests	-	20'	-	RAUL	
+
+>>**DO NOT LIVE CODE!!!** Let hte participants face the exercise and then solve it afterwards
 
 see `exercise.md`
 
@@ -733,6 +728,7 @@ We would need to add additional tests to check the above.
 
 > **Remember** Git commit!
 
+
 ##	10:00	-	Abstractions and Decoupling	-	10'	-	RAUL	
 
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/33-code-decoupling-abstractions.html#introduction)
@@ -747,9 +743,11 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 - When to implement them in practice?
   - when you find your self copy/pasting code, this is a sign that you can turn that bit of code into an abstraction (i.e. an independent function that you can call multiple times)
   - when you name your function and use lots of `and's` (e.g. `load_and_compute_and_save()`) this suggests that you should split this function into smaller functions
-  
+
   
 ##	10:10	-	 💪 Decouple Data Loading from Data Analysis	-	20'	-	RAUL	
+
+>>**DO NOT LIVE CODE!!!** Let hte participants face the exercise and then solve it afterwards
 
 see `exercise.md`
 
@@ -797,6 +795,8 @@ One way we can do this is by using *encapsulation*. Encapsulation can be used to
 For example a `class` is a very common encapsulation.
 
 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) to explain class with `Circle` example
+
+TODO Improve explanation of classes and find other analogies. During the pitlos, participants were still confussed about `self`. 
 
 > **Analogy** A `class` is a cookie cutter template, and `instances` as the cookies themselves. That is, one class can have many instances.
 
@@ -1014,6 +1014,7 @@ Pure functions are easier to:
 - understand because they eliminate side effects.
 - reuse as the caller only needs to understand what parameters to provide
 - test 
+
 
 ##	13:45	-	💪 Refactoring To Use a Pure Function	-	20'	-	RAUL	
 
