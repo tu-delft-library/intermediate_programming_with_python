@@ -827,6 +827,9 @@ Here, `test_create_patient` checks that an instance of `Patient` can be created 
 Let's run the test to see that it passes. All green  ✅
 
 A Class can have other methods (aka functions) defined on them. 
+
+TODO replace body mass index with patient dosage. Still based on body weight but it does not reflect on the idea of overweight or underweight. Also fix exercises accordingly.
+
 ```bash
 class Patient:
   def __init__(self, name):

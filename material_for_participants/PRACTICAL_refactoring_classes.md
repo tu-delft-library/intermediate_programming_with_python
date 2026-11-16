@@ -39,6 +39,7 @@ class Patient:
 ---
 
 ## Part 1 — Add a `is_overweight` Method
+TODO replace is_overweight with something else that is less psychological heavy for humans. For example, use get_patient_dosage
 
 A BMI above 25 is generally considered overweight. Add a method to `Patient` that returns `True` if the patient is overweight and `False` otherwise.
 

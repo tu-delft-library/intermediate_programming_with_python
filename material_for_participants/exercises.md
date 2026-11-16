@@ -266,6 +266,8 @@ def test_analyse_data():
 </details>
 
 ## 12 💪 Add a unit test for `Patient.get_body_mass_index`
+TODO replace get_body_mass_index with get_patient_dosage
+
 A unit test is an excellent way to test that a new implementation works as expected. Let's test our new `Patient` class.
 
 - Open the file `test_patient.py`
