@@ -4,8 +4,8 @@ A three-day course on Python and GitHub. Every day runs **9:30-15:30** (lunch 60
 
 | Day | Theme | Learner material | Homework afterwards |
 |---|---|---|---|
-| 1 | Ensuring correctness of software at scale: environments, testing, debugging, code style | `exercises.md` (1-8), `PRACTICAL_unit_testing_debugging.md` | `HOMEWORK_1.md` (optional) |
-| 2 | Software development as a process: refactoring, abstractions, classes | `exercises.md` (9-17), `PRACTICAL_refactoring_classes.md` | `HOMEWORK_2.md` (**Part A is required**: Day 3 preparation) |
+| 1 | Ensuring correctness of software at scale: environments, testing, debugging, code style | `exercises_day1.md`, `PRACTICAL_unit_testing_debugging.md` | `HOME_ASSIGNMENT_1.md` (optional) |
+| 2 | Software development as a process: refactoring, abstractions, classes | `exercises_day2.md` , `PRACTICAL_refactoring_classes.md` | `HOME_ASSIGNMENT_2.md` (**Part A is required**: Day 3 preparation) |
 | 3 | Collaborative software development: branching, GitHub roles, pull requests, code review, CI | `exercises_day3.md` | none |
 
 Conventions: 💪 exercise · 🎦 slides · 🏠 homework · `>>**NOTE**` callouts are for the instructor.
@@ -90,8 +90,8 @@ ls tests
 ls inflammation/
 ```
 
-##	10:10	-	💪 Have a peek at the data	-	5'
-see `exercises.md`
+##	10:10	-	1 💪 Have a peek at the data	-	5'
+see `exercises_day1.md`
 
 Solution
 ```bash
@@ -184,8 +184,8 @@ python inflammation-analysis.py    # use python to run script in current directo
 python inflammation-analysis.py data/inflammation-01.csv # add input file
 ```
 
-##	10:40	-	💪 Create a `venv`	-	15'
-see `exercises.md`
+##	10:40	-	2 💪 Create a `venv`	-	15'
+see `exercises_day1.md`
 
 solution
 ```bash
@@ -238,8 +238,9 @@ To add an external dependency (an extra package) we use the integrated terminal
 - Go back to the terminal
 - Type `python -m pip install pytest`
 
-##	11:20	-	💪 Requirements file	-	5'
-see `exercises.md`
+##	11:20	-	3 💪 Requirements file 	-	5'
+
+see `exercises_day1.md`
 
 solution
 ```bash
@@ -339,8 +340,8 @@ Fix the test before continuing. Remember here is important to have input data fo
 test_result = np.array([3, 4])
 ```
 
-##	11:50	-	💪 Write some unit tests	-	10'
-see `exercises.md`
+##	11:50	-	4 💪 Write some unit tests	-	10'
+see `exercises_day1.md`
 
 
 ----
@@ -396,8 +397,8 @@ def test_daily_max_string():
 ```
 - Git commit
 
-##	13:10	-	💪 Add data validation unit tests	-	10'
-see `exercises.md`
+##	13:10	-	5 💪 Add data validation unit tests	-	10'
+see `exercises_day1.md`
 
 
 ----
@@ -494,11 +495,10 @@ Let's get ready for the next exercise:
 - A pop up will offer to generate the `docstring`
 - Press `ENTER` and a template of `doscstring` will appear
 
-##	13:45	-	💪 Improve Code Style and Docstrings	-	20'
-see `exercises.md` (**Exercises 7 and 8**)
+##	13:45	- 6 💪 Improve Code Style and 7 💪 Fix the Docstrings	-	20'
+see `exercises_day1.md`
 
-**Solution 7**
-----
+### Solution 6
 
 Issues should have been automatically fixed by `Ruff`:
 
@@ -524,7 +524,8 @@ One naming convention to be fixed:
 
 > **Remember** Git commit!
 
-**Solution 8**
+
+### Solution 7
 
 The improved `docstring` for `daily_mean` contains explanations for parameters and return values.
 
@@ -603,9 +604,9 @@ see `PRACTICAL_unit_testing_debugging.md`
 - Questions
 - What to expect of tomorrow: refactoring, abstractions, classes, the main function, command line arguments
 
-##	15:15	-	Explain home assignment	-	5'
+##	15:15	-	🏠  Explain home assignment	-	5'
 
-🏠 **Homework 1** (≈ 60', optional but recommended): `HOMEWORK_1.md`. Day 2 does not depend on it.
+`HOME_ASSIGNMENT_1.md` should take ≈ 60'. Day 2 does not depend on it. It is recommend for extra practice.
 
 ##	15:20	-	Buffer -	10'
 Use for a practical that overran, extra questions or helping people catch up. If unused, finish early.
@@ -626,13 +627,8 @@ Use for a practical that overran, extra questions or helping people catch up. If
 - Key concepts from Day 1: environments, testing, debugging, style
 - Questions from participants, including about Homework 1 (optional, so don't dwell on it)
 
-##	9:45	-	💪 Simulate a contribution from a colleague	-	5'
-see `exercises.md`
-
-----
-- Open `exercises.md` 
-- Go to `💪 Simulate a contribution from a colleague`
-- Follow instructions to generate module with code
+##	9:45	-	1 💪 Simulate a contribution from a colleague	-	5'
+see `exercises_day2.md`
 
 >>**DIVERGENCE!!!** Materials in the carpentries require switching to a different branch with script `compute_data.py` in it to do the following sections. Here, instead of switching, we build up on the `analysis.py` script from this exercise.
 
@@ -650,11 +646,11 @@ Before we refactor, we should have tests that can verify the code behaviour as i
 We'll write this test in the next exercise. This is the plan: we will modify the function to return the data instead of visualising it because graphs are harder to test automatically (i.e. they need to be viewed and inspected manually in order to determine their correctness). Next, we will make the assert statements verify what the current outcome is, rather than check whether that is correct or not.
 
 
-##	10:00	-	💪 Write Regression Tests	-	20'
+##	10:00	-	2 💪 Write Regression Tests	-	20'
 
 >>**DO NOT LIVE CODE!!!** Let the participants face the exercise and then solve it afterwards
 
-see `exercises.md`
+see `exercises_day2.md`
 
 ----
 
@@ -716,11 +712,11 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
   - when you name your function and use lots of `and's` (e.g. `load_and_compute_and_save()`) this suggests that you should split this function into smaller functions
 
   
-##	10:30	-	💪 Decouple Data Loading from Data Analysis	-	20'
+##	10:30	-	3 💪 Decouple Data Loading from Data Analysis	-	20'
 
 >>**DO NOT LIVE CODE!!!** Let the participants face the exercise and then solve it afterwards
 
-see `exercises.md`
+see `exercises_day2.md`
 
 ---	
 
@@ -851,8 +847,8 @@ def test_create_patient():
 
 > **Remember** Git commit!
 
-##	11:35	-	💪 Add a unit test for `Patient.get_patient_dosage`	-	10'
-see `exercises.md`
+##	11:35	-	4 💪 Add a unit test for `Patient.get_patient_dosage`	-	10'
+see `exercises_day2.md`
 
 ----	
 ```bash
@@ -870,9 +866,9 @@ def test_get_patient_dosage():
 - important to use the name of the parameters to avoid errors by given them in the `wrong` order
 
 
-##	11:45	-	💪 Use Classes to Abstract out Data Loading	-	15'
+##	11:45	-	5 💪 Use Classes to Abstract out Data Loading	-	15'
 
-see `exercises.md`
+see `exercises_day2.md`
 
 ---	
 
@@ -945,9 +941,9 @@ Pure functions are easier to:
 - test 
 
 
-##	13:20	-	💪 Refactoring To Use a Pure Function	-	20'
+##	13:20	-	6 💪 Refactoring To Use a Pure Function	-	20'
 
-see `exercises.md`
+see `exercises_day2.md`
 
 ----	
 
@@ -1059,7 +1055,7 @@ You have practised the complete Day 2 workflow:
 
 ##	15:10	-	Explain home assingment	-	5'
 
-🏠 **Homework 2** (≈ 60-75'): `HOMEWORK_2.md`. **Part A is required**: it prepares Day 3 (GitHub username, accept the organization invitation, push your work). The rest is optional practice.
+🏠 **Homework 2** (≈ 60'): `HOME_ASSIGNMENT_2.md`. **Part A is required**: it prepares Day 3 (GitHub username, accept the organization invitation, push your work). The rest is optional practice.
 
 ##	15:15	-	Buffer (flexible)	-	20'
 Use for a practical that overran, extra questions or helping people catch up. If unused, finish early.
@@ -1069,20 +1065,7 @@ Use for a practical that overran, extra questions or helping people catch up. If
 
 # 🌞 DAY 3 - Collaborative software development 🌞	
 
-
-> **Material for this day:** `exercises_day3.md` (learner exercises), `day3_instructor_material.md` (answer key, templates, run order) and `setup_day3.sh` (organization setup). None of it has been piloted yet: do the dry run described below first.
-
-## Learning objectives
-
-By the end of the day participants can:
-
-- choose a branching strategy that fits a research team (and say why)
-- create, merge and delete branches, and resolve a merge conflict
-- work in each of the main GitHub roles: maintainer, external contributor (fork), collaborator (write access), reviewer
-- open a good pull request, and give and receive a code review
-- explain how CI and branch protection act as an "automated reviewer"
-
-## Logistics and prep (before the day)
+## Prep (before the day)
 
 ### Group size: 22-25 participants + instructor + 2 helpers
 
@@ -1090,20 +1073,19 @@ By the end of the day participants can:
   - 22 → 6×3 + 1×4 (7 teams) · 23 → 5×3 + 2×4 (7 teams) · 24 → 8×3 · 25 → 7×3 + 1×4 (8 teams)
 - Form teams **on the day** (9:30), not in advance, because 2-3 no-shows would leave broken teams. Never leave a team of 2: merge it into another team.
 - **Pre-create 9 team repos** so there is always a spare. Unused repos are simply ignored.
-- Support: ~3 people for 7-8 teams → each of us "owns" 2-3 teams. Round 1 and Round 2 are the risky sessions, so helpers float rather than sit.
+- Support - trainer + helpers: ~3 people for 7-8 teams → each of us "owns" 2-3 teams. 
 
-### Setup (instructor)
+### Setup (trainer)
 
 1. A GitHub **organization** for the course and a **public** template repo `day3-template` containing the `day2-complete` state of the project.
-   - *Public* because branch protection / rulesets on private repos need a paid plan (**verify**).
 2. Template also contains (`setup_day3.sh check` verifies these):
    - `requirements.txt` and `tests/test_models.py` (from the project)
    - `CHANGELOG.md` with an empty **Unreleased** section
    - `docs/ci.yml.example` (the CI workflow; learners move it into `.github/workflows/` themselves in the CI session)
    - `.github/pull_request_template.md`
-3. The script `setup_day3.sh` (GitHub CLI `gh`; run order in `day3_instructor_material.md`) that, for each of the 9 repos: creates it from the template, creates the labels and the Round 1 and Round 2 issues, creates the planted branch and opens the planted PR (so the template does **not** contain it), and creates one org team per repo. Further commands: `invite`, `assign`, `grant-write`, `status`, `teardown`.
-4. **Invitations**: collect GitHub usernames in HW2 and invite to the org **at least a few days ahead** (invitations expire and need acceptance). Base permission = Read. At Round 2 the instructor gives each team *Write* on its repo. This is a permission change, not a new invitation, so no new acceptance step.
-5. The Round 1 maintainer of each team needs **Admin** on the repo (rulesets need it). Repos are disposable, so this is acceptable.
+3. The script `setup_day3.sh` (GitHub CLI `gh`; run order in `day3_trainer_material.md`) that, for each of the 9 repos: creates it from the template, creates the labels and the Round 1 and Round 2 issues, creates the planted branch and opens the planted PR (so the template does **not** contain it), and creates one org team per repo. Further commands: `invite`, `assign`, `grant-write`, `status`, `teardown`.
+4. **Invitations**: collect GitHub usernames in HW2 and invite to the org **at least a few days ahead** (invitations expire and need acceptance). Base permission = Read. At Round 2 the trainer gives each team *Write* on its repo. This is a permission change, not a new invitation, so no new acceptance step.
+5. The Round 1 maintainer of each team needs **Admin** on the repo (rulesets need it).
 6. **Dry run** the whole script and both rounds with the helpers beforehand. Permissions and the CI/ruleset steps are the most likely to surprise us.
 
 ### Fallbacks
@@ -1122,6 +1104,7 @@ By the end of the day participants can:
 - Quick check: everyone has their own fork cloned from Day 2 and `pytest` runs.
 
 ##	9:45	-	GitHub roles and permissions	-	15'
+TODO slides
 
 🎦 slides / one diagram
 

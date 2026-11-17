@@ -1,148 +1,5 @@
-# Exercises
 
-## 1 💪 Have a peek at the data
-
-Using the integrated `Terminal` in VS code, answer these two questions:
-
-- How many rows does `inflammation-01.csv` have?
-- How many rows does `small-01.csv` have?
-
-<details>
-<summary>🔍 Click here for hints! </summary>history
-
-- Use `wc -l filename` to count the number of rows in a file
-</details>
-
-## 2 💪 Create a `venv`
-- Deactivate your current `venv` to go back to system Python
-- Navigate to your `~/Documents`
-- Make a new directory called `sandbox`
-- Navigate inside the `sandbox` directory
-- Create a new environment using called `purple` using `venv` command
-- Verify that the new environment is saved in the current directory
-- Activate it
-- Install the following packages: `numpy`, `requests`
-- Verify the packages were installed
-- Export the environment into a `requirements.txt`
-- View the contents of `requirements.txt`
-- Deactivate `purple` to go back to system Python
-- Navigate back to `~/Desktop/python-intermediate-inflammation`
-
-
-<details>
-<summary>🔍 Click here for hints! </summary>
-
-- Use `deactivate` to go back to system python
-- Use `python3 -m venv name_of_environment` to create a new environment
-- Use `source name_of_environment/bin/activate` activate the environment file
-- Use `python3 -m pip install package` to install a package
-- Use `python3 -m pip list` to see list of currently installed packages
-- Use `python3 -m pip freeze > requirements.txt` to save the environment
-</details>
-
-## 3 💪 Requirements file
-
-- Verify that `pytest` is appearing in your virtual environment
-- Compare this list to the list of packages inside `requirements.txt`
-- Regenerate the `requirements.txt` file
-- Confirm that `pytest` is included in `requirements.txt` file 
-
-
-<details>
-<summary>🔍 Click here for hints! </summary>
-
-- Use `python3 -m pip list` to see the list of packages in the current virtual environment
-- Use `cat a_file.txt` to see the contents of the `a_file.txt`
-- Use `python3 -m pip freeze > requirements.txt` to generate a new `requirements.txt` file
-</details>
-
-## 4 💪 Write some unit tests 
-- Write a unit test for `daily_max()` in a similar format than the test `test_daily_mean_integers()`
-- Modify `test_input` including to include negative values
-- Modify `test_result` to match the current `test_input` 
-- Once added, run all the tests again and you should also see your new test passing
-- Make sure the `"""docstring"""` reflects the content of the test
-- Once all tests pass, commit your changes to `git`
-
-<details>
-<summary>🔍 Click here for hints! </summary>
-
-- Start by duplicating an existing test and adapting it to the new function you want to test
-- Remember to import the new function to be tested at the top of `test_models.py` > `from inflammation.models import daily_max` 
-- Remember that these functions take a 2D array and return a 1D array with each element the result of analysing each *column* of the data
-- Use `pytest tests/test_models.py` or `python -m pytest tests/test_models.py` to run the tests again
-</details>
-
-
-#### 🚀 Optional challenge
-Do the same for `daily_min`
-
-
-## 5 💪 Add data validation unit tests 
-- Write a data validation unit test for `daily_mean()`
-- Once added, run all the tests again and you should also see your new test passing
-- Make sure the `"""docstring"""` reflects the content of the test
-- Once all tests pass, commit your changes to `git`
-
-<details>
-<summary>🔍 Click here for hints! </summary>
-
-- Start by duplicating an existing test and adapting it to the new function you want to test
-- Use `pytest tests/test_models.py` or `python -m pytest tests/test_models.py` to run the tests again
-</details>
-
-
-#### 🚀 Optional challenge
-What happens when you input a non-iterable value (e.g. a single integer)? Write a test case for this.
-
-<details>
-<summary>🔍 Click here for hints! </summary>
-
-- The error raised in this case is not `TypeError`. Adapt the test to use the error type (e.g. `AxisError`, `IndexError`)
-</details>
-
-
-## 6 🏠 Parametrize unit tests
-
-> **Moved to Homework 1.** See `HOMEWORK_1.md` (Part A). It includes hints and the solution.
-
-## 7 💪 Improve Code Style of Our Project  
-
-- Open `inflammation-analysis.py` from VSCode
-- Go to `View > Command Palette`, or shortcut `CTRL-SHIFT-P` (Windows, Linux) or `CMD-SHIFT-P` (macOS)
-- Search for `Ruff: format document` 
-- Save `inflammation-analysis.py`
-- Go to the `git view` to see the modifications that were done by the plugin
-- Don't commit yet
-- Go back to `inflammation-analysis.py`
-- Check for naming conventions
-- Save `inflammation-analysis.py`
-- Commit your changes to `git`
-
-
-## 8 💪 Fix the docstrings
-
-- Look into `models.py` from VSCode
-- Go to the function `daily_mean`
-- Delete the current `docstring`
-- Execute the `Generate docstring` plugin
-- Replace the text `_summary_` with an explanation of *what* the function does
-- Replace the text `_description_` with a description of the variables store, what is the expected shape and type
-- 🏠 *Doing the same for `daily_min` and `daily_max` is part of Homework 1 (`HOMEWORK_1.md`, Part B)*
-- Add type hints for the input and output parameters
-- Commit your changes to `git`
-
-<details>
-<summary>🔍 Click here for hints! </summary>
-
-- To generate the docstring:
-    - Stand where you want the `docstring`
-    - Go to `View > Command Palette`, or shortcut `CTRL-SHIFT-P` (Windows, Linux) or `CMD-SHIFT-P` (macOS)
-    - Execute `Generate Docstring`
-
-</details>
-
-## 9 💪 Simulate a contribution from a colleague
+## 1 💪 Simulate a contribution from a colleague
 
 - Add a new file inside the folder `inflammation` called `analysis.py`
 - Copy the following code inside the `analysis.py` file
@@ -202,7 +59,7 @@ if __name__ == '__main__':
 - Save the file and commit your changes to `git`
 
 
-## 10 💪 Write Regression Tests
+## 2 💪 Write Regression Tests
 
 - Open `analysis.py`
 - Modify the `analyse_data()` function not to plot a graph and return the `daily_standard_deviation` instead. 
@@ -234,7 +91,7 @@ def test_analyse_data():
 </details>
 
 
-## 11 💪 Decouple Data Loading from Data Analysis
+## 3 💪 Decouple Data Loading from Data Analysis
 
 - Open `analysis.py` 
 - Extract the data loading functionality from `analyse_data` into a new function `load_inflammation_data()` that returns a list of 2D NumPy arrays with inflammation data loaded from all inflammation CSV files found in a specified directory path. 
@@ -251,7 +108,7 @@ def test_analyse_data():
 `return list(data)`
 </details>
 
-## 12 💪 Add a unit test for `Patient.get_patient_dosage`
+## 4 💪 Add a unit test for `Patient.get_patient_dosage`
 
 A unit test is an excellent way to test that a new implementation works as expected. Let's test our new `Patient` class. (The dosages in this course are made up.)
 
@@ -276,7 +133,7 @@ A unit test is an excellent way to test that a new implementation works as expec
 
 Make sure to pass the parameters to the class constructor using parameters name. Then swap the parameters around and confirm that the test still passes.
 
-## 13 💪 Use Classes to Abstract out Data Loading
+## 5 💪 Use Classes to Abstract out Data Loading
 
 - Open `analysis.py`
 - At the TOP of the file, declare a new class `CSVDataSource`
@@ -304,11 +161,8 @@ def analyse_data(data_dir):
 
 </details>
 
-## 15 🏠 Add an Additional DataSource
 
-> **Moved to Homework 2.** See `HOMEWORK_2.md` (Part B). It includes hints and the solution.
-
-## 16 💪 Refactoring To Use a Pure Function
+## 6 💪 Refactoring To Use a Pure Function
 
 - Open `analysis.py`
 - Refactor the `analyse_data()` function to delegate the data analysis to a new pure function `compute_standard_deviation_by_day()`
@@ -323,11 +177,3 @@ def compute_standard_deviation_by_day(data):
 - All tests should be green ✅
 - Commit your changes to `git`
 
-
-#### 🏠 Optional challenge
-
-> Adding tests for `compute_standard_deviation_by_day()` is part of Homework 2 (`HOMEWORK_2.md`, Part D).
-
-## 17 💪 Use optional input parameter to save figures
-
-> **Now Part 1 of the practical.** See `PRACTICAL_refactoring_classes.md`.
