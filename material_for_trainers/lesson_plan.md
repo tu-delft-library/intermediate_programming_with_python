@@ -1066,3 +1066,254 @@ Use for a practical that overran, extra questions or helping people catch up. If
 
 ##	15:30	-	Good bye
 
+
+# 🌞 DAY 3 - Collaborative software development 🌞	
+
+
+> **Material for this day:** `exercises_day3.md` (learner exercises), `day3_instructor_material.md` (answer key, templates, run order) and `setup_day3.sh` (organization setup). None of it has been piloted yet: do the dry run described below first.
+
+## Learning objectives
+
+By the end of the day participants can:
+
+- choose a branching strategy that fits a research team (and say why)
+- create, merge and delete branches, and resolve a merge conflict
+- work in each of the main GitHub roles: maintainer, external contributor (fork), collaborator (write access), reviewer
+- open a good pull request, and give and receive a code review
+- explain how CI and branch protection act as an "automated reviewer"
+
+## Logistics and prep (before the day)
+
+### Group size: 22-25 participants + instructor + 2 helpers
+
+- **Teams of 3.** Leftover 1-2 people join existing teams as a 4th member. The ring review (A→B→C→A) works for 4 just as well.
+  - 22 → 6×3 + 1×4 (7 teams) · 23 → 5×3 + 2×4 (7 teams) · 24 → 8×3 · 25 → 7×3 + 1×4 (8 teams)
+- Form teams **on the day** (9:30), not in advance, because 2-3 no-shows would leave broken teams. Never leave a team of 2: merge it into another team.
+- **Pre-create 9 team repos** so there is always a spare. Unused repos are simply ignored.
+- Support: ~3 people for 7-8 teams → each of us "owns" 2-3 teams. Round 1 and Round 2 are the risky sessions, so helpers float rather than sit.
+
+### Setup (instructor)
+
+1. A GitHub **organization** for the course and a **public** template repo `day3-template` containing the `day2-complete` state of the project.
+   - *Public* because branch protection / rulesets on private repos need a paid plan (**verify**).
+2. Template also contains (`setup_day3.sh check` verifies these):
+   - `requirements.txt` and `tests/test_models.py` (from the project)
+   - `CHANGELOG.md` with an empty **Unreleased** section
+   - `docs/ci.yml.example` (the CI workflow; learners move it into `.github/workflows/` themselves in the CI session)
+   - `.github/pull_request_template.md`
+3. The script `setup_day3.sh` (GitHub CLI `gh`; run order in `day3_instructor_material.md`) that, for each of the 9 repos: creates it from the template, creates the labels and the Round 1 and Round 2 issues, creates the planted branch and opens the planted PR (so the template does **not** contain it), and creates one org team per repo. Further commands: `invite`, `assign`, `grant-write`, `status`, `teardown`.
+4. **Invitations**: collect GitHub usernames in HW2 and invite to the org **at least a few days ahead** (invitations expire and need acceptance). Base permission = Read. At Round 2 the instructor gives each team *Write* on its repo. This is a permission change, not a new invitation, so no new acceptance step.
+5. The Round 1 maintainer of each team needs **Admin** on the repo (rulesets need it). Repos are disposable, so this is acceptable.
+6. **Dry run** the whole script and both rounds with the helpers beforehand. Permissions and the CI/ruleset steps are the most likely to surprise us.
+
+### Fallbacks
+
+- Learner's own fork is broken or red → clone the template repository `day3-template` itself (it is the `day2-complete` state) and work from there.
+- Learner never accepted the invitation → pair them with a teammate (they review and co-drive) and fix access at lunch.
+
+##	9:30	-	Welcome, recap, homework debrief, form teams	-	15'
+
+- ✅ Roll call + 🤝 Code of Conduct, 🙋 stickers (🆘 red / ✅ green)
+- Recap of days 1-2: tests, refactoring, **everything so far was done alone on `main`**. Today is about working with other people.
+- Homework debrief: 2 minutes, questions only. Homework was never a dependency for today.
+- Form teams (see above) and hand out each team's repo URL (on a slide/shared sheet).
+- 🛠 **Helper**: write `teams.csv` as the teams form and run `bash setup_day3.sh assign teams.csv` (details in `day3_instructor_material.md`). It must be done before Round 1 at 13:00.
+- **Round 1 maintainer**: the person whose birthday comes next (low-effort, random, doubles as an icebreaker).
+- Quick check: everyone has their own fork cloned from Day 2 and `pytest` runs.
+
+##	9:45	-	GitHub roles and permissions	-	15'
+
+🎦 slides / one diagram
+
+- The permission levels: Read, Triage, Write, Maintain, Admin. Who can do what?
+- The four roles we practise today:
+  - **Maintainer**: triages issues, reviews, merges, protects `main`
+  - **External contributor**: no access, works through a **fork**
+  - **Collaborator**: write access, works on **branches** in the shared repo
+  - **Reviewer**: reads the change and gives feedback; can be any of the above
+- Fork vs clone vs branch (three different things people confuse)
+- Remotes: `origin` vs `upstream`. In the integrated terminal: `git remote -v`
+- 5' activity: match "I want to..." statements to the role/permission needed.
+
+##	10:00	-	Branching basics (talk)	-	10'
+
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/14-collaboration-using-git.html)
+
+Talk and demo (10'):
+
+- A branch is a movable pointer to a commit; the commit graph (VS Code `GRAPH` view)
+- `git switch -c feature/short-description`; the VS Code branch picker (bottom left)
+- Merging: fast-forward vs merge commit; delete merged branches
+- Naming conventions (`feature/…`, `fix/…`, `docs/…`)
+
+##	10:10	-	💪 Create, switch and merge a branch	-	15'
+
+see `exercises_day3.md`. Work in **your own fork** from Day 2; nothing is pushed.
+
+- Create branch `practice/<your-username>`, add a new file `notes.md`, commit
+- Switch back to `main`: the file disappears! Switch again: it returns
+- Merge the branch into `main` locally, then look at the graph
+- Delete the branch
+
+##	10:25	-	💪 Merge conflicts	-	25'
+
+see `exercises_day3.md`
+
+Demo (5'): conflict markers, then VS Code's merge editor (Accept Current / Incoming / Both).
+
+Exercise (20'), still local, in your own fork:
+
+- Make two branches that edit the *same line* of `README.md` differently
+- Merge the first into `main` (fine), then the second (conflict!)
+- Resolve in the merge editor, run the tests, commit
+- Swap with a neighbour and explain your resolution
+
+>>**NOTE** Kept local on purpose: it avoids permission and push problems in the morning.
+
+##	10:50	-	Break	-	15'
+
+##	11:05	-	Branching strategies	-	30'
+
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/41-code-review.html) (team working models) plus slides
+
+Talk (15'):
+
+- **Trunk-based**: everyone commits to `main` in small steps (what we did on days 1-2)
+- **GitHub Flow**: short-lived feature branches, PR, merge to `main` ← our default recommendation for research teams
+- **Git Flow**: `develop`, release and hotfix branches; heavier, suits scheduled releases
+- **Forking workflow**: for projects with outside contributors
+- Protected `main`: why, and what a research team gains from it
+
+💪 Scenario discussion (15'), in your new teams. Recommend a strategy for each and justify it:
+
+1. A 3-person lab sharing an analysis pipeline
+2. An open-source package with many outside contributors
+3. A pipeline that must be frozen and reproducible for each publication
+
+##	11:35	-	Issues and pull requests	-	10'
+
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/41-code-review.html)
+
+Demo (10'): issue → branch → commit (`Fixes #12`) → push → PR → merge → issue closes. Anatomy of a good PR: small scope, descriptive title, "what and why", link to issue, checklist.
+
+##	11:45	-	💪 Your first pull request	-	15'
+
+see `exercises_day3.md`
+
+- In your own fork: branch, change one line of the README, push, open a PR **into your own `main`**
+- ⚠️ **TRAP**: because your repo is a fork, GitHub proposes the *original* repository as the base. Change **base repository** to your own fork before clicking *Create pull request*.
+- Merge it yourself (just this once!) and delete the branch
+
+##	12:00	-	Lunch	-	60'
+
+>>**HELPERS** Over lunch: run the script / check that every team repo exists and all participants accepted their invitation.
+
+##	13:00	-	💪 Round 1: Fork and pull request (contributor ↔ maintainer)	-	30'
+
+see `exercises_day3.md`
+
+Setup: the team repo has pre-made issues labelled `round-1`. Contributors have **no access** (public repo), so they must use a fork.
+
+- **Maintainer (5')**: read the issues, assign one to each contributor, add a label
+- **Contributors (15')**: fork the team repo, clone the fork, create a branch, fix the issue, write `Fixes #N` in the commit message, push to the fork, and open a PR **to the team repo** (base = org repo)
+- **Maintainer (10')**: look at *Files changed*, leave at least one comment, merge, check the issue closed itself
+- Contributors: add the team repo as `upstream` and pull the merged change into your fork
+- While waiting for review, everyone clones the **team repo itself** and reinstalls the environment for Round 2 (see the box in Exercise 5)
+
+Draft Round 1 issues (small and in *different files*, so no conflicts yet):
+
+1. README: add a usage section for `inflammation-analysis.py`
+2. Fix a docstring in `views.py`
+3. Create `CONTRIBUTING.md` with a "Running the tests" section (for a 4th member)
+
+##	13:30	-	Code review	-	20'
+
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/41-code-review.html)
+
+- Why review: quality, shared knowledge of the codebase, fewer bugs reaching `main`
+- What to look for (checklist): **correctness · tests · readability · scope · docs**. Leave *style* to the linter.
+- How to word feedback:
+  - prefix comments: `nit:` / `question:` / `blocking:`
+  - ask questions, don't give orders; be specific; comment on the code, not the person
+- GitHub's review tools: inline comments, *Suggested changes*, **Comment / Approve / Request changes**
+- As an author: keep PRs small, review your own diff first, explain *why*
+- Live demo of the review UI on the planted PR
+
+##	13:50	-	💪 Review a pull request	-	20'
+
+see `exercises_day3.md`
+
+Each team repo has one open PR (title "Add range", empty description) opened by the instructor. Individually read it for 10', then agree as a team and submit **one** consolidated review with *Request changes*. Instructor then reveals the planted problems.
+
+Planted problems (answer key in `day3_instructor_material.md`; draft):
+
+- Uses `axis=1` (the same bug as in Day 1!)
+- No test
+- Magic number and single-letter variable names
+- No docstring
+- Unrelated reformatting of another function (scope creep)
+- Vague PR title and empty description
+
+Close the planted PR without merging when done.
+
+##	14:10	-	CI as an automated reviewer, and protecting `main`	-	20'
+
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/23-continuous-integration-automated-testing.html)
+
+Demo (10'): read `docs/ci.yml.example` line by line: checkout, set up Python, install, `pytest`, `ruff check`. Show a red and a green check on a PR.
+
+Hands-on (10'), **maintainer drives, teammates watch and comment**:
+
+- Maintainer opens a PR that moves the file to `.github/workflows/ci.yml`. The PR runs its own check. A teammate reviews and the maintainer merges.
+- Maintainer opens *Settings → Rules → Rulesets* and creates a rule on `main`: require a PR, require 1 approval, require the `test` check, block force pushes.
+
+>>**RISK** The tightest session. If behind, the demo is shortened and only the ruleset is done live. The workflow can be merged by the instructor.
+
+##	14:30	-	Break	-	15'
+
+>>**INSTRUCTOR** During the break: `bash setup_day3.sh grant-write` gives each team Write on its repo.
+
+##	14:45	-	💪 Round 2: Team sprint	-	35'
+
+see `exercises_day3.md`
+
+Everyone is now a collaborator with write access to a **protected** `main`.
+
+- **5' setup**: each person picks one `round-2` issue, creates a branch
+- **15' author**: implement it, add a test, run `ruff`, add a line to `CHANGELOG.md`, push, open a PR using the template
+- **10' review**: review your neighbour's PR (A→B→C→A). Comment, then Approve or Request changes
+- **5' merge**: whoever's PR is approved merges. The next ones will have a conflict: update your branch from `main`, resolve it, push again
+
+Draft Round 2 issues (**deliberately overlapping**: all append to `models.py` and `CHANGELOG.md`, so conflicts are guaranteed):
+
+1. Add `daily_median` + tests
+2. Add `daily_std` + tests
+3. Add `daily_range` + tests (done properly this time)
+4. (4th member) Add `daily_sum` + tests
+
+Must / Should / Could, to protect time:
+
+- **Must**: open a PR, review one PR
+- **Should**: get a PR merged through the protected `main`
+- **Could**: resolve the conflict in the 2nd and 3rd PRs. If time runs out, helpers demo it on one team.
+
+##	15:20	-	Wrap-up and retrospective	-	10'
+
+- Instructor demo (3'): create a release `v0.1.0` from a tag. A tagged commit with green CI is a *reproducible reference point* you can cite and re-run
+- Key points (below) and what to do next (no homework file for this: point to adding a README and `CITATION.cff` to their own project, and to the Carpentries episodes 4.2 on software reuse and 4.3 on packaging)
+- Retro on sticky notes: **one thing I'll start using on Monday**
+- Feedback form
+
+## Key Points
+
+| Concept | Where you used it |
+|---|---|
+| **Branches** | Feature branches in your fork and in the team repo |
+| **Merge conflicts** | Local exercise, then Round 2 for real |
+| **Branching strategies** | Scenario discussion, GitHub Flow in practice |
+| **Fork vs write access** | Round 1 (fork, no access) vs Round 2 (collaborator) |
+| **Pull requests** | First PR into your own fork, then PRs to the team repo |
+| **Code review** | Planted PR, and reviewing a teammate's PR |
+| **CI and protected `main`** | `pytest` and `ruff` on every PR, with required approval |
+
+##	15:30	-	Good bye
