@@ -1,3 +1,15 @@
+# Building reproducible research software
+
+A three-day course on Python and GitHub. Every day runs **9:30-15:30** (lunch 60', short breaks, and a flexible buffer at the end of days 1 and 2).
+
+| Day | Theme | Learner material | Homework afterwards |
+|---|---|---|---|
+| 1 | Ensuring correctness of software at scale: environments, testing, debugging, code style | `exercises.md` (1-8), `PRACTICAL_unit_testing_debugging.md` | `HOMEWORK_1.md` (optional) |
+| 2 | Software development as a process: refactoring, abstractions, classes | `exercises.md` (9-17), `PRACTICAL_refactoring_classes.md` | `HOMEWORK_2.md` (**Part A is required**: Day 3 preparation) |
+| 3 | Collaborative software development: branching, GitHub roles, pull requests, code review, CI | `exercises_day3.md` | none |
+
+Conventions: 💪 exercise · 🎦 slides · 🏠 homework · `>>**NOTE**` callouts are for the instructor.
+
 # 🌞 DAY 1 - Ensuring Correctness of Software at Scale 🌞
 
 ##	9:30	-	Land	-	5'
@@ -78,7 +90,7 @@ ls tests
 ls inflammation/
 ```
 
-##	10:10	-	2 💪 Have a peek at the data	-	5'
+##	10:10	-	💪 Have a peek at the data	-	5'
 see `exercises.md`
 
 Solution
@@ -612,7 +624,7 @@ Use for a practical that overran, extra questions or helping people catch up. If
 ##	9:40	-	Recap from day one	-	5'
 
 - Key concepts from Day 1: environments, testing, debugging, style
-- Questions from participants
+- Questions from participants, including about Homework 1 (optional, so don't dwell on it)
 
 ##	9:45	-	💪 Simulate a contribution from a colleague	-	5'
 see `exercises.md`
@@ -640,9 +652,9 @@ We'll write this test in the next exercise. This is the plan: we will modify the
 
 ##	10:00	-	💪 Write Regression Tests	-	20'
 
->>**DO NOT LIVE CODE!!!** Let hte participants face the exercise and then solve it afterwards
+>>**DO NOT LIVE CODE!!!** Let the participants face the exercise and then solve it afterwards
 
-see `exercise.md`
+see `exercises.md`
 
 ----
 
@@ -708,7 +720,7 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 
 >>**DO NOT LIVE CODE!!!** Let the participants face the exercise and then solve it afterwards
 
-see `exercise.md`
+see `exercises.md`
 
 ---	
 
@@ -786,43 +798,42 @@ Here, `test_create_patient` checks that an instance of `Patient` can be created 
 
 Let's run the test to see that it passes. All green  ✅
 
-A Class can have other methods (aka functions) defined on them. 
+A Class can have other methods (aka functions) defined on them. Let's add a method that computes the dosage of a medicine for a patient. It is based on the patient's body weight.
 
+>>**NOTE** All dosages in this course are **made up** for teaching purposes. They are not medical guidance. Say this out loud.
 
 ```bash
 class Patient:
   def __init__(self, name):
   ... # keep same indentation as constructor
   # leave one line between def inside class (PEP8)
-  def get_body_mass_index(self):      # self parameter is required
-  """Compute body mass index: weight_in_kg / height_in_meters**2"""
-    return self.weight / self.height**2   # use self to access properties of object
+  def get_patient_dosage(self, dose_per_kg):    # self parameter is required, then our own parameter
+    """Compute the dosage in mg: weight_in_kg * dose_in_mg_per_kg"""
+    return self.weight * dose_per_kg            # use self to access properties of object
 
 ```
-We have the body mass index method, but we still don't know the `Patient`s weight and height. Let's modify the constructor to request this values:
+Notice that the method has one parameter of its own (`dose_per_kg`) next to `self`. We have the dosage method, but we still don't know the `Patient`'s weight. Let's modify the constructor to request this value:
 ```bash
 class Patient:
-    def __init__(self, name, weight, height):
+    def __init__(self, name, weight):
         self.name = name
         self.weight = weight
-        self.height = height
 ```
-Now here is where our documentation becomes really important, to let the user know the units of the `weight` and `height`
+Now here is where our documentation becomes really important, to let the user know the unit of the `weight`
 
 ```bash
 class Patient:
-    def __init__(self, name:str, weight:float, height:float):
+    def __init__(self, name:str, weight:float):
         """Patient class
 
         :param name: Name of patient
         :param weight: Weight in kilograms
-        :param height: Height in meters
         """
 ```
 
 As always, when we make a change, we run the tests to check that nothing was broken. 
 
-Aha! `test_create_patient` is broken because we modified the constructor, and it requires a `weight` and a `height`.
+Aha! `test_create_patient` is broken because we modified the constructor, and it requires a `weight`.
 
 Let's fix that in the test.
 ```bash
@@ -830,40 +841,38 @@ def test_create_patient():
 
     name = 'Alice'
     w = 50
-    h = 1.8
-    p = Patient(name=name, weight=w, height=h) # with this we fix the test
+    p = Patient(name=name, weight=w) # with this we fix the test
 
     assert p.name == name
-    assert p.weight == w        # good practice: test the new properties
-    assert p.height == h        # good practice: test the new properties
+    assert p.weight == w        # good practice: test the new property
 ```
 
 > **Key concept** Encapsulation provides information hiding. Abstraction provides implementation hiding.
 
 > **Remember** Git commit!
 
-##	11:35	-	💪 Add a unit test for `Patient.get_body_mass_index`	-	10'
+##	11:35	-	💪 Add a unit test for `Patient.get_patient_dosage`	-	10'
 see `exercises.md`
 
 ----	
 ```bash
 import numpy.testing as npt      
 
-def test_compute_bmi():
-    maria = Patient(name='maria',  height=1.6, weight=60)
-    expected_bmi = 23.4375
+def test_get_patient_dosage():
+    maria = Patient(name='maria', weight=60)
+    expected_dosage = 150.0
 
-    npt.assert_almost_equal(maria.get_body_mass_index(), expected_bmi)
+    npt.assert_almost_equal(maria.get_patient_dosage(dose_per_kg=2.5), expected_dosage)
 
 ```
 - Use `assert_almost_equal` to ignore small computational differences in floats
-- `get_body_mass_index()` is a function so it needs the parenthesis at the end of the call 
+- `get_patient_dosage()` is a function so it needs the parenthesis at the end of the call, and an argument for `dose_per_kg`
 - important to use the name of the parameters to avoid errors by given them in the `wrong` order
 
 
 ##	11:45	-	💪 Use Classes to Abstract out Data Loading	-	15'
 
-see `exercise.md`
+see `exercises.md`
 
 ---	
 
@@ -903,7 +912,7 @@ Let's now use this class in the main entry script:
 data_source = analysis.CSVDataSource(os.path.dirname(infiles[0]))    # pick dir from first file
 analysis.analyse_data(data_source)
 ```
-- We need to modify `analyse_data()` to recieve the `CSVDataSource` class instead of a string with the `data_dir`
+- We need to modify `analyse_data()` to receive the `CSVDataSource` class instead of a string with the `data_dir`
 - As `data_source` is created outside this function, we can delete the line that creates an instance of `CSVDataSource` inside `analyse_data`
 - `CSVDataSource` implements the `load_inflammation_data()` method as a parameter.
 
@@ -938,7 +947,7 @@ Pure functions are easier to:
 
 ##	13:20	-	💪 Refactoring To Use a Pure Function	-	20'
 
-see `exercise.md`
+see `exercises.md`
 
 ----	
 
@@ -1004,7 +1013,7 @@ We can also add optional parameters by using a `'-'` or `'--'`
     )
 ```
 then in the `main` function we can use this new argument.
-we want to create a figure for each csv file we read, so we need to generate outpufiles inside the loop:
+we want to create a figure for each csv file we read, so we need to generate output files inside the loop:
 ```bash
         outfile = os.path.basename(filename).replace('.csv','.png')
         if args.outdir is None: 
@@ -1027,7 +1036,6 @@ Oh oh! this is broken! You are going to fix it in the first part of the practica
 
 ##	14:10	-	💪 PRACTICAL: Refactoring classes	-	45'
 
-
 see `PRACTICAL_refactoring_classes.md`
 
 ##	14:55	-	Final  review	-	15'
@@ -1038,10 +1046,11 @@ You have practised the complete Day 2 workflow:
 
 | Concept | Where you used it |
 |---|---|
-| **Classes** | Added a method and validation to `Patient` |
-| **Data validation** | Raised `ValueError` in the constructor; tested with `pytest.raises` |
-| **Refactoring** | Extracted `compute_bmi` without changing observable behaviour |
-| **Pure functions** | `compute_bmi` takes only its parameters and returns a result |
+| **Classes** | Added methods and validation to `Patient` |
+| **Data validation** | Raised `ValueError` in the constructor and in a method; tested with `pytest.raises` |
+| **Refactoring** | Extracted `compute_dosage` without changing observable behaviour |
+| **Pure functions** | `compute_dosage` takes only its parameters and returns a result |
+| **Command-line options** | Fixed the optional `-outdir` argument by giving `visualize` an `outfile` parameter |
 | **Tests stay green** | Ran tests after every change |
 | **Git commits** | Committed at each logical checkpoint |
 
@@ -1050,9 +1059,9 @@ You have practised the complete Day 2 workflow:
 
 ##	15:10	-	Explain home assingment	-	5'
 
-- 🏠 **Homework 2** (≈ 60-75'): `HOMEWORK_2.md`. **Part A is required**: it prepares Day 3 (GitHub username, accept the organization invitation, push your work). The rest is optional practice.
+🏠 **Homework 2** (≈ 60-75'): `HOMEWORK_2.md`. **Part A is required**: it prepares Day 3 (GitHub username, accept the organization invitation, push your work). The rest is optional practice.
 
-##	15:15	-	Buffer (flexible)	-	15'
+##	15:15	-	Buffer (flexible)	-	20'
 Use for a practical that overran, extra questions or helping people catch up. If unused, finish early.
 
 ##	15:30	-	Good bye

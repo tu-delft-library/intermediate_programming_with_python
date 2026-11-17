@@ -251,18 +251,16 @@ def test_analyse_data():
 `return list(data)`
 </details>
 
-## 12 💪 Add a unit test for `Patient.get_body_mass_index`
-TODO replace get_body_mass_index with get_patient_dosage
+## 12 💪 Add a unit test for `Patient.get_patient_dosage`
 
-A unit test is an excellent way to test that a new implementation works as expected. Let's test our new `Patient` class.
+A unit test is an excellent way to test that a new implementation works as expected. Let's test our new `Patient` class. (The dosages in this course are made up.)
 
 - Open the file `test_patient.py`
-- Add a `test_case` called `test_compute_bmi`
+- Add a `test_case` called `test_get_patient_dosage`
 - Create an instance of the class `Patient` with the properties:
     - `name = 'maria'`
     - `weight = 60`
-    - `height = 1.6`
-- Use `assert_almost_equal` from the `numpy.testing` library to compare the results to the theoretical value of `23.4375`
+- Use `assert_almost_equal` from the `numpy.testing` library to compare the result of `get_patient_dosage(dose_per_kg=2.5)` to the theoretical value of `150.0`
 - Save the file, then go back to the **Testing** panel and click **Run All Tests** again.
 - All tests should be green ✅
 - Commit your changes to `git`
@@ -270,8 +268,8 @@ A unit test is an excellent way to test that a new implementation works as expec
 <details>
 <summary>🔍 Click here for hints! </summary>
 
-- `get_body_mass_index` is a function so it requires that you use the parenthesis at the end when calling it, like this: `get_body_mass_index()` 
-- Remember to import `numpy.testing as npt` at the top of the file. Then compare the values like `npt.assert_almost_equal(patient_instance.get_body_mass_index(), expected_bmi)`
+- `get_patient_dosage` is a function so it requires that you use the parenthesis at the end when calling it, and that you give it a value for `dose_per_kg`, like this: `get_patient_dosage(dose_per_kg=2.5)` 
+- Remember to import `numpy.testing as npt` at the top of the file. Then compare the values like `npt.assert_almost_equal(patient_instance.get_patient_dosage(dose_per_kg=2.5), expected_dosage)`
 </details>
 
 #### 🚀 Optional challenge

@@ -100,19 +100,19 @@ In `inflammation-analysis.py`:
 
 ## C. Test the pure function directly
 
-Because `compute_bmi` is now a module-level function, you can write a focused unit test for it that does not require constructing a `Patient`. Add this to `test_patient.py`:
+Because `compute_dosage` is now a module-level function, you can write a focused unit test for it that does not require constructing a `Patient`. Add this to `test_patient.py`:
 
 ```python
-from inflammation.models import Patient, compute_bmi
+from inflammation.models import Patient, compute_dosage
 
-@pytest.mark.parametrize("weight, height, expected_bmi", [
-    (70,  1.75, 22.857142857142858),
-    (90,  1.80, 27.777777777777779),
-    (50,  1.60, 19.531250),
+@pytest.mark.parametrize("weight, dose_per_kg, expected_dosage", [
+    (70,   2.5, 175.0),
+    (50,   0.5, 25.0),
+    (82.5, 1.2, 99.0),
 ])
-def test_compute_bmi_pure(weight, height, expected_bmi):
-    """Test that compute_bmi returns the correct value for various inputs."""
-    npt.assert_almost_equal(compute_bmi(weight, height), expected_bmi)
+def test_compute_dosage_pure(weight, dose_per_kg, expected_dosage):
+    """Test that compute_dosage returns the correct value for various inputs."""
+    npt.assert_almost_equal(compute_dosage(weight, dose_per_kg), expected_dosage)
 ```
 
 Make sure `npt` is imported at the top of the file (`import numpy.testing as npt`).
