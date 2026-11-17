@@ -1,20 +1,10 @@
-# HOMEWORK 2
-
-**≈ 60-75 minutes · Part A is required · the rest is optional practice**
-
-| Part | What | Time | |
-|---|---|---|---|
-| **A** | **Get ready for Day 3** | 15' | **required** |
-| B | Add an additional data source (JSON) | 20' | optional |
-| C | Test the pure function directly | 10' | optional |
-| D | Extra tests for `compute_standard_deviation_by_day` | 15' | optional 🚀 |
-| E | Add a `--patient` command-line argument | 20' | optional 🚀 |
-
-Day 3 starts from the same code for everybody, so you won't fall behind if you skip B to E. Commit to git after each part. ✅
+#  🏠 HOME ASSIGNMENT 2 ≈ 60
 
 ## A. Get ready for Day 3
 
-Tomorrow's work happens on GitHub, together with a team. These steps make sure you can start right away.
+TODO: check how this was done by Nikket and Halford
+
+Next session's work happens on GitHub, together with a team. These steps make sure you can start right away.
 
 - [ ] **Run the tests** in your project (`python -m pytest`). Everything should be green ✅. If it isn't, don't worry: we have a fallback. Bring the question to Day 3
 - [ ] **Push your work** to your fork on GitHub: `git status` should say there is nothing to commit, then `git push`. Open your fork on github.com and check that your latest commit is there
@@ -24,6 +14,9 @@ Tomorrow's work happens on GitHub, together with a team. These steps make sure y
 - [ ] 📖 *(optional, 10')* Read GitHub's page [About pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
 
 ## B. Add an additional data source
+
+### B1. Create data source class
+
 
 In class you created `CSVDataSource` to separate loading data from analysing it. Now add a second data source for JSON files.
 
@@ -97,6 +90,12 @@ In `inflammation-analysis.py`:
     analysis.analyse_data(data_source)
 ```
 </details>
+
+### B2. Add a unit test for the new data source
+TODO provide a JSON file to test on
+
+TODO write the excercise
+
 
 ## C. Test the pure function directly
 

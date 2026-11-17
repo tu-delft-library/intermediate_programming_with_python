@@ -1,16 +1,4 @@
-# HOMEWORK 1
-
-**≈ 60 minutes · optional but recommended · not needed for Day 2**
-
-Day 2 starts from the same code for everybody, so you won't fall behind if you skip this. But the practice sticks much better if you do it while Day 1 is still fresh. Questions? Write them down and bring them to the start of Day 2.
-
-| Part | What | Time |
-|---|---|---|
-| A | Parametrize unit tests (Exercise 6) | 15' |
-| B | Finish the docstrings and type hints | 10' |
-| C | The rest of the *Catching Bugs* practical (Parts 6-9) | 35' |
-
-Remember: commit to git after each part. ✅
+# 🏠 HOME ASSIGNMENT 1 ≈60'
 
 ## A. Parametrize unit tests
 

@@ -228,4 +228,4 @@ All tests should be green. ✅
 > 🔖 **Commit your work to git**
 
 
-> 🏠 **Homework 2** continues from here: testing `compute_dosage` directly, and an optional challenge to add a `--patient` command-line argument. See `HOMEWORK_2.md`.
+> 🏠 **HOME ASSIGNMENT 2** continues from here: testing `compute_dosage` directly, and an optional challenge to add a `--patient` command-line argument. See `HOME_ASSIGNMENT_2.md`.

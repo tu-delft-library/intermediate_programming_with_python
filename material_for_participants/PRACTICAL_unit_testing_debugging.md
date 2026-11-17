@@ -154,7 +154,7 @@ All tests should be green. ✅
 > 🔖 **Commit your work to git**
 
 
-> 🏠 **Parts 6-9 of this practical are in `HOMEWORK_1.md`**: edge case tests, data validation with `pytest.raises`, `NaN` values and code style with Ruff. Do them after class if you want more practice.
+> 🏠 **HOME ASSIGNMENT 1** continues from here: edge case tests, data validation with `pytest.raises`, `NaN` values and code style with Ruff. Do them after class if you want more practice.
 
 ## Key Points
 
