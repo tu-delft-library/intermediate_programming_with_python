@@ -102,23 +102,9 @@ What happens when you input a non-iterable value (e.g. a single integer)? Write 
 </details>
 
 
-## 6 💪 Parametrize unit tests 
-- Rewrite your test function for `daily_max()` to be parameterized
-- Add an extra set of `test_input, test_result`
-- Once added, run all the tests again and you should also see your new test passing
-- Make sure the `"""docstring"""` reflects the content of the test
-- Once all tests pass, commit your changes to `git`
+## 6 🏠 Parametrize unit tests
 
-<details>
-<summary>🔍 Click here for hints! </summary>
-
-- Start by duplicating an existing test with parametrized input and adapting it to the new function you want to test
-- Use `pytest tests/test_models.py` or `python -m pytest tests/test_models.py` to run the tests again
-</details>
-
-#### 🚀 Optional challenge
-- What edge cases can you think of? Add them to the parametrize sets
-
+> **Moved to Homework 1.** See `HOMEWORK_1.md` (Part A). It includes hints and the solution.
 
 ## 7 💪 Improve Code Style of Our Project  
 
@@ -142,7 +128,7 @@ What happens when you input a non-iterable value (e.g. a single integer)? Write 
 - Execute the `Generate docstring` plugin
 - Replace the text `_summary_` with an explanation of *what* the function does
 - Replace the text `_description_` with a description of the variables store, what is the expected shape and type
-- Do the same for `daily_min` and `daily_max`
+- 🏠 *Doing the same for `daily_min` and `daily_max` is part of Homework 1 (`HOMEWORK_1.md`, Part B)*
 - Add type hints for the input and output parameters
 - Commit your changes to `git`
 
@@ -320,45 +306,9 @@ def analyse_data(data_dir):
 
 </details>
 
-## 15 💪 Add an Additional DataSource
+## 15 🏠 Add an Additional DataSource
 
-- Open `models.py`
-- Add this function which load observations from a JSON file:
-
-```bash
-def load_json(filename):
-    """Load a numpy array from a JSON document.
-    
-    Expected format:
-    [
-      {
-        "observations": [0, 1]
-      },
-      {
-        "observations": [0, 2]
-      }    
-    ]
-    :param filename: Filename of CSV to load
-    """
-    with open(filename, 'r', encoding='utf-8') as file:
-        data_as_json = json.load(file)
-        return [np.array(entry['observations']) for entry in data_as_json]
-```
-- Open `analysis.py`
-- Duplicate the `CSVDataSource` class and rename as `JSONDataSource`
-- Adapt `JSONDataSource` to load `JSON` files
-- Modify the docstring accordingly
-- Open `inflammation-analysis.py`
-- Replace the line that creates an instance of `CSVDataSource` with an `if .. elif` logic that constructs an appropriate data source instance based on the file extension
-
-
-<details>
-<summary>🔍 Click here for hints! </summary>
-
-- The function `load_json` requires to load the module `json` at the top of `models.py`
-- The `load_inflammation_data` method in `JSONDataSource` should filter files by `"inflammation*.json"`
-- Use `  _, extension = os.path.splitext(in_files[0])` to split the file extension. Then use the variable `extension` in the `if .. elif` statement to choose the data source class
-</details>
+> **Moved to Homework 2.** See `HOMEWORK_2.md` (Part B). It includes hints and the solution.
 
 ## 16 💪 Refactoring To Use a Pure Function
 
@@ -376,48 +326,10 @@ def compute_standard_deviation_by_day(data):
 - Commit your changes to `git`
 
 
-#### 🚀 Optional challenge
+#### 🏠 Optional challenge
 
-Add tests for `compute_standard_deviation_by_day()` that check for situations when there is only one file with multiple rows, multiple files with one row, and any other cases you can think of that should be tested.
-
-<details>
-<summary>🔍 Click here for hints! </summary>
-
-You might have thought of more tests, but we can easily extend the test by parametrizing with more inputs and expected outputs:
-
-```bash
-@pytest.mark.parametrize('data,expected_output', [
-    ([[[0, 1, 0], [0, 2, 0]]], [0, 0, 0]),
-    ([[[0, 2, 0]], [[0, 1, 0]]], [0, math.sqrt(0.25), 0]),
-    ([[[0, 1, 0], [0, 2, 0]], [[0, 1, 0], [0, 2, 0]]], [0, 0, 0])
-],
-ids=['Two patients in same file', 'Two patients in different files', 'Two identical patients in two different files'])
-
-def test_compute_standard_deviation_by_day(data, expected_output):
-    from inflammation.analysis import compute_standard_deviation_by_day
-
-    result = compute_standard_deviation_by_day(data)
-    npt.assert_array_almost_equal(result, expected_output)
-
-```
-</details>
+> Adding tests for `compute_standard_deviation_by_day()` is part of Homework 2 (`HOMEWORK_2.md`, Part D).
 
 ## 17 💪 Use optional input parameter to save figures
 
-- Open `views.py`
-- Modify `visualize` to receive another argument `outfile`
-- Use an `if ... else` statement to either save the figure to `outfile` or show the figure 
-- Run the script from the integrated terminal in different conditions:
-    - single file, no `-outdir`
-    - single file, `-outdir data`
-    - with multiple input files, no `-outdir`
-    - multiple input files,  `-outdir data`
-- Check that the `.png` files were saved in the `data` folder
-- Commit your changes to `git`
-
-<details>
-<summary>🔍 Click here for hints! </summary>
-
-- Use `plt.savefig(outfile)` to save the file to disk
-- If the figure is still showing, move `fig.tight_layout()` inside the `else: .... plt.show()` block
-</details>
+> **Now Part 1 of the practical.** See `PRACTICAL_refactoring_classes.md`.

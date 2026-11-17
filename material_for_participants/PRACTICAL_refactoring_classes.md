@@ -4,14 +4,40 @@
 
 By the end of this lab you will be able to:
 
+- Make a function accept an optional argument, so a command-line option works
 - Add attributes and methods to an existing class
 - Write unit tests for class methods, including data validation
-- Extract a pure function from a class method and test it independently
+- Extract a pure function from a class method
 - Confirm your test suite stays green after every change
 - Commit working code at each checkpoint
 
 
-## The Starting Point
+## Part 1 — Fix the `-outdir` Option
+
+At the end of the last session, `inflammation-analysis.py` started passing an output file name to `views.visualize()`, but `visualize` does not accept it yet. The script is broken. Let's fix it.
+
+- Open `views.py`
+- Modify `visualize` to receive another argument `outfile`
+- Use an `if ... else` statement to either save the figure to `outfile` or show the figure
+- Run the script from the integrated terminal in different conditions:
+    - single file, no `-outdir`
+    - single file, `-outdir data`
+    - multiple input files, no `-outdir`
+    - multiple input files, `-outdir data`
+- Check that the `.png` files were saved in the `data` folder
+- Run all tests: they should be green ✅
+
+<details>
+<summary>🔍 Click here for hints! </summary>
+
+- Use `plt.savefig(outfile)` to save the file to disk
+- If the figure is still showing, move `fig.tight_layout()` inside the `else: .... plt.show()` block
+</details>
+
+> 🔖 **Commit your work to git**
+
+
+## The Starting Point for Parts 2-6
 
 The codebase now has a `Patient` class in `models.py` with three attributes (`name`, `weight`, `height`) and one method (`get_body_mass_index`).
 
@@ -38,7 +64,7 @@ class Patient:
 
 ---
 
-## Part 1 — Add a `is_overweight` Method
+## Part 2 — Add a `is_overweight` Method
 TODO replace is_overweight with something else that is less psychological heavy for humans. For example, use get_patient_dosage
 
 A BMI above 25 is generally considered overweight. Add a method to `Patient` that returns `True` if the patient is overweight and `False` otherwise.
@@ -58,7 +84,7 @@ All tests should be green. ✅
 > 🔖 **Commit your work to git**
 
 
-## Part 2 — Write Tests for `is_overweight`
+## Part 3 — Write Tests for `is_overweight`
 
 Open `tests/test_patient.py` and add the following parametrized test below the existing tests. Notice how we use `pytest.mark.parametrize` to cover several cases with a single test function:
 
@@ -86,7 +112,7 @@ All tests should be green. ✅
 > 🔖 **Commit your work to git**
 
 
-## Part 3 — Add Data Validation to the Patient Constructor
+## Part 4 — Add Data Validation to the Patient Constructor
 
 Right now, nothing prevents a user from creating a patient with nonsensical values:
 
@@ -128,7 +154,7 @@ All tests should be green. ✅
 > 🔖 **Commit your work to git**
 
 
-## Part 4 — Test the Data Validation
+## Part 5 — Test the Data Validation
 
 Now write tests that confirm the `ValueError` is raised when it should be. Add these to `test_patient.py`:
 
@@ -152,7 +178,7 @@ All tests should be green. ✅
 > 🔖 **Commit your work to git**
 
 
-## Part 5 — Extract a Pure Function for BMI Calculation
+## Part 6 — Extract a Pure Function for BMI Calculation
 
 The `get_body_mass_index` method works correctly, but the formula itself — `weight / height ** 2` — is a standalone piece of logic that does not depend on any other part of the `Patient` class. Making it a module-level function means it can be:
 
@@ -187,92 +213,4 @@ All tests should be green. ✅
 > 🔖 **Commit your work to git**
 
 
-## Part 6 — Test the Pure Function Directly
-
-Because `compute_bmi` is now a module-level function, you can write a focused unit test for it that does not require constructing a `Patient`. Add this to `test_patient.py`:
-
-```python
-from inflammation.models import Patient, compute_bmi
-
-@pytest.mark.parametrize("weight, height, expected_bmi", [
-    (70,  1.75, 22.857142857142858),
-    (90,  1.80, 27.777777777777779),
-    (50,  1.60, 19.531250),
-])
-def test_compute_bmi_pure(weight, height, expected_bmi):
-    """Test that compute_bmi returns the correct value for various inputs."""
-    npt.assert_almost_equal(compute_bmi(weight, height), expected_bmi)
-```
-
-Make sure `npt` is imported at the top of the file (`import numpy.testing as npt`).
-
-Save the file, then go back to the **Testing** panel and run `test_patient.py`
-
-All tests should be green. ✅
-
-> 🔖 **Commit your work to git**
-
-
-## 🚀 Optional Challenge — Add a `--patient` Command-Line Argument
-
-The `inflammation-analysis.py` script currently processes CSV files and saves figures. You will now add a new optional argument `--patient` that, when provided, prints a brief summary of one patient's data to the terminal.
-
-### Step 1 — Add the argument to the parser
-
-Open `inflammation-analysis.py`. In the `if __name__ == "__main__":` block, add a new optional argument after the existing `"-outdir"` argument:
-
-```python
-parser.add_argument(
-    "-patient",
-    type=int,
-    help="Row index (0-based) of the patient to summarise",
-)
-```
-
-### Step 2 — Add a helper function
-
-Add a small pure function **above** `main()` in `inflammation-analysis.py`:
-
-```python
-def summarise_patient(inflammation_data, patient_index):
-    """Print a summary of a single patient's inflammation data.
-
-    :param inflammation_data: 2D NumPy array of inflammation readings
-    :param patient_index: Row index of the patient to summarise
-    """
-    row = inflammation_data[patient_index]
-    print(f"Patient {patient_index}: "
-          f"mean={row.mean():.2f}, "
-          f"max={row.max():.0f}, "
-          f"min={row.min():.0f}")
-```
-
-### Step 3 — Call the helper function from `main()`
-
-Inside `main()`, after loading `inflammation_data`, add:
-
-```python
-if args.patient is not None:
-    summarise_patient(inflammation_data, args.patient)
-```
-
-### Step 4 — Test it from the terminal
-
-```bash
-python inflammation-analysis.py data/inflammation-01.csv -outdir data -patient 0
-```
-
-You should see a line like:
-
-```
-Patient 0: mean=5.45, max=18, min=0
-```
-
-Save the file, then go back to the **Testing** panel and click **Run All Tests**.
-
-All tests should be green. ✅
-
-> 🔖 **Commit your work to git**
-
-
-
+> 🏠 **Homework 2** continues from here: testing `compute_bmi` directly, and an optional challenge to add a `--patient` command-line argument. See `HOMEWORK_2.md`.

@@ -1,14 +1,11 @@
-# 🌞 DAY 1 🌞
+# 🌞 DAY 1 - Ensuring Correctness of Software at Scale 🌞
 
-##	9:00	-	Land	-	5'
+##	9:30	-	Land	-	5'
 - Coffee / Tea
 
-##	9:05	-	Welcome	-	5'
-
+##	9:35	-	Housekeeping, Installation check	-	10'
 - ✅ Roll call + 🤝 Code of Conduct
 - 🙋 Getting help (🆘 red  ✅ green stickers)
-
-##	9:10	-	Installation check	-	15'
 
 🖥 Tools that should be installed:
 - Python
@@ -27,9 +24,9 @@ Hi USERNAME! You've successfully authenticated, but GitHub does not provide shel
 ```
 - You see a folder named `python-intermediate-inflammation` in your `Desktop` (or another folder of your choice that you know how to find :))
 
-##	9:25	-	A short icebreaker	-	5'
+##	9:45	-	A short icebreaker	-	5'
 
-##	9:30	-	Introduction	-	15'
+##	9:50	-	Introduction	-	10'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/10-section1-intro.html) 
 
 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
@@ -43,7 +40,7 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
 - Setting the scene
 
 
-##	9:45	-	Our project structure using VS Code	-	10'
+##	10:00	-	Our project structure using VS Code	-	10'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/13-ides.html)
 
 #### Starting with a software project
@@ -81,7 +78,7 @@ ls tests
 ls inflammation/
 ```
 
-##	9:55	-	2 💪 Have a peek at the data - 5'
+##	10:10	-	2 💪 Have a peek at the data	-	5'
 see `exercises.md`
 
 Solution
@@ -90,7 +87,7 @@ wc -l data/inflammation-01.csv      # 60 lines
 wc -l data/small-01.csv             # 2 lines
 ```
 
-##	10:00	-	Virtual Environments For Software Development	-	10'
+##	10:15	-	Virtual Environments For Software Development	-	10'
 🎦 Introduce Virtual environments with the kitchen analogy using [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
 
 - Double click on the file `inflammation/views.py` using the `File Explorer`
@@ -108,7 +105,7 @@ wc -l data/small-01.csv             # 2 lines
 
 - There many options for package managers and venv managers. Some of them (like `conda`) do both roles together. In this course we use `pip` as package manager and `venv` as virtual environment manager
 
-##	10:10	-	Creating Virtual Environments Using `venv`	-	15'
+##	10:25	-	Creating Virtual Environments Using `venv`	-	15'
 
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/12-virtual-environments.html)
 
@@ -175,7 +172,7 @@ python inflammation-analysis.py    # use python to run script in current directo
 python inflammation-analysis.py data/inflammation-01.csv # add input file
 ```
 
-##	10:25	-	💪 Create a `venv` - 10' 
+##	10:40	-	💪 Create a `venv`	-	15'
 see `exercises.md`
 
 solution
@@ -195,9 +192,9 @@ deactivate
 cd ../python-intermediate-inflammation/
 ```
 
-##	10:35	-	Break	-	10'	
+##	10:55	-	Break	-	15'
 
-##	10:45	-	VSCode orientation	-	10'
+##	11:10	-	VSCode orientation	-	10'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/13-ides.html)
 
   
@@ -229,7 +226,7 @@ To add an external dependency (an extra package) we use the integrated terminal
 - Go back to the terminal
 - Type `python -m pip install pytest`
 
-##	10:55	-	💪 Requirements file - 5' 
+##	11:20	-	💪 Requirements file	-	5'
 see `exercises.md`
 
 solution
@@ -240,7 +237,7 @@ python -m pip freeze > requirements.txt  # regenerate requirements.txt
 python -m pip freeze --exclude-editable > requirements.txt # remember the --exclude-editable flag for your current project
 ```
 
-##	11:00	-	Version control using IDE - 10' 
+##	11:25	-	Version control using IDE	-	10'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/13-ides.html#version-control)
 
 In the `Version control` view we see a little blue notification. It means `git` has found a change
@@ -253,7 +250,7 @@ In the `Version control` view we see a little blue notification. It means `git` 
   - Notice update on log history in the `GRAPH` below
   - Finally, we can `Sync Changes` which means `Pull + Push`.
   
-  ##	11:10	-	Why testing matters	-	5'
+##	11:35	-	Why testing matters	-	5'
 
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/21-automatically-testing-software.html#what-is-software-testing)
 
@@ -269,7 +266,7 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
   - regression tests: whole pipelines. Ensures output has not changed. Normally requires input data.
 
 
-##	11:15	-	Unit testing with Pytest	-	10'
+##	11:40	-	Unit testing with Pytest	-	10'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/21-automatically-testing-software.html#using-a-testing-framework)
 
 Let's open the file `inflammation/models.py`. Note function `daily_mean()` which calculates mean *vertically* across the data.
@@ -330,7 +327,7 @@ Fix the test before continuing. Remember here is important to have input data fo
 test_result = np.array([3, 4])
 ```
 
-##	11:25	-	💪 Write some unit tests -	10'
+##	11:50	-	💪 Write some unit tests	-	10'
 see `exercises.md`
 
 
@@ -362,9 +359,9 @@ modify `test_input` include negative values
 - run the tests in the terminal
 > **Remember** Git commit!
 
-##	11:35	-	Break	-	10'
+##	12:00	-	Lunch	-	60'
 
-##	11:45	-	Data validation	-	10'
+##	13:00	-	Data validation	-	10'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/21-automatically-testing-software.html#what-about-testing-for-errors)
 
 Testing the behaviour of inputs, both valid and invalid, is a really good idea and is known as *data validation*.
@@ -387,7 +384,7 @@ def test_daily_max_string():
 ```
 - Git commit
 
-##	11:55	-	 💪 Add data validation unit tests	-	10'
+##	13:10	-	💪 Add data validation unit tests	-	10'
 see `exercises.md`
 
 
@@ -406,7 +403,7 @@ def test_daily_mean_string():
 
 > **Remember** Git commit!
 
-##	12:05	-	Test parametrization	-	10'
+##	13:20	-	Test parametrization	-	10'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/22-scaling-up-unit-testing.html#parameterising-our-unit-tests)
 
 Let's take a look at our tests so far. They seem to have a lot of the same lines of code. The main difference is the input/result arrays.
@@ -447,29 +444,10 @@ For example:
 Once the tests are passing, we can **commit!**
 
 
-##	12:15	-	 💪 Parametrize unit tests	-	15'
+>>**Note** You will practice parametrize in the practical this afternoon and in the home assignment
 
-see `exercises.md`
+##	13:30	-	Python Coding Style Guide and Docstrings	-	15'
 
-----
-```bash
-@pytest.mark.parametrize(
-        "test_input, test_result",
-        [
-            ([[1, 2], [3, 4], [5, 6]], [5, 6]),
-            ([[1, 2, -9], [-3, 4, -2], [-1, 5, -6]], [1, 5, -2]),
-        ])
-
-def test_daily_max(test_input, test_result):
-    """Test that max function works for an array of positive and negative integers."""
-    npt.assert_array_equal(daily_max(test_input), test_result)
-```
-> **Remember** Git commit!
-
-##	12:30	-	Lunch	-	60'	
-
-
-##	13:30	-	Python Coding Style Guide	-	15'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/15-coding-conventions.html)
 
 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) 
@@ -480,9 +458,34 @@ Let's get a plugin that helps with PEP8 style
 
 This extension includes a `linter` and it verifies code style, not functionality.
 
-##	13:45	-	 💪 Improve Code Style of Our Project -	15'
-see `exercises.md`
 
+source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/15-coding-conventions.html#documentation-strings-aka-docstrings)
+
+Let's now talk about documentation of functions. 
+- Docstrings are special comment strings immediately below the function definition is called a `docstring`. The triple quotes `""""` allows to break the string in multiple lines. 
+- The docstring of a function is return when using the `help` function.
+- Docstrings can also be placed at the top of a module. For example, at the top of `modules.py` we see a docstring with the explanation of what the module does.
+
+Apart from `docstrings`, a very useful documentation practice is using `typehints`. They are a way to communicate what types are expected as input and what is the type of the return values. 
+
+- Open `models.py`
+- Go to `def daily_mean`
+- Add the type hints by using a colon `:` and the type after each variable name:
+```def daily_mean(data: np.ndarray) -> np.ndarray:```
+
+Important to note that the types are not enforced by python. They are a `hint` for the user to know what type of parameter to pass. It becomes part of the documentation.
+
+Let's get ready for the next exercise:
+- Open `models.py`
+- Delete the `docstring` of `daily_mean`
+- Stand below the `def` line and type `"""`
+- A pop up will offer to generate the `docstring`
+- Press `ENTER` and a template of `doscstring` will appear
+
+##	13:45	-	💪 Improve Code Style and Docstrings	-	20'
+see `exercises.md` (**Exercises 7 and 8**)
+
+**Solution 7**
 ----
 
 Issues should have been automatically fixed by `Ruff`:
@@ -509,40 +512,9 @@ One naming convention to be fixed:
 
 > **Remember** Git commit!
 
-##	14:00	-	Python Coding Style Guide	-	10'
-source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/15-coding-conventions.html#documentation-strings-aka-docstrings)
+**Solution 8**
 
-Let's now talk about documentation of functions. 
-- Docstrings are special comment strings immediately below the function definition is called a `docstring`. The triple quotes `""""` allows to break the string in multiple lines. 
-- The docstring of a function is return when using the `help` function.
-- Docstrings can also be placed at the top of a module. For example, at the top of `modules.py` we see a docstring with the explanation of what the module does.
-
-Apart from `docstrings`, a very useful documentation practice is using `typehints`. They are a way to communicate what types are expected as input and what is the type of the return values. 
-
-- Open `models.py`
-- Go to `def daily_mean`
-- Add the type hints by using a colon `:` and the type after each variable name:
-```def daily_mean(data: np.ndarray) -> np.ndarray:```
-
-Important to note that the types are not enforced by python. They are a `hint` for the user to know what type of parameter to pass. It becomes part of the documentation.
-
-Let's get ready for the next exercise:
-- Open `models.py`
-- Delete the `docstring` of `daily_mean`
-- Stand below the `def` line and type `"""`
-- A pop up will offer to generate the `docstring`
-- Press `ENTER` and a template of `doscstring` will appear
-
-
-
-
-
-##	14:10	-	💪 Fix the Docstrings	-	15'
-
-see `exercises.md`
-
-----
-The improved `docstrings` for the above functions would contain explanations for parameters and return values.
+The improved `docstring` for `daily_mean` contains explanations for parameters and return values.
 
 ```bash
 def daily_mean(data: np.ndarray) -> np.ndarray:
@@ -553,27 +525,10 @@ def daily_mean(data: np.ndarray) -> np.ndarray:
    """
    return np.mean(data, axis=0)
 ```
-```bash
-def daily_max(data: np.ndarray) -> np.ndarray:
-   """Calculate the daily maximum of a 2D inflammation data array for each day.
 
-   :param data: A 2D data array with inflammation data (each row contains measurements for a single patient across all days).
-   :return: An array of max values of measurements for each day.
-   """
-   return np.max(data, axis=0)
-```
-```bash
-def daily_min(data: np.ndarray) -> np.ndarray:
-   """Calculate the daily minimum of a 2D inflammation data array for each day.
+##	14:05	-	Break	-	15'
 
-   :param data: A 2D data array with inflammation data (each row contains measurements for a single patient across all days).
-   :return: An array of minimum values of measurements for each day.
-   """
-   return np.min(data, axis=0)
-```
-##	14:25	-	Break	-	10'			
-
-##	14:35	-	Debugging in the IDE	-	15'
+##	14:20	-	Debugging in the IDE	-	10'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/24-diagnosing-issues-improving-robustness.html#debugging-in-an-ide)
 
 A bug is an expected behavior of code. Debugging means "finding and fixing a bug". 
@@ -623,39 +578,43 @@ Let's `Step into` which takes us to the function `daily_mean`:
 - `Step over` to go back to `test_daily_mean`
 - And `Continue` executing and note how the variables change in each iteration
 
-##	14:50	-	Break	-	10'	
-##	15:00	-	 💪 PRACTICAL: Catching bugs	-	45'
+##	14:30	-	💪 PRACTICAL: Catching bugs	-	40'
 see `PRACTICAL_unit_testing_debugging.md`
 
-
-##	15:45	-	Review PRACTICAL with the group	-	10'
 - Discuss solutions and common issues
 - Q&a
 - E.G. where to put the breakpoint, step into vs step over
 
-##	15:55	-	Summarize key points	-	15'
+##	15:10	-	Summarize key points	-	5'
 
 - Recap: virtual environments, testing, debugging, style
 - Questions
 - What to expect of tomorrow: refactoring, abstractions, classes, the main function, command line arguments
 
+##	15:15	-	Explain home assignment	-	5'
 
-##	16:10	-	Good bye		
+🏠 **Homework 1** (≈ 60', optional but recommended): `HOMEWORK_1.md`. Day 2 does not depend on it.
 
-# 🌞 DAY 2 🌞				
-##	9:00	-	Coffee, tea	-	10'
+##	15:20	-	Buffer -	10'
+Use for a practical that overran, extra questions or helping people catch up. If unused, finish early.
 
-##	9:10	-	Welcome	-	5'
+##	15:30	-	Good bye
+
+# 🌞 DAY 2 - Software Development as a Process 🌞	
+
+##	9:30	-	Coffee, tea	-	5'
+
+##	9:35	-	Welcome	-	5'
 
 - ✅ Roll call + 🤝 Code of Conduct
 - 🙋 Getting help (🆘 red  ✅ green stickers)
 
-##	9:15	-	Recap from day one	-	10'	
+##	9:40	-	Recap from day one	-	5'
 
 - Key concepts from Day 1: environments, testing, debugging, style
 - Questions from participants
 
-##	9:25	-	 💪 Simulate a contribution from a colleague	-	5'	
+##	9:45	-	💪 Simulate a contribution from a colleague	-	5'
 see `exercises.md`
 
 ----
@@ -667,7 +626,7 @@ see `exercises.md`
 
 >>**ENHANCEMENT!!!** Added argparse so it can run with `python inflammation/analysis.py data/` or `python inflammation/analysis.py -h`
 
-##	9:30	-	Refactoring	-	10'	
+##	9:50	-	Refactoring	-	10'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/34-code-refactoring.html#introduction)
 
 Code *refactoring* is the process of improving the design of an existing code: **change structure not behaviour**.
@@ -679,7 +638,7 @@ Before we refactor, we should have tests that can verify the code behaviour as i
 We'll write this test in the next exercise. This is the plan: we will modify the function to return the data instead of visualising it because graphs are harder to test automatically (i.e. they need to be viewed and inspected manually in order to determine their correctness). Next, we will make the assert statements verify what the current outcome is, rather than check whether that is correct or not.
 
 
-##	9:40	-	💪 Write Regression Tests	-	20'	
+##	10:00	-	💪 Write Regression Tests	-	20'
 
 >>**DO NOT LIVE CODE!!!** Let hte participants face the exercise and then solve it afterwards
 
@@ -729,7 +688,7 @@ We would need to add additional tests to check the above.
 > **Remember** Git commit!
 
 
-##	10:00	-	Abstractions and Decoupling	-	10'	
+##	10:20	-	Abstractions and Decoupling	-	10'
 
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/33-code-decoupling-abstractions.html#introduction)
 
@@ -745,9 +704,9 @@ source: [carpentries](https://carpentries-incubator.github.io/python-intermediat
   - when you name your function and use lots of `and's` (e.g. `load_and_compute_and_save()`) this suggests that you should split this function into smaller functions
 
   
-##	10:10	-	 💪 Decouple Data Loading from Data Analysis	-	20'	
+##	10:30	-	💪 Decouple Data Loading from Data Analysis	-	20'
 
->>**DO NOT LIVE CODE!!!** Let hte participants face the exercise and then solve it afterwards
+>>**DO NOT LIVE CODE!!!** Let the participants face the exercise and then solve it afterwards
 
 see `exercise.md`
 
@@ -782,9 +741,9 @@ def analyse_data(data_dir):
 The code is now easier to follow since we do not need to understand the data loading part to understand the statistical analysis part, and vice versa. In most cases, functions work best when they are short!
 > **Remember** Git commit!
 
-##	10:30	-	Break	-	15'
+##	10:50	-	Break	-	15'
 
-##	10:45	-	Encapsulations and Classes	-	20'	
+##	11:05	-	Encapsulations and Classes	-	30'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/33-code-decoupling-abstractions.html#encapsulation-classes
 )
 
@@ -796,7 +755,8 @@ For example a `class` is a very common encapsulation.
 
 🎦 use [slides](https://tud365.sharepoint.com/:p:/r/sites/ResearchDataServices/Gedeelde%20documenten/Training/Research_Software_Training/lesson_plans/resources/Intermediate%20programming%20with%20Python.pptx?d=w0c2ead6d71874acca3944dcdff26f1f9&csf=1&web=1&e=V2REU6) to explain class with `Circle` example
 
-TODO Improve explanation of classes and find other analogies. During the pitlos, participants were still confussed about `self`. 
+
+`self`: slow down, draw `Patient` instances on a whiteboard, and trace `maria.get_body_mass_index()` as `Patient.get_body_mass_index(maria)`.
 
 > **Analogy** A `class` is a cookie cutter template, and `instances` as the cookies themselves. That is, one class can have many instances.
 
@@ -828,7 +788,6 @@ Let's run the test to see that it passes. All green  ✅
 
 A Class can have other methods (aka functions) defined on them. 
 
-TODO replace body mass index with patient dosage. Still based on body weight but it does not reflect on the idea of overweight or underweight. Also fix exercises accordingly.
 
 ```bash
 class Patient:
@@ -883,7 +842,7 @@ def test_create_patient():
 
 > **Remember** Git commit!
 
-##	11:05	-	 💪 Add a unit test for `Patient.get_body_mass_index` - 20'
+##	11:35	-	💪 Add a unit test for `Patient.get_body_mass_index`	-	10'
 see `exercises.md`
 
 ----	
@@ -902,7 +861,7 @@ def test_compute_bmi():
 - important to use the name of the parameters to avoid errors by given them in the `wrong` order
 
 
-##	11:25	-	 💪 Use Classes to Abstract out Data Loading	-	15'
+##	11:45	-	💪 Use Classes to Abstract out Data Loading	-	15'
 
 see `exercise.md`
 
@@ -932,8 +891,9 @@ and inside `analyse_data`
     data_source = CSVDataSource(data_dir=data_dir)
     data = data_source.load_inflammation_data()
 ``` 
+##	12:00	-	Lunch	-	60'
 
-## 11:40 Use CSVDataSource Loading class in `main` - 10'
+##	13:00	-	Use CSVDataSource Loading class in `main`	-	10'
 
 Let's now use this class in the main entry script: 
 - Open the file `inflammation-analysis.py`
@@ -962,51 +922,8 @@ We need to fix the regression test
 ```
 > **Remember** Git commit!
 
-##	11:50	-	Break	-	15'
 
-##	12:05	-	💪  Add an Additional DataSource	-	20'	
-
-see `exercise.md`
-
-----	
-
-- The function `load_json` requires to load the module `json` at the top of `models.py`
-
-- The `load_inflammation_data` method in `JSONDataSource` should filter files by `"inflammation*.json"`
-```bash
-class JSONDataSource:
-  """
-  Loads patient data with inflammation values from JSON files within a specified folder.
-  """
-  def __init__(self, dir_path):
-    self.dir_path = dir_path
-
-  def load_inflammation_data(self):
-    data_file_paths = glob.glob(os.path.join(self.dir_path, 'inflammation*.json'))
-    if len(data_file_paths) == 0:
-      raise ValueError(f"No inflammation JSON files found in path {self.dir_path}")
-    data = map(models.load_json, data_file_paths)
-    return list(data)
-```
-In `inflammation-analysis.py`-> `  _, extension = os.path.splitext(infiles[0])` to split the file extension. Then use the variable `extension` in the `if .. elif` statement to choose the data source class
-```bash
-    _, extension = os.path.splitext(infiles[0])
-    if extension == '.json':
-        data_source = analysis.JSONDataSource(os.path.dirname(infiles[0]))
-    elif extension == '.csv':
-        data_source = analysis.CSVDataSource(os.path.dirname(infiles[0]))
-    else:
-        raise ValueError(f'Unsupported data file format: {extension}')
-    analysis.analyse_data(data_source)
-```
-
-
-
-
-
-##	12:35	-	Break	-	60'
-
-##	13:35 -	Separating Pure and Impure Code	-	10'	
+##	13:10	-	Separating Pure and Impure Code	-	10'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/34-code-refactoring.html#separating-pure-and-impure-code)
 
 Next step is to separate out as much of code as possible into *pure functions*.
@@ -1019,7 +936,7 @@ Pure functions are easier to:
 - test 
 
 
-##	13:45	-	💪 Refactoring To Use a Pure Function	-	20'	
+##	13:20	-	💪 Refactoring To Use a Pure Function	-	20'
 
 see `exercise.md`
 
@@ -1049,7 +966,9 @@ def analyse_data(data_source):
 ```
 - Confirm all test still pass ✅
 
-##	14:05	-	The __main__ function and command line arguments	-	10'	
+##	13:40	-	Break	-	15'
+
+##	13:55	-	The __main__ function and command line arguments	-	15'
 source: [carpentries](https://carpentries-incubator.github.io/python-intermediate-development/instructor/35-software-architecture-revisited.html#controller-structure)
 
 You will have noticed already that structure of the `inflammation-analysis.py` file follows this pattern:
@@ -1102,38 +1021,16 @@ We can now add this parameter on the terminal like this:
 ```bash
 python inflammation-analysis.py data/inflammation-01.csv -outdir data
 ```
-Oh oh! this is broken! You are going to fix it in the next exercise!
-
-##	14:15	-	 💪 Use optional input parameter to save figures	-	20'	
-
-see `exercise.md`
-
----	
-
-in `inflammation-analysis.py` the call for views.visualize() will have a new parameter
-```bash
-views.visualize(view_data, outpath )
-```
-in `views.py` 
-```bash
-def visualize(data_dict, outfile):
-....
-    if outfile:
-        plt.savefig(outfile)
-    else:
-        fig.tight_layout()          # this command triggers the show
-        plt.show()
-```
-
-##	14:35	-	Break	-	15'	
+Oh oh! this is broken! You are going to fix it in the first part of the practical!
 
 
-##	14:50	-	💪 PRACTICAL: Refactoring classes - 45'	
+
+##	14:10	-	💪 PRACTICAL: Refactoring classes	-	45'
+
 
 see `PRACTICAL_refactoring_classes.md`
 
-
-##	15:35	-	Final  review	-	15'	
+##	14:55	-	Final  review	-	15'
 
 ## Key Points
 
@@ -1151,17 +1048,12 @@ You have practised the complete Day 2 workflow:
 
 - Q&a
 
-##	15:50	-	Summarize key points	-	10'	
+##	15:10	-	Explain home assingment	-	5'
 
-- Recap: Project structure, abstractions, modules, Pure functions, refactoring
-- Where to go next: packaging, documentation Tools (Sphinx), continuous integration
-- questions and feedback
+- 🏠 **Homework 2** (≈ 60-75'): `HOMEWORK_2.md`. **Part A is required**: it prepares Day 3 (GitHub username, accept the organization invitation, push your work). The rest is optional practice.
 
-##	15:00	-	Give feedback about the course	-	5'	
+##	15:15	-	Buffer (flexible)	-	15'
+Use for a practical that overran, extra questions or helping people catch up. If unused, finish early.
 
-##	16:05 -	Good bye
+##	15:30	-	Good bye
 
-
-# 🌞 DAY 3 🌞	
-
-Collaborative software development

@@ -9,9 +9,7 @@ By the end of this lab you will be able to:
 - Read a test failure trace and locate the relevant information
 - Use the VSCode debugger to inspect a program's state at the point of failure
 - Fix a bug and verify the whole test suite passes again
-- Write a data validation test using `pytest.raises`
 - Commit passing code to version control
-- Check code style with a linter
 
 ## Part 1 - Add another unit test
 Open the file `test_models.py` and copy the following parametrized unit test in it.
@@ -156,97 +154,8 @@ All tests should be green. ✅
 > 🔖 **Commit your work to git**
 
 
-
-## Part 6 — Edge Case Tests
-
-The current test suite does not check a couple of important edge cases. Add the following parametrized cases to the **existing** `@pytest.mark.parametrize` block for `test_daily_min` in `test_models.py`:
-
-```python
-([[0, 1, 2], [0, 3, 4]], [0, 1, 2]),     # array containing zeros
-([[3, 3, 3], [3, 3, 3], [3, 3, 3]], [3, 3, 3]), # all values the same
-```
-
-There should still be a `breakpoint 🔴` inside the function `daily_min` in the module `models.py`. If not, add it again by clicking in the **gutter** (the narrow strip just to the left of the line numbers) on the `return` line inside `daily_min`.
-
-In the **Testing** panel, find test `test_daily_min`. Hover over it and click on **Debug Test** ▶️  + 🐞.
-
-
-Use `Step Over (F10)` to see in `VARIABLES` the `(return)` value of `daily_min` before `npt.assert_array_equal` is executed.
-
-Visually confirm that the expected value actually matches the expected return stored in `test_result`. Keep pressing `Step Over (F10)` to go through all the test cases.
-
-When the tests stop running, All tests should be green ✅
-
-
-> 🔖 **Commit your work to git**
-
-
-## Part 7 — Data Validation with `pytest.raises`
-
-A good test suite checks not just that functions return the right answer for valid input, but also that they fail in the expected way for *invalid* input. This is called **data validation testing**.
-
-The test suite already contains `test_daily_max_string`, which confirms that passing a list of strings raises a `TypeError`.
-
-Now add a new data validation test for `daily_max`. An empty array cannot be reduced along an axis, which causes an `ValueError`. Add the following test to `test_models.py`:
-
-```python
-def test_daily_max_empty_array():
-    """Test that daily_max raises ValueError when given an empty array."""
-    with pytest.raises(ValueError):
-        daily_max([])
-```
-
-Save the file, then go back to the Testing panel and click Run All Tests again.
-
-All tests should be green. ✅
-
-## Part 8 — Data Validation with `NaN`
-Another very useful test uses `NaN` values in the input array. The current behavior of the function `daily_max` is to select `np.nan` as the maximum value. Add the test below to the `test_models.py` file.
-
-```python
-def test_daily_max_nan_propagation():
-    data = np.array([[1, np.nan], [3, 4]])
-    result = daily_max(data)
-    assert np.isnan(result[1])  # documents current behavior
-```
-Add a breakpoint on the line `result = daily_max(data)`. Run the test in Debug mode: in the **Testing** panel, find test `test_daily_max_nan_propagation`. Hover over it and click on **Debug Test** ▶️  + 🐞.
-
-Use `Step Over (F10)` to see in `VARIABLES` the `result` before `assert np.isnan` is executed. Stop the debugger
-
-Run the full test suite and confirm everything is green ✅
-
-> 🔖 **Commit your work to git**
-
-
-## Part 9 — Check Code Style
-
-### Ruff linter
-
-The Ruff linter checks that code follows the PEP 8 style guide. It does *not* check whether your code is correct — that is what tests are for — but consistent style makes code easier to read and review.
-
-With the file `test_models.py` open in the editor, open the Command Palette (`View > Command Palette`, or shortcut `CTRL-SHIFT-P` (Windows, Linux) or `CMD-SHIFT-P` (macOS))
-
-Search for `Ruff: format document` and enter to execute. Save the file.
-
-Go to the `git view` to see the modifications that were done by the plugin.
-
-Check any other warnings underlined in yellow by the Ruff plugin. Fix them if possible.
-
-> 🔖 **Commit your work to git**
-
-### Docstrings
-
-Revise all the `docstrings` in `test_models.py` to make sure they correctly reflect what each test is doing.
-
-Run the full test suite one more time to confirm that your style fixes have not accidentally broken anything. ✅
-
-> 🔖 **Commit your work to git**
-
-
-## 🚀  Optional Challenge
-
-Do Part 6, 7, 8 and 9 for `daily_max`
+> 🏠 **Parts 6-9 of this practical are in `HOMEWORK_1.md`**: edge case tests, data validation with `pytest.raises`, `NaN` values and code style with Ruff. Do them after class if you want more practice.
 
 ## Key Points
 
-The workflow you just followed — **red → debug → green → commit** — is the core loop of test-driven debugging and something you will use throughout your career. Along the way you also practiced reading error traces, testing for invalid inputs, and keeping code style clean — habits that make your code more trustworthy and easier for others (and your future self) to work with.
+The workflow you just followed — **red → debug → green → commit** — is the core loop of test-driven debugging and something you will use throughout your career. Along the way you also practiced reading error traces and using the debugger to inspect the state of a program.
